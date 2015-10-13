@@ -3,6 +3,7 @@ package com.metroveu.metroveu.activities;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import com.metroveu.metroveu.tasks.FetchParadesTask;
 import com.metroveu.metroveu.R;
 import com.metroveu.metroveu.fragments.ParadaFragment;
 
@@ -37,10 +38,18 @@ public class MainActivity extends AppCompatActivity {
          especificamente existen los archivos colors.xml y strings.xml.
         */
 
+        // Uncomment this to fetch the paradas from the api and print them in a Log
+        //updateParades();
+
         // Creates fragment
         ParadaFragment paradaFragment = new ParadaFragment();
         // Adds fragment to content frame (see res/layout/activity_main.xml) in the activity_main layout
         getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, paradaFragment).commit();
+    }
+
+    private void updateParades() {
+        FetchParadesTask paradesTask = new FetchParadesTask();
+        paradesTask.execute();
     }
 
 }
