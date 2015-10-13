@@ -9,7 +9,7 @@ Android Studio version: 1.4
 
 Add the following dependencies:
 
-- androidTestCompile 'com.android.support.test\:runner:0.4'
+- androidTestCompile 'com.android.support.test:runner:0.4'
 
 - androidTestCompile 'com.android.support.test:rules:0.4'
 
