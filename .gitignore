@@ -2,3 +2,4 @@ build/*
 build.gradle
 mobile.iml
 proguard-rules.pro
+.DS_Store
