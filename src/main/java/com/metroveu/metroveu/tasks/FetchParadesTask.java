@@ -1,8 +1,13 @@
 package com.metroveu.metroveu.tasks;
 
+import android.content.ContentUris;
+import android.content.ContentValues;
+import android.content.Context;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
+
+import com.metroveu.metroveu.data.MetroContract;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -22,9 +27,29 @@ import java.util.Arrays;
 public class FetchParadesTask extends AsyncTask<String, Void, String[]> {
 
     private final String LOG_TAG = FetchParadesTask.class.getSimpleName();
+    private final Context mContext;
 
-    public FetchParadesTask() {
+    public FetchParadesTask(Context context) {
+        mContext = context;
+    }
 
+    long addMapa(String nomMapa) {
+        long mapaId;
+
+        // First we should check if a map with this name exists in the db otherwise we'll
+        // get an error if the PK already exists
+
+        ContentValues mapaValues = new ContentValues();
+        mapaValues.put(MetroContract.MapaEntry.COLUMN_MAPA_NOM, nomMapa);
+
+        Uri insertedUri = mContext.getContentResolver().insert(
+                MetroContract.MapaEntry.CONTENT_URI,
+                mapaValues
+        );
+
+        mapaId = ContentUris.parseId(insertedUri);
+
+        return mapaId;
     }
 
     private String[] getParadesDataFromJson(String paradesJsonStr)
@@ -39,6 +64,8 @@ public class FetchParadesTask extends AsyncTask<String, Void, String[]> {
                 paradesArray[i] = metroArray.getJSONObject(i).getString("name");
             }
             Log.v(LOG_TAG, Arrays.toString(paradesArray));
+            long mapaId = addMapa("Barcelona");
+            Log.v(LOG_TAG, String.valueOf(mapaId));
         } catch (JSONException e) {
             Log.e(LOG_TAG, e.getMessage(), e);
             e.printStackTrace();
@@ -94,13 +121,9 @@ public class FetchParadesTask extends AsyncTask<String, Void, String[]> {
             paradesJsonStr = buffer.toString();
         } catch (IOException e) {
             Log.e(LOG_TAG, "Error ", e);
-            // If the code didn't successfully get the station data, there's no point in attemping
-            // to parse it.
             return null;
         } finally {
-            if (urlConnection != null) {
-                urlConnection.disconnect();
-            }
+            if (urlConnection != null) urlConnection.disconnect();
             if (reader != null) {
                 try {
                     reader.close();
@@ -116,7 +139,7 @@ public class FetchParadesTask extends AsyncTask<String, Void, String[]> {
             Log.e(LOG_TAG, e.getMessage(), e);
             e.printStackTrace();
         }
-        // This will only happen if there was an error getting or parsing the stations.
+
         return null;
     }
 }

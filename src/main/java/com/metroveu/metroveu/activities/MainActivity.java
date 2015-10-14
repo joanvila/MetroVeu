@@ -2,14 +2,12 @@ package com.metroveu.metroveu.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 
+import com.metroveu.metroveu.R;
 import com.metroveu.metroveu.fragments.HomeFragment;
 import com.metroveu.metroveu.fragments.LiniesFragment;
 import com.metroveu.metroveu.tasks.FetchParadesTask;
-import com.metroveu.metroveu.R;
-import com.metroveu.metroveu.fragments.ParadaFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -52,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateParades() {
-        FetchParadesTask paradesTask = new FetchParadesTask();
+        FetchParadesTask paradesTask = new FetchParadesTask(getApplicationContext());
         paradesTask.execute();
     }
 
