@@ -12,6 +12,7 @@ import org.junit.runner.RunWith;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
 /**
@@ -22,9 +23,21 @@ public class MainActivityTest {
     @Rule
     public final ActivityTestRule<MainActivity> main = new ActivityTestRule<>(MainActivity.class);
 
+//    @Test
+//    /**
+//     * Test test lol
+//     */
+//    public void shouldBeAbleToLaunchMainScreen() {
+//        onView(withText("Parada"))
+//                .check(ViewAssertions.matches(isDisplayed()));
+//    }
+
     @Test
-    public void shouldBeAbleToLaunchMainScreen() {
-        onView(withText("Parada"))
+    /**
+     * Test if there is a homepage with the text MetroVeu on it
+     */
+    public void onAppStartedHomePageAppears() {
+        onView(withText("Metro Veu"))
                 .check(ViewAssertions.matches(isDisplayed()));
     }
 }

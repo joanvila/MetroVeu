@@ -3,6 +3,7 @@ package com.metroveu.metroveu.activities;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import com.metroveu.metroveu.fragments.HomeFragment;
 import com.metroveu.metroveu.tasks.FetchParadesTask;
 import com.metroveu.metroveu.R;
 import com.metroveu.metroveu.fragments.ParadaFragment;
@@ -42,9 +43,9 @@ public class MainActivity extends AppCompatActivity {
         //updateParades();
 
         // Creates fragment
-        ParadaFragment paradaFragment = new ParadaFragment();
+        HomeFragment homeFragment = new HomeFragment();
         // Adds fragment to content frame (see res/layout/activity_main.xml) in the activity_main layout
-        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, paradaFragment).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, homeFragment).commit();
     }
 
     private void updateParades() {

@@ -2,4 +2,5 @@
     <string name="app_name">MetroVeu</string>
     <string name="parada">Parada</string>
     <string name="action_settings">Settings</string>
+    <string name="home">Metro Veu</string>
 </resources>
