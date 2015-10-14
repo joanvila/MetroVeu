@@ -29,6 +29,7 @@ public class MetroDbHelper extends SQLiteOpenHelper {
         final String SQL_CREATE_TARIFA_TABLE = "CREATE TABLE " + TarifaEntry.TABLE_NAME + " (" +
                 TarifaEntry.COLUMN_TARIFA_NOM + " TEXT ," +
                 TarifaEntry.COLUMN_TARIFA_PREU + " FLOAT NOT NULL ," +
+                TarifaEntry.COLUMN_TARIFA_MAPA + " TEXT ," +
                 " FOREIGN KEY (" + TarifaEntry.COLUMN_TARIFA_MAPA + ") REFERENCES " +
                 MapaEntry.TABLE_NAME + " (" + MapaEntry.COLUMN_MAPA_NOM + "), " +
                 "PRIMARY KEY (" + TarifaEntry.COLUMN_TARIFA_NOM + ", " +
@@ -38,6 +39,7 @@ public class MetroDbHelper extends SQLiteOpenHelper {
         final String SQL_CREATE_RUTA_TABLE = "CREATE TABLE " + RutaEntry.TABLE_NAME + " (" +
                 RutaEntry.COLUMN_RUTA_NOM + " TEXT PRIMARY KEY ," +
                 RutaEntry.COLUMN_RUTA_LLOCSINTERES + " TEXT ," +
+                RutaEntry.COLUMN_RUTA_MAPA + " TEXT ," +
                 " FOREIGN KEY (" + RutaEntry.COLUMN_RUTA_MAPA + ") REFERENCES " +
                 MapaEntry.TABLE_NAME + " (" + MapaEntry.COLUMN_MAPA_NOM + "));";
 
@@ -45,6 +47,7 @@ public class MetroDbHelper extends SQLiteOpenHelper {
                 LiniaEntry.COLUMN_LINIA_NOM + " TEXT ," +
                 LiniaEntry.COLUMN_LINIA_COLOR + " TEXT ," +
                 LiniaEntry.COLUMN_LINIA_FREQUENCIA + " INTEGER ," +
+                LiniaEntry.COLUMN_LINIA_MAPA +  " TEXT ," +
                 " FOREIGN KEY (" + LiniaEntry.COLUMN_LINIA_MAPA + ") REFERENCES " +
                 MapaEntry.TABLE_NAME + " (" + MapaEntry.COLUMN_MAPA_NOM + "), " +
                 " PRIMARY KEY (" + LiniaEntry.COLUMN_LINIA_MAPA + ", " +
@@ -56,6 +59,9 @@ public class MetroDbHelper extends SQLiteOpenHelper {
                 ParadaEntry.COLUMN_PARADA_ACCESSIBILITAT + " INTEGER);";
 
         final String SQL_CREATE_PERTANY_TABLE = "CREATE TABLE " + PertanyEntry.TABLE_NAME + " (" +
+                PertanyEntry.COLUMN_PERTANY_MAPA + " TEXT ," +
+                PertanyEntry.COLUMN_PERTANY_LINIA + " TEXT ," +
+                PertanyEntry.COLUMN_PERTANY_PARADA + " TEXT ," +
                 " FOREIGN KEY (" + PertanyEntry.COLUMN_PERTANY_MAPA + ") REFERENCES " +
                 LiniaEntry.TABLE_NAME + " (" + LiniaEntry.COLUMN_LINIA_MAPA + "), " +
                 " FOREIGN KEY (" + PertanyEntry.COLUMN_PERTANY_LINIA + ") REFERENCES " +
@@ -74,12 +80,14 @@ public class MetroDbHelper extends SQLiteOpenHelper {
                 AccessibilitatEntry.COLUMN_ACCESSIBILITAT_ESCMEC + " BOOLEAN NOT NULL);";
 
         final String SQL_CREATE_RUTAPARADA_TABLE = "CREATE TABLE " + RutaparadaEntry.TABLE_NAME + " (" +
-                RutaparadaEntry.COLUMN_RUTAPARADA_RUTA + " TEXT PRIMARY KEY," +
-                RutaparadaEntry.COLUMN_RUTAPARADA_PARADA + " TEXT PRIMARY KEY, " +
+                RutaparadaEntry.COLUMN_RUTAPARADA_RUTA + " TEXT ," +
+                RutaparadaEntry.COLUMN_RUTAPARADA_PARADA + " TEXT ," +
                 " FOREIGN KEY (" + RutaparadaEntry.COLUMN_RUTAPARADA_RUTA + ") REFERENCES " +
                 RutaEntry.TABLE_NAME + " (" + RutaEntry.COLUMN_RUTA_NOM + "), " +
                 " FOREIGN KEY (" + RutaparadaEntry.COLUMN_RUTAPARADA_PARADA + ") REFERENCES " +
-                ParadaEntry.TABLE_NAME + " (" + ParadaEntry.COLUMN_PARADA_NOM + "));";
+                ParadaEntry.TABLE_NAME + " (" + ParadaEntry.COLUMN_PARADA_NOM + "), " +
+                " PRIMARY KEY (" + RutaparadaEntry.COLUMN_RUTAPARADA_RUTA + ", " +
+                                    RutaparadaEntry.COLUMN_RUTAPARADA_PARADA + "));";
 
         sqLiteDatabase.execSQL(SQL_CREATE_MAPA_TABLE);
         sqLiteDatabase.execSQL(SQL_CREATE_TARIFA_TABLE);

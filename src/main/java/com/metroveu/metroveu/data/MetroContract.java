@@ -47,8 +47,8 @@ public class MetroContract {
 
         public static final String COLUMN_MAPA_NOM = "mapa_nom";
 
-        public static Uri buildLocationUri(long id) {
-            return ContentUris.withAppendedId(CONTENT_URI, id);
+        public static Uri buildMapaUri(long _id) {
+            return ContentUris.withAppendedId(CONTENT_URI, _id);
         }
     }
 
