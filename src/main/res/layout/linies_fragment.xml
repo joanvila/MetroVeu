@@ -5,23 +5,13 @@
     android:orientation="vertical"
     android:background="@color/colorBlack">
 
-    <TextView android:text="@string/home" android:layout_width="match_parent"
+    <TextView android:text="@string/lines_title" android:layout_width="match_parent"
+        android:id="@+id/lines_title"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:layout_gravity="center"
         android:textColor="@color/colorWhite"
         android:textStyle="bold"
         android:textSize="32sp"
-        android:layout_centerInParent="true"
-        android:id="@+id/textView" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/show_lines_button"
-        android:id="@+id/show_lines_button"
-        android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="70dp"
-        android:onClick="buttonClick" />
+        android:layout_centerInParent="true" />
 </RelativeLayout>

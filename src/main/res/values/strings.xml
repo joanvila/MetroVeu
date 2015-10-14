@@ -1,6 +1,15 @@
 <resources>
     <string name="app_name">MetroVeu</string>
-    <string name="parada">Parada</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Configuració</string>
+
+    <!-- home fragment -->
     <string name="home">Metro Veu</string>
+    <string name="show_lines_button">Línies</string>
+
+    <!-- parada fragment -->
+    <string name="parada">Parada</string>
+
+    <!-- lines fragment -->
+    <string name="lines_title">Selecciona una línia</string>
+
 </resources>

@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
@@ -37,7 +38,19 @@ public class MainActivityTest {
      * Test if there is a homepage with the text MetroVeu on it
      */
     public void onAppStartedHomePageAppears() {
-        onView(withText("Metro Veu"))
+        onView(withText(R.string.home))
                 .check(ViewAssertions.matches(isDisplayed()));
+    }
+
+    @Test
+    /**
+     * Test if lines button shows all lines
+     */
+    public void onLinesButtonClickedLinesAppear() {
+        onView(withId(R.id.show_lines_button))
+                .perform(click());
+        onView(withId(R.id.lines_title))
+                .check(ViewAssertions.matches(isDisplayed()));
+
     }
 }

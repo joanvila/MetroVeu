@@ -2,8 +2,11 @@ package com.metroveu.metroveu.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
 
 import com.metroveu.metroveu.fragments.HomeFragment;
+import com.metroveu.metroveu.fragments.LiniesFragment;
 import com.metroveu.metroveu.tasks.FetchParadesTask;
 import com.metroveu.metroveu.R;
 import com.metroveu.metroveu.fragments.ParadaFragment;
@@ -51,6 +54,15 @@ public class MainActivity extends AppCompatActivity {
     private void updateParades() {
         FetchParadesTask paradesTask = new FetchParadesTask();
         paradesTask.execute();
+    }
+
+    public void buttonClick(View v) {
+        switch (v.getId()) {
+            case R.id.show_lines_button:
+                LiniesFragment liniesFragment = new LiniesFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, liniesFragment).commit();
+                break;
+        }
     }
 
 }

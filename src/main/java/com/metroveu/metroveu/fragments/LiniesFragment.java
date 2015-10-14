@@ -11,12 +11,11 @@ import com.metroveu.metroveu.R;
 /**
  * Created by joanvila on 14/10/15.
  */
-public class HomeFragment extends Fragment {
-
+public class LiniesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.home_fragment, container, false);
+        View rootView = inflater.inflate(R.layout.linies_fragment, container, false);
+
         return rootView;
     }
-
 }
