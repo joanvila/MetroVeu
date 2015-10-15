@@ -2,6 +2,7 @@ package com.metroveu.metroveu.activities;
 
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +14,8 @@ import com.metroveu.metroveu.fragments.LiniesFragment;
 import com.metroveu.metroveu.tasks.FetchParadesTask;
 
 public class MainActivity extends AppCompatActivity {
+
+    private FragmentTransaction transaction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +75,10 @@ public class MainActivity extends AppCompatActivity {
         switch (v.getId()) {
             case R.id.show_lines_button:
                 LiniesFragment liniesFragment = new LiniesFragment();
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, liniesFragment).commit();
+                transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.content_frame, liniesFragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
                 break;
         }
     }
