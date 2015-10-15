@@ -21,6 +21,9 @@ public class MetroProvider extends ContentProvider {
     static final int PARADA = 300;
     static final int ACCESSIBILITAT = 400;
     static final int PERTANY = 500;
+    static final int RUTA = 600;
+    static final int RUTAPARADA = 700;
+    static final int TARIFA = 800;
 
     static UriMatcher buildUriMatcher() {
 
@@ -35,6 +38,9 @@ public class MetroProvider extends ContentProvider {
         matcher.addURI(authority, MetroContract.PATH_PARADA, PARADA);
         matcher.addURI(authority, MetroContract.PATH_ACCESSIBILITAT, ACCESSIBILITAT);
         matcher.addURI(authority, MetroContract.PATH_PERTANY, PERTANY);
+        matcher.addURI(authority, MetroContract.PATH_RUTA, RUTA);
+        matcher.addURI(authority, MetroContract.PATH_RUTAPARADA, PARADA);
+        matcher.addURI(authority, MetroContract.PATH_TARIFA, TARIFA);
         return matcher;
     }
 
@@ -109,7 +115,42 @@ public class MetroProvider extends ContentProvider {
                 );
                 break;
             }
-
+            case RUTA: {
+                retCursor = mOpenHelper.getReadableDatabase().query(
+                        MetroContract.RutaEntry.TABLE_NAME,
+                        projection,
+                        selection,
+                        selectionArgs,
+                        null,
+                        null,
+                        sortOrder
+                );
+                break;
+            }
+            case RUTAPARADA: {
+                retCursor = mOpenHelper.getReadableDatabase().query(
+                        MetroContract.RutaparadaEntry.TABLE_NAME,
+                        projection,
+                        selection,
+                        selectionArgs,
+                        null,
+                        null,
+                        sortOrder
+                );
+                break;
+            }
+            case TARIFA: {
+                retCursor = mOpenHelper.getReadableDatabase().query(
+                        MetroContract.TarifaEntry.TABLE_NAME,
+                        projection,
+                        selection,
+                        selectionArgs,
+                        null,
+                        null,
+                        sortOrder
+                );
+                break;
+            }
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
@@ -166,6 +207,30 @@ public class MetroProvider extends ContentProvider {
                 long _id = db.insert(MetroContract.PertanyEntry.TABLE_NAME, null, values);
                 if ( _id > 0 )
                     returnUri = MetroContract.PertanyEntry.buildPertanyUri(_id);
+                else
+                    throw new android.database.SQLException("Failed to insert row into " + uri);
+                break;
+            }
+            case RUTA: {
+                long _id = db.insert(MetroContract.RutaEntry.TABLE_NAME, null, values);
+                if ( _id > 0 )
+                    returnUri = MetroContract.RutaEntry.buildRutaUri(_id);
+                else
+                    throw new android.database.SQLException("Failed to insert row into " + uri);
+                break;
+            }
+            case RUTAPARADA: {
+                long _id = db.insert(MetroContract.RutaparadaEntry.TABLE_NAME, null, values);
+                if ( _id > 0 )
+                    returnUri = MetroContract.RutaparadaEntry.buildRutaparadaUri(_id);
+                else
+                    throw new android.database.SQLException("Failed to insert row into " + uri);
+                break;
+            }
+            case TARIFA: {
+                long _id = db.insert(MetroContract.TarifaEntry.TABLE_NAME, null, values);
+                if ( _id > 0 )
+                    returnUri = MetroContract.TarifaEntry.buildTarifaUri(_id);
                 else
                     throw new android.database.SQLException("Failed to insert row into " + uri);
                 break;
