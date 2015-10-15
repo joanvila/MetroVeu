@@ -46,7 +46,7 @@ public class MetroDbHelper extends SQLiteOpenHelper {
         final String SQL_CREATE_LINIA_TABLE = "CREATE TABLE " + LiniaEntry.TABLE_NAME + " (" +
                 LiniaEntry.COLUMN_LINIA_NOM + " TEXT ," +
                 LiniaEntry.COLUMN_LINIA_COLOR + " TEXT ," +
-                LiniaEntry.COLUMN_LINIA_FREQUENCIA + " INTEGER ," +
+                LiniaEntry.COLUMN_LINIA_FREQUENCIA + " TEXT ," +
                 LiniaEntry.COLUMN_LINIA_MAPA +  " TEXT ," +
                 " FOREIGN KEY (" + LiniaEntry.COLUMN_LINIA_MAPA + ") REFERENCES " +
                 MapaEntry.TABLE_NAME + " (" + MapaEntry.COLUMN_MAPA_NOM + "), " +
@@ -55,8 +55,9 @@ public class MetroDbHelper extends SQLiteOpenHelper {
 
         final String SQL_CREATE_PARADA_TABLE = "CREATE TABLE " + ParadaEntry.TABLE_NAME + " (" +
                 ParadaEntry.COLUMN_PARADA_NOM + " TEXT PRIMARY KEY ," +
-                ParadaEntry.COLUMN_PARADA_FREQUENCIA + " INTEGER ," +
-                ParadaEntry.COLUMN_PARADA_ACCESSIBILITAT + " INTEGER);";
+                ParadaEntry.COLUMN_PARADA_ACCESSIBILITAT + " INTEGER ," +
+                " FOREIGN KEY (" + ParadaEntry.COLUMN_PARADA_ACCESSIBILITAT + ") REFERENCES " +
+                AccessibilitatEntry.TABLE_NAME + " (" + AccessibilitatEntry._ID + "));";
 
         final String SQL_CREATE_PERTANY_TABLE = "CREATE TABLE " + PertanyEntry.TABLE_NAME + " (" +
                 PertanyEntry.COLUMN_PERTANY_MAPA + " TEXT ," +

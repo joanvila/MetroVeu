@@ -16,8 +16,10 @@ public class MetroProvider extends ContentProvider {
     private static final UriMatcher sUriMatcher = buildUriMatcher();
     private MetroDbHelper mOpenHelper;
 
-    static final int MAPA = 200;
-    static final int PARADA = 100;
+    static final int MAPA = 100;
+    static final int LINIA = 200;
+    static final int PARADA = 300;
+    static final int ACCESSIBILITAT = 400;
 
     static UriMatcher buildUriMatcher() {
 
@@ -28,7 +30,9 @@ public class MetroProvider extends ContentProvider {
         final String authority = MetroContract.CONTENT_AUTHORITY;
 
         matcher.addURI(authority, MetroContract.PATH_MAPA, MAPA);
+        matcher.addURI(authority, MetroContract.PATH_LINIA, LINIA);
         matcher.addURI(authority, MetroContract.PATH_PARADA, PARADA);
+        matcher.addURI(authority, MetroContract.PATH_ACCESSIBILITAT, ACCESSIBILITAT);
         return matcher;
     }
 
@@ -41,7 +45,62 @@ public class MetroProvider extends ContentProvider {
     @Nullable
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
-        return null;
+        Cursor retCursor;
+        switch (sUriMatcher.match(uri)) {
+            case MAPA: {
+                retCursor = mOpenHelper.getReadableDatabase().query(
+                        MetroContract.MapaEntry.TABLE_NAME,
+                        projection,
+                        selection,
+                        selectionArgs,
+                        null,
+                        null,
+                        sortOrder
+                );
+                break;
+            }
+            case LINIA: {
+                retCursor = mOpenHelper.getReadableDatabase().query(
+                        MetroContract.LiniaEntry.TABLE_NAME,
+                        projection,
+                        selection,
+                        selectionArgs,
+                        null,
+                        null,
+                        sortOrder
+                );
+                break;
+            }
+            case PARADA: {
+                retCursor = mOpenHelper.getReadableDatabase().query(
+                        MetroContract.ParadaEntry.TABLE_NAME,
+                        projection,
+                        selection,
+                        selectionArgs,
+                        null,
+                        null,
+                        sortOrder
+                );
+                break;
+            }
+            case ACCESSIBILITAT: {
+                retCursor = mOpenHelper.getReadableDatabase().query(
+                        MetroContract.AccessibilitatEntry.TABLE_NAME,
+                        projection,
+                        selection,
+                        selectionArgs,
+                        null,
+                        null,
+                        sortOrder
+                );
+                break;
+            }
+
+            default:
+                throw new UnsupportedOperationException("Unknown uri: " + uri);
+        }
+        retCursor.setNotificationUri(getContext().getContentResolver(), uri);
+        return retCursor;
     }
 
     @Nullable
@@ -59,9 +118,32 @@ public class MetroProvider extends ContentProvider {
         switch (match) {
             case MAPA: {
                 long _id = db.insert(MetroContract.MapaEntry.TABLE_NAME, null, values);
-                if ( _id > 0 ) {
+                if ( _id > 0 )
                     returnUri = MetroContract.MapaEntry.buildMapaUri(_id);
-                }
+                else
+                    throw new android.database.SQLException("Failed to insert row into " + uri);
+                break;
+            }
+            case LINIA: {
+                long _id = db.insert(MetroContract.LiniaEntry.TABLE_NAME, null, values);
+                if ( _id > 0 )
+                    returnUri = MetroContract.LiniaEntry.buildLiniaUri(_id);
+                else
+                    throw new android.database.SQLException("Failed to insert row into " + uri);
+                break;
+            }
+            case PARADA: {
+                long _id = db.insert(MetroContract.ParadaEntry.TABLE_NAME, null, values);
+                if ( _id > 0 )
+                    returnUri = MetroContract.ParadaEntry.buildParadaUri(_id);
+                else
+                    throw new android.database.SQLException("Failed to insert row into " + uri);
+                break;
+            }
+            case ACCESSIBILITAT: {
+                long _id = db.insert(MetroContract.AccessibilitatEntry.TABLE_NAME, null, values);
+                if ( _id > 0 )
+                    returnUri = MetroContract.AccessibilitatEntry.buildAccessibilitatUri(_id);
                 else
                     throw new android.database.SQLException("Failed to insert row into " + uri);
                 break;

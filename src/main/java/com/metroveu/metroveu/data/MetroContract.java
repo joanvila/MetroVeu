@@ -68,7 +68,7 @@ public class MetroContract {
         public static final String COLUMN_RUTA_LLOCSINTERES = "ruta_llocsinteres";
         public static final String COLUMN_RUTA_MAPA = "ruta_mapa";
 
-        public static Uri buildLocationUri(long id) {
+        public static Uri buildRutaUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);
         }
     }
@@ -90,7 +90,7 @@ public class MetroContract {
         public static final String COLUMN_LINIA_FREQUENCIA = "linia_frequencia";
         public static final String COLUMN_LINIA_MAPA = "linia_mapa";
 
-        public static Uri buildLocationUri(long id) {
+        public static Uri buildLiniaUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);
         }
     }
@@ -111,7 +111,7 @@ public class MetroContract {
         public static final String COLUMN_PERTANY_PARADA = "pertany_parada";
         public static final String COLUMN_PERTANY_MAPA = "pertany_mapa";
 
-        public static Uri buildLocationUri(long id) {
+        public static Uri buildPertanyUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);
         }
     }
@@ -129,11 +129,9 @@ public class MetroContract {
         public static final String TABLE_NAME = "parada";
 
         public static final String COLUMN_PARADA_NOM = "parada_nom";
-        //public static final String COLUMN_PARADA_LLOCS_INTERES = "parada_llocs_interes";
-        public static final String COLUMN_PARADA_FREQUENCIA = "parada_frequencia";
         public static final String COLUMN_PARADA_ACCESSIBILITAT = "parada_accessibilitat";
 
-        public static Uri buildLocationUri(long id) {
+        public static Uri buildParadaUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);
         }
     }
@@ -150,12 +148,12 @@ public class MetroContract {
 
         public static final String TABLE_NAME = "accessibilitat";
 
-        public static final String COLUMN_ACCESSIBILITAT_ASCENSOR = "parada_nom";
-        public static final String COLUMN_ACCESSIBILITAT_GUIES = "parada_guies";
-        public static final String COLUMN_ACCESSIBILITAT_RAMPES = "parada_rampes";
-        public static final String COLUMN_ACCESSIBILITAT_ESCMEC = "parada_escmec";
+        public static final String COLUMN_ACCESSIBILITAT_ASCENSOR = "accessibilitat_ascensor";
+        public static final String COLUMN_ACCESSIBILITAT_GUIES = "accessibilitat_guies";
+        public static final String COLUMN_ACCESSIBILITAT_RAMPES = "accessibilitat_rampes";
+        public static final String COLUMN_ACCESSIBILITAT_ESCMEC = "accessibilitat_escmec";
 
-        public static Uri buildLocationUri(long id) {
+        public static Uri buildAccessibilitatUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);
         }
     }
@@ -176,7 +174,7 @@ public class MetroContract {
         public static final String COLUMN_TARIFA_PREU = "tarifa_preu";
         public static final String COLUMN_TARIFA_MAPA = "tarifa_mapa";
 
-        public static Uri buildLocationUri(long id) {
+        public static Uri buildTarifaUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);
         }
     }
@@ -196,7 +194,7 @@ public class MetroContract {
         public static final String COLUMN_RUTAPARADA_RUTA = "rutaparada_ruta";
         public static final String COLUMN_RUTAPARADA_PARADA = "rutaparada_parada";
 
-        public static Uri buildLocationUri(long id) {
+        public static Uri buildRutaparadaUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);
         }
     }

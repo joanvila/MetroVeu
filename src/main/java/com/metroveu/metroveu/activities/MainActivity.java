@@ -1,10 +1,13 @@
 package com.metroveu.metroveu.activities;
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 
 import com.metroveu.metroveu.R;
+import com.metroveu.metroveu.data.MetroDbHelper;
 import com.metroveu.metroveu.fragments.HomeFragment;
 import com.metroveu.metroveu.fragments.LiniesFragment;
 import com.metroveu.metroveu.tasks.FetchParadesTask;
@@ -41,7 +44,18 @@ public class MainActivity extends AppCompatActivity {
         */
 
         // Uncomment this to fetch the paradas from the api and print them in a Log
-        //updateParades();
+        updateParades();
+
+        Cursor linies = new MetroDbHelper(getApplicationContext()).getReadableDatabase().
+                rawQuery("select * from linia", null);
+        Log.v("LINIES", "AGAFADES");
+        if (linies != null && linies.moveToFirst()){
+            do {
+                String data = linies.getString(linies.getColumnIndex("linia_nom"));
+                Log.v("LINIES: ", data);
+            } while(linies.moveToNext());
+            linies.close();
+        }
 
         // Creates fragment
         HomeFragment homeFragment = new HomeFragment();
