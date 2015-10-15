@@ -20,6 +20,7 @@ public class MetroProvider extends ContentProvider {
     static final int LINIA = 200;
     static final int PARADA = 300;
     static final int ACCESSIBILITAT = 400;
+    static final int PERTANY = 500;
 
     static UriMatcher buildUriMatcher() {
 
@@ -33,6 +34,7 @@ public class MetroProvider extends ContentProvider {
         matcher.addURI(authority, MetroContract.PATH_LINIA, LINIA);
         matcher.addURI(authority, MetroContract.PATH_PARADA, PARADA);
         matcher.addURI(authority, MetroContract.PATH_ACCESSIBILITAT, ACCESSIBILITAT);
+        matcher.addURI(authority, MetroContract.PATH_PERTANY, PERTANY);
         return matcher;
     }
 
@@ -95,6 +97,18 @@ public class MetroProvider extends ContentProvider {
                 );
                 break;
             }
+            case PERTANY: {
+                retCursor = mOpenHelper.getReadableDatabase().query(
+                        MetroContract.PertanyEntry.TABLE_NAME,
+                        projection,
+                        selection,
+                        selectionArgs,
+                        null,
+                        null,
+                        sortOrder
+                );
+                break;
+            }
 
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
@@ -144,6 +158,14 @@ public class MetroProvider extends ContentProvider {
                 long _id = db.insert(MetroContract.AccessibilitatEntry.TABLE_NAME, null, values);
                 if ( _id > 0 )
                     returnUri = MetroContract.AccessibilitatEntry.buildAccessibilitatUri(_id);
+                else
+                    throw new android.database.SQLException("Failed to insert row into " + uri);
+                break;
+            }
+            case PERTANY: {
+                long _id = db.insert(MetroContract.PertanyEntry.TABLE_NAME, null, values);
+                if ( _id > 0 )
+                    returnUri = MetroContract.PertanyEntry.buildPertanyUri(_id);
                 else
                     throw new android.database.SQLException("Failed to insert row into " + uri);
                 break;

@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.metroveu.metroveu.data.MetroContract;
+import com.metroveu.metroveu.data.Pair;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -101,19 +102,35 @@ public class FetchParadesTask extends AsyncTask<String, Void, String[]> {
 
 
     long addPertany(String mapa, String linia, String parada) {
+        long pertanyId;
 
-        ContentValues pertanyValues = new ContentValues();
-        pertanyValues.put(MetroContract.PertanyEntry.COLUMN_PERTANY_MAPA, mapa);
-        pertanyValues.put(MetroContract.PertanyEntry.COLUMN_PERTANY_LINIA, linia);
-        pertanyValues.put(MetroContract.PertanyEntry.COLUMN_PERTANY_PARADA, parada);
+        Cursor pertanyCursor = mContext.getContentResolver().query(
+                MetroContract.PertanyEntry.CONTENT_URI,
+                null,
+                MetroContract.PertanyEntry.COLUMN_PERTANY_MAPA + " = ? AND " +
+                        MetroContract.PertanyEntry.COLUMN_PERTANY_LINIA + " = ? AND " +
+                        MetroContract.PertanyEntry.COLUMN_PERTANY_PARADA + " = ?",
+                new String[]{mapa, linia, parada},
+                null);
 
-        Uri insertedUri = mContext.getContentResolver().insert(
-                MetroContract.LiniaEntry.CONTENT_URI,
-                pertanyValues
-        );
+        if (pertanyCursor.moveToFirst()) {
+            int pertanyIndex = pertanyCursor.getColumnIndex(MetroContract.PertanyEntry.COLUMN_PERTANY_MAPA);
+            pertanyId = pertanyCursor.getLong(pertanyIndex);
+        } else {
+            ContentValues pertanyValues = new ContentValues();
+            pertanyValues.put(MetroContract.PertanyEntry.COLUMN_PERTANY_MAPA, mapa);
+            pertanyValues.put(MetroContract.PertanyEntry.COLUMN_PERTANY_LINIA, linia);
+            pertanyValues.put(MetroContract.PertanyEntry.COLUMN_PERTANY_PARADA, parada);
 
-        long pertanyId = ContentUris.parseId(insertedUri);
+            Uri insertedUri = mContext.getContentResolver().insert(
+                    MetroContract.PertanyEntry.CONTENT_URI,
+                    pertanyValues
+            );
 
+            pertanyId = ContentUris.parseId(insertedUri);
+        }
+
+        pertanyCursor.close();
         return pertanyId;
     }
 
@@ -192,10 +209,14 @@ public class FetchParadesTask extends AsyncTask<String, Void, String[]> {
             JSONArray metroArray = paradesJson.getJSONArray("metro");
             String[] paradesArray = new String[metroArray.length()];
             ArrayList<String> liniesArray = new ArrayList<>();
+            ArrayList<Pair<String,String>> pertanyensaList = new ArrayList<>();
             String linia;
             for (int i = 0; i < metroArray.length(); ++i) {
-                paradesArray[i] = metroArray.getJSONObject(i).getString("name");
+                String parada = metroArray.getJSONObject(i).getString("name");
+                paradesArray[i] = parada;
                 linia = metroArray.getJSONObject(i).getString("line");
+                Pair pertany = new Pair(linia, parada);
+                pertanyensaList.add(pertany);
                 if (!liniesArray.contains(linia)) {
                     liniesArray.add(linia);
                 }
@@ -210,6 +231,9 @@ public class FetchParadesTask extends AsyncTask<String, Void, String[]> {
             long accessibilitatId = addAccessibilitat(false, false, false, false);
             for (int i = 0; i < paradesArray.length; ++i) {
                 addParada(paradesArray[i], (int) accessibilitatId);
+            }
+            for (int i = 0; i < pertanyensaList.size(); ++i) {
+                addPertany("Barcelona", pertanyensaList.get(i).getL(), pertanyensaList.get(i).getR());
             }
         } catch (JSONException e) {
             Log.e(LOG_TAG, e.getMessage(), e);
