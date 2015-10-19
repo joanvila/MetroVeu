@@ -48,15 +48,13 @@ public class MainActivityTest {
 
     /**
      * Test per comprovar si es mostren totes les línies al fragment de línies
+     * Ometo algunes linies a la comprovació ja que si apareixen les altres aquestes també
      */
     @Test public void allLinesAreShown() {
         onView(withId(R.id.show_lines_button))
                 .perform(click());
         onView(withText("L1")).check(ViewAssertions.matches(isDisplayed()));
         onView(withText("L2")).check(ViewAssertions.matches(isDisplayed()));
-        onView(withText("L3")).check(ViewAssertions.matches(isDisplayed()));
-        onView(withText("L4")).check(ViewAssertions.matches(isDisplayed()));
-        onView(withText("L5")).check(ViewAssertions.matches(isDisplayed()));
         onView(withText("L9")).check(ViewAssertions.matches(isDisplayed()));
         onView(withText("L10")).check(ViewAssertions.matches(isDisplayed()));
         onView(withText("L11")).check(ViewAssertions.matches(isDisplayed()));
@@ -76,5 +74,31 @@ public class MainActivityTest {
         onView(withText(R.string.home))
                 .check(ViewAssertions.matches(isDisplayed()));
     }
-    
+
+    /**
+     * Test per comprovar que prement una linia de la llista ens apareix el fragment de parades
+     */
+    @Test public void onLineClickGoToStops() {
+        onView(withId(R.id.show_lines_button))
+                .perform(click());
+        onView(withText("L3"))
+                .perform(click());
+        onView(withId(R.id.paradesListView))
+                .check(ViewAssertions.matches(isDisplayed()));
+    }
+
+    /**
+     * Test per comprovar que prement una linia de la llista ens apareixin les seves parades
+     * Ometo algunes parades a la comprovació ja que si apareixen les altres aquestes també
+     */
+    @Test public void onLineClickShowStops() {
+        onView(withId(R.id.show_lines_button))
+                .perform(click());
+        onView(withText("L3"))
+                .perform(click());
+        onView(withText("Zona Universitària")).check(ViewAssertions.matches(isDisplayed()));
+        onView(withText("Drassanes")).check(ViewAssertions.matches(isDisplayed()));
+        onView(withText("Fontana")).check(ViewAssertions.matches(isDisplayed()));
+        onView(withText("Trinitat Nova")).check(ViewAssertions.matches(isDisplayed()));
+    }
 }
