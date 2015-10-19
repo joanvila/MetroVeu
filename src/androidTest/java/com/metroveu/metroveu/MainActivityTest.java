@@ -10,13 +10,17 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.pressBack;
+import static android.support.test.espresso.action.ViewActions.scrollTo;
 import static android.support.test.espresso.matcher.ViewMatchers.isClickable;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.isEnabled;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.Matchers.anything;
 
 /**
  * Created by joanvila on 13/10/15.
@@ -96,9 +100,43 @@ public class MainActivityTest {
                 .perform(click());
         onView(withText("L3"))
                 .perform(click());
-        onView(withText("Zona Universitària")).check(ViewAssertions.matches(isDisplayed()));
-        onView(withText("Drassanes")).check(ViewAssertions.matches(isDisplayed()));
-        onView(withText("Fontana")).check(ViewAssertions.matches(isDisplayed()));
-        onView(withText("Trinitat Nova")).check(ViewAssertions.matches(isDisplayed()));
+        onView(withText("Zona Universitària"))
+                .check(ViewAssertions.matches(isDisplayed()));
+
+        onData(anything()).inAdapterView(withId(R.id.paradesListView))
+                .atPosition(0)
+                //.perform(click());
+                .check(ViewAssertions.matches(isDisplayed()));
+
+        //TODO: Es pot ampliar el test
+
+    }
+
+    /**
+     * Test per comprovar que prement una parada de la llista ens apareix el fragment dels detalls de la parada
+     */
+    @Test public void onStopClickGoToDetails() {
+        onView(withId(R.id.show_lines_button))
+                .perform(click());
+        onView(withText("L4"))
+                .perform(click());
+        onView(withText("Barceloneta"))
+                .perform(click());
+        onView(withId(R.id.nomParada))
+                .check(ViewAssertions.matches(isDisplayed()));
+    }
+
+    /**
+     * Test per comprovar que prement una parada de la llista ens apareixen els detalls amb el seu nom
+     */
+    @Test public void onStopClickShowDetailsName() {
+        onView(withId(R.id.show_lines_button))
+                .perform(click());
+        onView(withText("L4"))
+                .perform(click());
+        onView(withText("Barceloneta"))
+                .perform(click());
+        onView(withText("Barceloneta"))
+                .check(ViewAssertions.matches(isDisplayed()));
     }
 }
