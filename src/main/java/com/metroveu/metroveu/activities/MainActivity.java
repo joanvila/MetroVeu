@@ -17,6 +17,8 @@ public class MainActivity extends AppCompatActivity {
 
     private FragmentTransaction transaction;
 
+    private String data;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         Log.v("LINIES", "AGAFADES");
         if (linies != null && linies.moveToFirst()){
             do {
-                String data = linies.getString(linies.getColumnIndex("linia_nom"));
+                data = linies.getString(linies.getColumnIndex("linia_nom"));
                 Log.v("LINIES: ", data);
             } while(linies.moveToNext());
             linies.close();
@@ -81,6 +83,10 @@ public class MainActivity extends AppCompatActivity {
                 transaction.commit();
                 break;
         }
+    }
+
+    public String getMyData() {
+        return data;
     }
 
 }
