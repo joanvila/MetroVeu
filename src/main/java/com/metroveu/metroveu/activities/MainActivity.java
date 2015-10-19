@@ -12,7 +12,7 @@ import com.metroveu.metroveu.tasks.FetchParadesTask;
 
 public class MainActivity extends AppCompatActivity {
 
-    private FragmentTransaction transaction;
+    private FragmentTransaction ft;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +35,10 @@ public class MainActivity extends AppCompatActivity {
         switch (v.getId()) {
             case R.id.show_lines_button:
                 LiniesFragment liniesFragment = new LiniesFragment();
-                transaction = getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.content_frame, liniesFragment);
-                transaction.addToBackStack(null);
-                transaction.commit();
+                ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.content_frame, liniesFragment);
+                ft.addToBackStack(null);
+                ft.commit();
                 break;
         }
     }
