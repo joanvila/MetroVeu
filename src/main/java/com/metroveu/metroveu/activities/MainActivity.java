@@ -6,18 +6,20 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ListView;
 
 import com.metroveu.metroveu.R;
 import com.metroveu.metroveu.data.MetroDbHelper;
 import com.metroveu.metroveu.fragments.HomeFragment;
 import com.metroveu.metroveu.fragments.LiniesFragment;
+import com.metroveu.metroveu.fragments.ParadaFragment;
 import com.metroveu.metroveu.tasks.FetchParadesTask;
 
 public class MainActivity extends AppCompatActivity {
 
     private FragmentTransaction transaction;
 
-    private String data;
+    private String data = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,11 +54,11 @@ public class MainActivity extends AppCompatActivity {
         updateParades();
 
         Cursor linies = new MetroDbHelper(getApplicationContext()).getReadableDatabase().
-                rawQuery("select * from linia", null);
+                rawQuery("select * from linia order by linia_nom asc", null);
         Log.v("LINIES", "AGAFADES");
         if (linies != null && linies.moveToFirst()){
             do {
-                data = linies.getString(linies.getColumnIndex("linia_nom"));
+                data += (linies.getString(linies.getColumnIndex("linia_nom"))+", ");
                 Log.v("LINIES: ", data);
             } while(linies.moveToNext());
             linies.close();

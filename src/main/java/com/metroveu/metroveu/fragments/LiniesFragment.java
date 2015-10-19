@@ -2,6 +2,7 @@ package com.metroveu.metroveu.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +32,7 @@ public class LiniesFragment extends Fragment {
                 "Android Example List View" };*/
 
         MainActivity activity = (MainActivity) getActivity();
-        String[] values = activity.getMyData().split(" ");
+        String[] values = activity.getMyData().split(", ");
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity()
                 .getApplicationContext(), android.R.layout.simple_list_item_1,
                 android.R.id.text1, values);
