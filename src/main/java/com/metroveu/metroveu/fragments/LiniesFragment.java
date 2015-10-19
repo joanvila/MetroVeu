@@ -23,7 +23,7 @@ public class LiniesFragment extends Fragment {
 
         ListView listView = (ListView) rootView.findViewById(R.id.listView);
 
-        /* Defined Array values to show in ListView
+        /*Defined Array values to show in ListView
         String[] values = new String[] { "Android List View",
                 "Adapter implementation", "Simple List View In Android",
                 "Create List View Android", "Android Example",

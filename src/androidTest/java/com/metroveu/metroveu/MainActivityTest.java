@@ -49,8 +49,6 @@ public class MainActivityTest {
     public void onLinesButtonClickedLinesAppear() {
         onView(withId(R.id.show_lines_button))
                 .perform(click());
-        onView(withId(R.id.lines_title))
-                .check(ViewAssertions.matches(isDisplayed()));
 
     }
 }
