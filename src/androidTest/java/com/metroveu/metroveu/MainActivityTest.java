@@ -113,6 +113,20 @@ public class MainActivityTest {
     }
 
     /**
+     * Test per comprovar que prement enrere a la llista de parades tornem a la llista de línies
+     */
+    @Test public void fromStopsReturnToLines() {
+        onView(withId(R.id.show_lines_button))
+                .perform(click());
+        onView(withText("L2"))
+                .perform(click());
+        onView(withId(R.id.paradesListView))
+                .perform(pressBack());
+        onView(withId(R.id.liniesListView))
+                .check(ViewAssertions.matches(isDisplayed()));
+    }
+
+    /**
      * Test per comprovar que prement una parada de la llista ens apareix el fragment dels detalls de la parada
      */
     @Test public void onStopClickGoToDetails() {
@@ -139,4 +153,21 @@ public class MainActivityTest {
         onView(withText("Barceloneta"))
                 .check(ViewAssertions.matches(isDisplayed()));
     }
+
+    /**
+     * Test per comprovar que prement enrere als detalls de una parada tornem a la llista de parades
+     */
+    @Test public void fromDetailsReturnToStops() {
+        onView(withId(R.id.show_lines_button))
+                .perform(click());
+        onView(withText("L4"))
+                .perform(click());
+        onView(withText("Barceloneta"))
+                .perform(click());
+        onView(withId(R.id.nomParada))
+                .perform(pressBack());
+        onView(withId(R.id.paradesListView))
+                .check(ViewAssertions.matches(isDisplayed()));
+    }
+
 }
