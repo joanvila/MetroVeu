@@ -3,9 +3,11 @@ package com.metroveu.metroveu.fragments;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -19,6 +21,7 @@ import java.util.ArrayList;
  */
 public class ParadesFragment extends Fragment {
 
+    private FragmentTransaction ft;
     ArrayList<String> paradesData;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -44,6 +47,23 @@ public class ParadesFragment extends Fragment {
 
         ListView paradesListView = (ListView) rootView.findViewById(R.id.paradesListView);
         paradesListView.setAdapter(adapter);
+
+        paradesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+
+                ParadaFragment paradaFragment = new ParadaFragment();
+                Bundle paradaBundle = new Bundle();
+                paradaBundle.putString("parada_nom", paradesData.get(position));
+                paradaFragment.setArguments(paradaBundle);
+                ft = getFragmentManager().beginTransaction();
+                ft.replace(R.id.content_frame, paradaFragment);
+                ft.addToBackStack(null);
+                ft.commit();
+            }
+        });
 
         return rootView;
     }
