@@ -24,8 +24,7 @@ public class ParadaFragment extends Fragment {
         // Defined Array values to show in ListView
         String[] values = new String[] { "Android List View",
                 "Adapter implementation", "Simple List View In Android",
-                "Create List View Android", "Android Example",
-                "List View Source Code", "List View Array Adapter",
+                "Create List View Android", "Android Example", "List View Array Adapter",
                 "Android Example List View" };
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity()
