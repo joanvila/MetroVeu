@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.accessibility.AccessibilityEvent;
 import android.widget.TextView;
 
 import com.metroveu.metroveu.R;
@@ -27,6 +28,7 @@ public class ParadaFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Creates view and links it to the parada fragment layout in res/layout
         View rootView = inflater.inflate(R.layout.parada_fragment, container, false);
+        rootView.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED);
 
         Bundle paradesBundle = getArguments();
         final ArrayList<String> paradesList = paradesBundle.getStringArrayList("parades_data");
@@ -43,6 +45,7 @@ public class ParadaFragment extends Fragment {
 
         final TextView nomParadaView = (TextView) rootView.findViewById(R.id.nomParada);
         nomParadaView.setText(nomParada);
+        nomParadaView.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_CLICKED);
 
         final GestureDetector gesture = new GestureDetector(getActivity(),
                 new GestureDetector.SimpleOnGestureListener() {
@@ -75,6 +78,7 @@ public class ParadaFragment extends Fragment {
                                     nomParadaView.setText(paradesList.get(index));
                                 }
                             }
+                            nomParadaView.sendAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED);
                         } catch (Exception e) {
                             // nothing
                         }
