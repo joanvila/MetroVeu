@@ -64,14 +64,16 @@ public class ParadaFragment extends Fragment {
                             if (e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE
                                     && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
                                 Log.i("FLOR", "Right to Left");
+                                // Right to Left
                                 int index = paradesList.lastIndexOf(nomParadaView.getText())+1;
                                 if(paradesList.get(index) != null)
                                     nomParadaView.setText(paradesList.get(index));
                             } else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE
                                     && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
                                 Log.i("FLOR", "Left to Right");
+                                // Left to Right
                                 int index = paradesList.lastIndexOf(nomParadaView.getText())-1;
-                                if(index > 0) {
+                                if(index >= 0) {
                                     nomParadaView.setText(paradesList.get(index));
                                 }
                             }
