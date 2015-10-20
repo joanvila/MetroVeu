@@ -86,6 +86,7 @@ public class MetroContract {
         public static final String TABLE_NAME = "linia";
 
         public static final String COLUMN_LINIA_NOM = "linia_nom";
+        public static final String COLUMN_LINIA_ORDRE = "linia_ordre";
         public static final String COLUMN_LINIA_COLOR = "linia_color";
         public static final String COLUMN_LINIA_FREQUENCIA = "linia_frequencia";
         public static final String COLUMN_LINIA_MAPA = "linia_mapa";
@@ -129,6 +130,7 @@ public class MetroContract {
         public static final String TABLE_NAME = "parada";
 
         public static final String COLUMN_PARADA_NOM = "parada_nom";
+        public static final String COLUMN_PARADA_ORDRE = "parada_ordre";
         public static final String COLUMN_PARADA_ACCESSIBILITAT = "parada_accessibilitat";
 
         public static Uri buildParadaUri(long id) {
