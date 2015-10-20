@@ -56,6 +56,7 @@ public class ParadesFragment extends Fragment {
 
                 ParadaFragment paradaFragment = new ParadaFragment();
                 Bundle paradaBundle = new Bundle();
+                paradaBundle.putStringArrayList("parades_data", paradesData);
                 paradaBundle.putString("parada_nom", paradesData.get(position));
                 paradaFragment.setArguments(paradaBundle);
                 ft = getFragmentManager().beginTransaction();
