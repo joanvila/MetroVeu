@@ -67,7 +67,7 @@ public class FetchParadesTask extends AsyncTask<String, Void, String[]> {
         return mapaId;
     }
 
-    long addLinia(String nomLinia, String colorLinia, String frequencia, String nomMapa) {
+    long addLinia(String nomLinia, int ordreLinia, String colorLinia, String frequencia, String nomMapa) {
         long liniaId;
 
         Cursor liniaCursor = mContext.getContentResolver().query(
@@ -83,6 +83,7 @@ public class FetchParadesTask extends AsyncTask<String, Void, String[]> {
         } else {
             ContentValues liniaValues = new ContentValues();
             liniaValues.put(MetroContract.LiniaEntry.COLUMN_LINIA_NOM, nomLinia);
+            liniaValues.put(MetroContract.LiniaEntry.COLUMN_LINIA_ORDRE, ordreLinia);
             liniaValues.put(MetroContract.LiniaEntry.COLUMN_LINIA_COLOR, colorLinia);
             liniaValues.put(MetroContract.LiniaEntry.COLUMN_LINIA_FREQUENCIA, frequencia);
             liniaValues.put(MetroContract.LiniaEntry.COLUMN_LINIA_MAPA, nomMapa);
@@ -208,14 +209,16 @@ public class FetchParadesTask extends AsyncTask<String, Void, String[]> {
             paradesJson = paradesJson.getJSONObject("data");
             JSONArray metroArray = paradesJson.getJSONArray("metro");
             String[] paradesArray = new String[metroArray.length()];
-            ArrayList<String> liniesArray = new ArrayList<>();
+            ArrayList<Pair<Integer,String>> liniesArray = new ArrayList<>();
             ArrayList<Pair<String,String>> pertanyensaList = new ArrayList<>();
-            String linia;
+            String liniaNom;
             for (int i = 0; i < metroArray.length(); ++i) {
                 String parada = metroArray.getJSONObject(i).getString("name");
                 paradesArray[i] = parada;
-                linia = metroArray.getJSONObject(i).getString("line");
-                Pair pertany = new Pair(linia, parada);
+                liniaNom = metroArray.getJSONObject(i).getString("line");
+                int liniaIndex = Integer.parseInt(metroArray.getJSONObject(i).getString("lineorder"));
+                Pair linia = new Pair(liniaIndex, liniaNom);
+                Pair pertany = new Pair(liniaNom, parada);
                 pertanyensaList.add(pertany);
                 if (!liniesArray.contains(linia)) {
                     liniesArray.add(linia);
@@ -226,7 +229,7 @@ public class FetchParadesTask extends AsyncTask<String, Void, String[]> {
 
             addMapa("Barcelona");
             for (int i = 0; i < liniesArray.size(); ++i) {
-                addLinia(liniesArray.get(i), null, null, "Barcelona");
+                addLinia(liniesArray.get(i).getR(), liniesArray.get(i).getL(), null, null, "Barcelona");
             }
             long accessibilitatId = addAccessibilitat(false, false, false, false);
             for (int i = 0; i < paradesArray.length; ++i) {
@@ -255,7 +258,7 @@ public class FetchParadesTask extends AsyncTask<String, Void, String[]> {
 
         try {
             // Construct the URL for the barcelonaapi query
-            final String PARADES_URL = "http://barcelonaapi.marcpous.com/metro/stations.json";
+            final String PARADES_URL = "https://bcn-metro-api.herokuapp.com/stations";
             Log.v(LOG_TAG, "URL DEFINIDO");
 
             Uri builtUri = Uri.parse(PARADES_URL);

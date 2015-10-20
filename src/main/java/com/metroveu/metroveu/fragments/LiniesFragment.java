@@ -29,7 +29,7 @@ public class LiniesFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.linies_fragment, container, false);
 
         Cursor linies = new MetroDbHelper(getActivity().getApplicationContext()).getReadableDatabase().
-                rawQuery("select * from linia order by linia_nom asc", null);
+                rawQuery("select * from linia order by linia_ordre asc", null);
         liniesData = new ArrayList<>();
         if (linies != null && linies.moveToFirst()){
             do {
