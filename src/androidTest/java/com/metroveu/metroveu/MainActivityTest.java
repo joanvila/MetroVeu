@@ -15,6 +15,8 @@ import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.pressBack;
 import static android.support.test.espresso.action.ViewActions.scrollTo;
+import static android.support.test.espresso.action.ViewActions.swipeLeft;
+import static android.support.test.espresso.action.ViewActions.swipeRight;
 import static android.support.test.espresso.matcher.ViewMatchers.isClickable;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.isEnabled;
@@ -155,7 +157,7 @@ public class MainActivityTest {
     }
 
     /**
-     * Test per comprovar que prement enrere als detalls de una parada tornem a la llista de parades
+     * Test per comprovar que prement enrere als detalls d'una parada tornem a la llista de parades
      */
     @Test public void fromDetailsReturnToStops() {
         onView(withId(R.id.show_lines_button))
@@ -169,5 +171,137 @@ public class MainActivityTest {
         onView(withId(R.id.paradesListView))
                 .check(ViewAssertions.matches(isDisplayed()));
     }
+    /**
+     * Test per comprovar que lliscant amb el dit a l'esquerra es canvia de parada a l'anterior
+     */
+    @Test public void fromStopChangeStopToLeft() {
+        onView(withId(R.id.show_lines_button))
+                .perform(click());
+        onView(withText("L5"))
+                .perform(click());
+        onView(withText("Collblanc"))
+                .perform(click());
+        onView(withId(R.id.nomParada))
+                .perform(swipeLeft());
+        onView(withText("Badal"))
+                .check(ViewAssertions.matches(isDisplayed()));
+    }
+
+    /**
+     * Test per comprovar que lliscant amb el dit a la dreta es canvia de parada a la següent
+     */
+    @Test public void fromStopChangeStopToRight() {
+        onView(withId(R.id.show_lines_button))
+                .perform(click());
+        onView(withText("L5"))
+                .perform(click());
+        onView(withText("Collblanc"))
+                .perform(click());
+        onView(withId(R.id.nomParada))
+                .perform(swipeRight());
+        onView(withText("Pubilla Cases"))
+                .check(ViewAssertions.matches(isDisplayed()));
+    }
+
+    /**
+     * Test per comprovar que lliscant amb el dit a la parada següent es mostri la informació d'aquesta
+     */
+    @Test public void fromStopChangeStopAndDetails() {
+        onView(withId(R.id.show_lines_button))
+                .perform(click());
+        onView(withText("L5"))
+                .perform(click());
+        onView(withText("Collblanc"))
+                .perform(click());
+        onView(withId(R.id.nomParada))
+                .perform(swipeRight());
+        onView(withText("Pubilla Cases"))
+                .perform(click());
+        onView(withId(R.id.nomParada))
+                .check(ViewAssertions.matches(isDisplayed()));
+    }
+
+    /**
+     * Test per comprovar que des d'una parada lliscant amb el dit a l'esquerra es canvia de parada a l'anterior i si tornem a lliscar surt l'anterior d'aquesta
+     */
+    @Test public void fromStopChangeStopToLeft2() {
+        onView(withId(R.id.show_lines_button))
+                .perform(click());
+        onView(withText("L5"))
+                .perform(click());
+        onView(withText("Collblanc"))
+                .perform(click());
+        onView(withId(R.id.nomParada))
+                .perform(swipeLeft());
+        onView(withText("Badal"))
+                .perform(click());
+        onView(withId(R.id.nomParada))
+                .perform(swipeLeft());
+        onView(withText("Plaça de Sants"))
+                .check(ViewAssertions.matches(isDisplayed()));
+    }
+
+    /**
+     * Test per comprovar que des d'una parada lliscant amb el dit a la dreta es canvia de parada a seguent i si tornem a lliscar surt la següent d'aquesta
+     */
+    @Test public void fromStopChangeStopToRight2() {
+        onView(withId(R.id.show_lines_button))
+                .perform(click());
+        onView(withText("L5"))
+                .perform(click());
+        onView(withText("Collblanc"))
+                .perform(click());
+        onView(withId(R.id.nomParada))
+                .perform(swipeRight());
+        onView(withText("Pubilla Cases"))
+                .perform(click());
+        onView(withId(R.id.nomParada))
+                .perform(swipeRight());
+        onView(withText("Can Vidalet"))
+                .check(ViewAssertions.matches(isDisplayed()));
+    }
+
+    /**
+     * Test per comprovar que des d'una parada lliscant amb el dit a l'esquerra es canvia de parada
+     * a l'anterior i si llavors llisquem a la dreta tornem a la parada inicial
+     */
+    @Test public void fromStopChangeStopToLeftAndRight() {
+        onView(withId(R.id.show_lines_button))
+                .perform(click());
+        onView(withText("L5"))
+                .perform(click());
+        onView(withText("Collblanc"))
+                .perform(click());
+        onView(withId(R.id.nomParada))
+                .perform(swipeLeft());
+        onView(withText("Badal"))
+                .perform(click());
+        onView(withId(R.id.nomParada))
+                .perform(swipeRight());
+        onView(withText("Collblanc"))
+                .check(ViewAssertions.matches(isDisplayed()));
+    }
+
+    /**
+     * Test per comprovar que des d'una parada lliscant amb el dit a la dreta es canvia de parada a
+     * seguent i si llavors llisquem a l'esquerra tornem a la parada inicial
+     */
+    @Test public void fromStopChangeStopToRightAndLeft() {
+        onView(withId(R.id.show_lines_button))
+                .perform(click());
+        onView(withText("L5"))
+                .perform(click());
+        onView(withText("Collblanc"))
+                .perform(click());
+        onView(withId(R.id.nomParada))
+                .perform(swipeRight());
+        onView(withText("Pubilla Cases"))
+                .perform(click());
+        onView(withId(R.id.nomParada))
+                .perform(swipeLeft());
+        onView(withText("Collblanc"))
+                .check(ViewAssertions.matches(isDisplayed()));
+    }
+
 
 }
