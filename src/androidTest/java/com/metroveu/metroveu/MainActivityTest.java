@@ -303,5 +303,9 @@ public class MainActivityTest {
                 .check(ViewAssertions.matches(isDisplayed()));
     }
 
+    /**
+     * Test per comprovar que lliscant cap a l'esquerra l'aparada que apareix es la següent
+     * corresponent en el mapa
+     */
 
 }
