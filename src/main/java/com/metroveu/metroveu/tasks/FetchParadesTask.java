@@ -216,12 +216,29 @@ public class FetchParadesTask extends AsyncTask<String, Void, String[]> {
                 String parada = metroArray.getJSONObject(i).getString("name");
                 paradesArray[i] = parada;
                 liniaNom = metroArray.getJSONObject(i).getString("line");
-                int liniaIndex = Integer.parseInt(metroArray.getJSONObject(i).getString("lineorder"));
-                Pair linia = new Pair(liniaIndex, liniaNom);
-                Pair pertany = new Pair(liniaNom, parada);
-                pertanyensaList.add(pertany);
-                if (!liniesArray.contains(linia)) {
-                    liniesArray.add(linia);
+                if (liniaNom.equals("L9|L10")) {
+                    int linia9Index = 5; //TODO: Maybe there is a way to get the index
+                    int linia10Index = 6;
+                    Pair linia9 = new Pair(linia9Index, "L9");
+                    Pair linia10 = new Pair(linia10Index, "L10");
+                    Pair pertany9 = new Pair("L9", parada);
+                    Pair pertany10 = new Pair("L10", parada);
+                    pertanyensaList.add(pertany9);
+                    pertanyensaList.add(pertany10);
+                    if (!liniesArray.contains(linia9)) {
+                        liniesArray.add(linia9);
+                    }
+                    if (!liniesArray.contains(linia10)) {
+                        liniesArray.add(linia10);
+                    }
+                } else {
+                    int liniaIndex = Integer.parseInt(metroArray.getJSONObject(i).getString("lineorder"));
+                    Pair linia = new Pair(liniaIndex, liniaNom);
+                    Pair pertany = new Pair(liniaNom, parada);
+                    pertanyensaList.add(pertany);
+                    if (!liniesArray.contains(linia)) {
+                        liniesArray.add(linia);
+                    }
                 }
             }
             Log.v(LOG_TAG, Arrays.toString(paradesArray));
