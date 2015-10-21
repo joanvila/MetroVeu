@@ -110,6 +110,7 @@ public class MetroContract {
 
         public static final String COLUMN_PERTANY_LINIA = "pertany_linia";
         public static final String COLUMN_PERTANY_PARADA = "pertany_parada";
+        public static final String COLUMN_PERTANY_ORDRE = "pertany_ordre";
         public static final String COLUMN_PERTANY_MAPA = "pertany_mapa";
 
         public static Uri buildPertanyUri(long id) {
@@ -130,7 +131,6 @@ public class MetroContract {
         public static final String TABLE_NAME = "parada";
 
         public static final String COLUMN_PARADA_NOM = "parada_nom";
-        public static final String COLUMN_PARADA_ORDRE = "parada_ordre";
         public static final String COLUMN_PARADA_ACCESSIBILITAT = "parada_accessibilitat";
 
         public static Uri buildParadaUri(long id) {

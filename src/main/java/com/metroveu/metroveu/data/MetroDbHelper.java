@@ -56,7 +56,6 @@ public class MetroDbHelper extends SQLiteOpenHelper {
 
         final String SQL_CREATE_PARADA_TABLE = "CREATE TABLE " + ParadaEntry.TABLE_NAME + " (" +
                 ParadaEntry.COLUMN_PARADA_NOM + " TEXT PRIMARY KEY ," +
-                ParadaEntry.COLUMN_PARADA_ORDRE + " INTEGER ," +
                 ParadaEntry.COLUMN_PARADA_ACCESSIBILITAT + " INTEGER ," +
                 " FOREIGN KEY (" + ParadaEntry.COLUMN_PARADA_ACCESSIBILITAT + ") REFERENCES " +
                 AccessibilitatEntry.TABLE_NAME + " (" + AccessibilitatEntry._ID + "));";
@@ -65,6 +64,7 @@ public class MetroDbHelper extends SQLiteOpenHelper {
                 PertanyEntry.COLUMN_PERTANY_MAPA + " TEXT ," +
                 PertanyEntry.COLUMN_PERTANY_LINIA + " TEXT ," +
                 PertanyEntry.COLUMN_PERTANY_PARADA + " TEXT ," +
+                PertanyEntry.COLUMN_PERTANY_ORDRE + " INTEGER ," +
                 " FOREIGN KEY (" + PertanyEntry.COLUMN_PERTANY_MAPA + ") REFERENCES " +
                 LiniaEntry.TABLE_NAME + " (" + LiniaEntry.COLUMN_LINIA_MAPA + "), " +
                 " FOREIGN KEY (" + PertanyEntry.COLUMN_PERTANY_LINIA + ") REFERENCES " +
