@@ -304,8 +304,7 @@ public class MainActivityTest {
     }
 
     /**
-     * Test per comprovar que lliscant cap a l'esquerra l'aparada que apareix es la següent
-     * corresponent en el mapa
+     * Test per comprovar que les linies estan ordenades
      */
     @Test public void OrderedLines() {
         onView(withId(R.id.show_lines_button))
