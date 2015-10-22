@@ -321,5 +321,19 @@ public class MainActivityTest {
         onView(withText("TELEFÈRIC DE MONTJUÏC")).check(isBelow(withText("FUNICULAR DE MONTJUÏC")));
     }
 
+    /**
+     * Test per comprovar que les parades estan ordenades
+     */
+    @Test public void OrdereStations() {
+        onView(withId(R.id.show_lines_button))
+                .perform(click());
+        onView(withText("L3"))
+                .perform(click());
+        onView(withText("Palau Reial")).check(isBelow(withText("Zona Universitària")));
+        onView(withText("Maria Cristina")).check(isBelow(withText("Palau Reial")));
+        onView(withText("Les Corts")).check(isBelow(withText("Maria Cristina")));
+        onView(withText("Plaça del Centre")).check(isBelow(withText("Les Corts")));
+    }
+
 
 }
