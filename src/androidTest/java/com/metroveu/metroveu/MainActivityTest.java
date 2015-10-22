@@ -17,6 +17,7 @@ import static android.support.test.espresso.action.ViewActions.pressBack;
 import static android.support.test.espresso.action.ViewActions.scrollTo;
 import static android.support.test.espresso.action.ViewActions.swipeLeft;
 import static android.support.test.espresso.action.ViewActions.swipeRight;
+import static android.support.test.espresso.assertion.PositionAssertions.isBelow;
 import static android.support.test.espresso.matcher.ViewMatchers.isClickable;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.isEnabled;
@@ -306,5 +307,20 @@ public class MainActivityTest {
      * Test per comprovar que lliscant cap a l'esquerra l'aparada que apareix es la següent
      * corresponent en el mapa
      */
+    @Test public void OrderedLines() {
+        onView(withId(R.id.show_lines_button))
+                .perform(click());
+        onView(withText("L2")).check(isBelow(withText("L1")));
+        onView(withText("L3")).check(isBelow(withText("L2")));
+        onView(withText("L4")).check(isBelow(withText("L3")));
+        onView(withText("L5")).check(isBelow(withText("L4")));
+        onView(withText("L9")).check(isBelow(withText("L5")));
+        onView(withText("L10")).check(isBelow(withText("L9")));
+        onView(withText("L11")).check(isBelow(withText("L10")));
+        onView(withText("TRAMVIA BLAU")).check(isBelow(withText("L11")));
+        onView(withText("FUNICULAR DE MONTJUÏC")).check(isBelow(withText("TRAMVIA BLAU")));
+        onView(withText("TELEFÈRIC DE MONTJUÏC")).check(isBelow(withText("FUNICULAR DE MONTJUÏC")));
+    }
+
 
 }
