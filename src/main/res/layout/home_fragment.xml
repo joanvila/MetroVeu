@@ -24,4 +24,14 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="70dp"
         android:onClick="buttonClick" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/show_rate_button"
+        android:id="@+id/show_rate_button"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="130dp"
+        android:onClick="buttonClick" />
 </RelativeLayout>

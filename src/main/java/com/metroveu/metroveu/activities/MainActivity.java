@@ -8,6 +8,7 @@ import android.view.View;
 import com.metroveu.metroveu.R;
 import com.metroveu.metroveu.fragments.HomeFragment;
 import com.metroveu.metroveu.fragments.LiniesFragment;
+import com.metroveu.metroveu.fragments.RatesFragment;
 import com.metroveu.metroveu.tasks.FetchParadesTask;
 
 public class MainActivity extends AppCompatActivity {
@@ -37,6 +38,14 @@ public class MainActivity extends AppCompatActivity {
                 LiniesFragment liniesFragment = new LiniesFragment();
                 ft = getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.content_frame, liniesFragment);
+                ft.addToBackStack(null);
+                ft.commit();
+                break;
+
+            case R.id.show_rate_button:
+                RatesFragment rateFragment = new RatesFragment();
+                ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.content_frame, rateFragment);
                 ft.addToBackStack(null);
                 ft.commit();
                 break;

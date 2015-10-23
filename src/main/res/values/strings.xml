@@ -5,6 +5,7 @@
     <!-- home fragment -->
     <string name="home">Metro Veu</string>
     <string name="show_lines_button">Línies</string>
+    <string name="show_rate_button">Tarifes</string>
 
     <!-- parada fragment -->
     <string name="parada">Parada</string>
