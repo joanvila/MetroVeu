@@ -139,7 +139,7 @@ public class MainActivityTest {
                 .perform(click());
         onView(withText("L4"))
                 .perform(click());
-        onView(withText("Barceloneta"))
+        onView(withText("Urquinaona"))
                 .perform(click());
         onView(withId(R.id.nomParada))
                 .check(ViewAssertions.matches(isDisplayed()));
@@ -153,9 +153,9 @@ public class MainActivityTest {
                 .perform(click());
         onView(withText("L4"))
                 .perform(click());
-        onView(withText("Barceloneta"))
+        onView(withText("Urquinaona"))
                 .perform(click());
-        onView(withText("Barceloneta"))
+        onView(withText("Urquinaona"))
                 .check(ViewAssertions.matches(isDisplayed()));
     }
 
@@ -167,7 +167,7 @@ public class MainActivityTest {
                 .perform(click());
         onView(withText("L4"))
                 .perform(click());
-        onView(withText("Barceloneta"))
+        onView(withText("Urquinaona"))
                 .perform(click());
         onView(withId(R.id.nomParada))
                 .perform(pressBack());
@@ -346,7 +346,7 @@ public class MainActivityTest {
                 .perform(click());
         onView(withText("L4"))
                 .perform(click());
-        onView(withText("Jaume I"))
+        onView(withText("Verdaguer"))
                 .perform(click());
         onView(withText("No adaptada"))
                 .check(ViewAssertions.matches(isDisplayed()))
@@ -356,7 +356,7 @@ public class MainActivityTest {
         onView(withText("Adaptada"))
                 .check(ViewAssertions.matches(isDisplayed()))
                 .perform(pressBack());
-        onView(withText("Verdaguer"))
+        onView(withText("Maragall"))
                 .perform(click());
         onView(withText("No adaptada"))
                 .check(ViewAssertions.matches(isDisplayed()));
@@ -370,9 +370,14 @@ public class MainActivityTest {
                 .perform(click());
         onView(withText("L4"))
                 .perform(click());
-        onView(withText("Jaume I"))
+        onView(withText("Verdaguer"))
                 .perform(click());
         onView(withText("No adaptada"))
+                .check(ViewAssertions.matches(isDisplayed()))
+                .perform(swipeLeft());
+        onView(withText("Girona"))
+                .check(ViewAssertions.matches(isDisplayed()));
+        onView(withText("Adaptada"))
                 .check(ViewAssertions.matches(isDisplayed()))
                 .perform(swipeLeft());
         onView(withText("Passeig de Gràcia"))
@@ -380,7 +385,7 @@ public class MainActivityTest {
         onView(withText("Adaptada"))
                 .check(ViewAssertions.matches(isDisplayed()))
                 .perform(swipeLeft());
-        onView(withText("Verdaguer"))
+        onView(withText("Urquinaona"))
                 .check(ViewAssertions.matches(isDisplayed()));
         onView(withText("No adaptada"))
                 .check(ViewAssertions.matches(isDisplayed()));

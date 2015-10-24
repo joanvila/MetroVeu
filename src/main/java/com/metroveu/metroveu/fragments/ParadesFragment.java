@@ -32,7 +32,7 @@ public class ParadesFragment extends Fragment {
         final String linia = paradesBundle.getString("linia_nom");
 
         Cursor parades = new MetroDbHelper(getActivity().getApplicationContext()).getReadableDatabase().
-                rawQuery("select * from pertany where pertany_linia =?", new String[] {linia});
+                rawQuery("select * from pertany where pertany_linia = ? order by pertany_ordre", new String[] {linia});
         paradesData = new ArrayList<>();
         if (parades != null && parades.moveToFirst()){
             do {

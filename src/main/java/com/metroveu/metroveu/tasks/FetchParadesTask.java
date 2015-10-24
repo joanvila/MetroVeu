@@ -111,8 +111,7 @@ public class FetchParadesTask extends AsyncTask<String, Void, String[]> {
                 null,
                 MetroContract.PertanyEntry.COLUMN_PERTANY_MAPA + " = ? AND " +
                         MetroContract.PertanyEntry.COLUMN_PERTANY_LINIA + " = ? AND " +
-                        MetroContract.PertanyEntry.COLUMN_PERTANY_PARADA + " = ? AND " +
-                        MetroContract.PertanyEntry.COLUMN_PERTANY_ORDRE + " = ?",
+                        MetroContract.PertanyEntry.COLUMN_PERTANY_PARADA + " = ?",
                 new String[]{mapa, linia, parada},
                 null);
 
