@@ -135,7 +135,7 @@ public class FetchParadesTask extends AsyncTask<String, Void, String[]> {
         return pertanyId;
     }
 
-    long addParada(String nomParada, int accessibilitat) {
+    long addParada(String nomParada, String accessibilitat) {
         long paradaId;
 
         Cursor paradaCursor = mContext.getContentResolver().query(
@@ -165,42 +165,6 @@ public class FetchParadesTask extends AsyncTask<String, Void, String[]> {
         return paradaId;
     }
 
-    long addAccessibilitat(Boolean ascensor, Boolean guies, Boolean rampes, Boolean escMec) {
-        long accessibilitatId;
-
-        Cursor accessibilitatCursor = mContext.getContentResolver().query(
-                MetroContract.AccessibilitatEntry.CONTENT_URI,
-                null,
-                MetroContract.AccessibilitatEntry.COLUMN_ACCESSIBILITAT_ASCENSOR + " = ? AND " +
-                        MetroContract.AccessibilitatEntry.COLUMN_ACCESSIBILITAT_GUIES + " = ? AND " +
-                        MetroContract.AccessibilitatEntry.COLUMN_ACCESSIBILITAT_RAMPES + " = ? AND " +
-                        MetroContract.AccessibilitatEntry.COLUMN_ACCESSIBILITAT_ESCMEC + " = ?",
-                new String[] {String.valueOf(ascensor), String.valueOf(guies), String.valueOf(rampes),
-                                String.valueOf(escMec)},
-                null);
-
-        if (accessibilitatCursor.moveToFirst()) {
-            int accessibilitatIndex = accessibilitatCursor.getColumnIndex(MetroContract.AccessibilitatEntry.COLUMN_ACCESSIBILITAT_ASCENSOR);
-            accessibilitatId = accessibilitatCursor.getLong(accessibilitatIndex);
-        } else {
-            ContentValues accessibilitatValues = new ContentValues();
-            accessibilitatValues.put(MetroContract.AccessibilitatEntry.COLUMN_ACCESSIBILITAT_ASCENSOR, ascensor);
-            accessibilitatValues.put(MetroContract.AccessibilitatEntry.COLUMN_ACCESSIBILITAT_GUIES, guies);
-            accessibilitatValues.put(MetroContract.AccessibilitatEntry.COLUMN_ACCESSIBILITAT_RAMPES, rampes);
-            accessibilitatValues.put(MetroContract.AccessibilitatEntry.COLUMN_ACCESSIBILITAT_ESCMEC, escMec);
-
-            Uri insertedUri = mContext.getContentResolver().insert(
-                    MetroContract.AccessibilitatEntry.CONTENT_URI,
-                    accessibilitatValues
-            );
-
-            accessibilitatId = ContentUris.parseId(insertedUri);
-        }
-
-        accessibilitatCursor.close();
-        return accessibilitatId;
-    }
-
     private String[] getParadesDataFromJson(String paradesJsonStr)
             throws JSONException {
 
@@ -208,49 +172,42 @@ public class FetchParadesTask extends AsyncTask<String, Void, String[]> {
             JSONObject paradesJson = new JSONObject(paradesJsonStr);
             paradesJson = paradesJson.getJSONObject("data");
             JSONArray metroArray = paradesJson.getJSONArray("metro");
-            String[] paradesArray = new String[metroArray.length()];
+            ArrayList<Pair<String, String>> paradesArray = new ArrayList<>();
             ArrayList<Pair<Integer,String>> liniesArray = new ArrayList<>();
             ArrayList<Pair<String,String>> pertanyensaList = new ArrayList<>();
             String liniaNom;
             for (int i = 0; i < metroArray.length(); ++i) {
                 String parada = metroArray.getJSONObject(i).getString("name");
-                paradesArray[i] = parada;
+                String accessibilitatParada = metroArray.getJSONObject(i).getString("accessibility");
+                paradesArray.add(new Pair(parada, accessibilitatParada));
                 liniaNom = metroArray.getJSONObject(i).getString("line");
                 if (liniaNom.equals("L9|L10")) {
                     int linia9Index = 5; //TODO: Maybe there is a way to get the index
                     int linia10Index = 6;
-                    Pair linia9 = new Pair(linia9Index, "L9");
-                    Pair linia10 = new Pair(linia10Index, "L10");
-                    Pair pertany9 = new Pair("L9", parada);
-                    Pair pertany10 = new Pair("L10", parada);
-                    pertanyensaList.add(pertany9);
-                    pertanyensaList.add(pertany10);
-                    if (!liniesArray.contains(linia9)) {
-                        liniesArray.add(linia9);
+                    pertanyensaList.add(new Pair("L9", parada));
+                    pertanyensaList.add(new Pair("L10", parada));
+                    if (!liniesArray.contains(new Pair(linia9Index, "L9"))) {
+                        liniesArray.add(new Pair(linia9Index, "L9"));
                     }
-                    if (!liniesArray.contains(linia10)) {
-                        liniesArray.add(linia10);
+                    if (!liniesArray.contains(new Pair(linia10Index, "L10"))) {
+                        liniesArray.add(new Pair(linia10Index, "L10"));
                     }
                 } else {
                     int liniaIndex = Integer.parseInt(metroArray.getJSONObject(i).getString("lineorder"));
-                    Pair linia = new Pair(liniaIndex, liniaNom);
-                    Pair pertany = new Pair(liniaNom, parada);
-                    pertanyensaList.add(pertany);
-                    if (!liniesArray.contains(linia)) {
-                        liniesArray.add(linia);
+                    pertanyensaList.add(new Pair(liniaNom, parada));
+                    if (!liniesArray.contains(new Pair(liniaIndex, liniaNom))) {
+                        liniesArray.add(new Pair(liniaIndex, liniaNom));
                     }
                 }
             }
-            Log.v(LOG_TAG, Arrays.toString(paradesArray));
-            Log.v(LOG_TAG, String.valueOf(liniesArray));
 
             addMapa("Barcelona");
             for (int i = 0; i < liniesArray.size(); ++i) {
                 addLinia(liniesArray.get(i).getR(), liniesArray.get(i).getL(), null, null, "Barcelona");
             }
-            long accessibilitatId = addAccessibilitat(false, false, false, false);
-            for (int i = 0; i < paradesArray.length; ++i) {
-                addParada(paradesArray[i], (int) accessibilitatId);
+
+            for (int i = 0; i < paradesArray.size(); ++i) {
+                addParada(paradesArray.get(i).getL(), paradesArray.get(i).getR());
             }
             for (int i = 0; i < pertanyensaList.size(); ++i) {
                 addPertany("Barcelona", pertanyensaList.get(i).getL(), pertanyensaList.get(i).getR());

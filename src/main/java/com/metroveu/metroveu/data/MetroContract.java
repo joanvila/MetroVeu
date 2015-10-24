@@ -28,7 +28,6 @@ public class MetroContract {
     public static final String PATH_LINIA = "linia";
     public static final String PATH_PERTANY = "pertany";
     public static final String PATH_PARADA = "parada";
-    public static final String PATH_ACCESSIBILITAT = "accessibilitat";
     public static final String PATH_TARIFA = "tarifa";
     public static final String PATH_RUTAPARADA = "rutaparada";
 
@@ -134,28 +133,6 @@ public class MetroContract {
         public static final String COLUMN_PARADA_ACCESSIBILITAT = "parada_accessibilitat";
 
         public static Uri buildParadaUri(long id) {
-            return ContentUris.withAppendedId(CONTENT_URI, id);
-        }
-    }
-
-    public static final class AccessibilitatEntry implements BaseColumns {
-
-        public static final Uri CONTENT_URI =
-                BASE_CONTENT_URI.buildUpon().appendPath(PATH_ACCESSIBILITAT).build();
-
-        public static final String CONTENT_TYPE =
-                ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_ACCESSIBILITAT;
-        public static final String CONTENT_ITEM_TYPE =
-                ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_ACCESSIBILITAT;
-
-        public static final String TABLE_NAME = "accessibilitat";
-
-        public static final String COLUMN_ACCESSIBILITAT_ASCENSOR = "accessibilitat_ascensor";
-        public static final String COLUMN_ACCESSIBILITAT_GUIES = "accessibilitat_guies";
-        public static final String COLUMN_ACCESSIBILITAT_RAMPES = "accessibilitat_rampes";
-        public static final String COLUMN_ACCESSIBILITAT_ESCMEC = "accessibilitat_escmec";
-
-        public static Uri buildAccessibilitatUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);
         }
     }

@@ -56,9 +56,7 @@ public class MetroDbHelper extends SQLiteOpenHelper {
 
         final String SQL_CREATE_PARADA_TABLE = "CREATE TABLE " + ParadaEntry.TABLE_NAME + " (" +
                 ParadaEntry.COLUMN_PARADA_NOM + " TEXT PRIMARY KEY ," +
-                ParadaEntry.COLUMN_PARADA_ACCESSIBILITAT + " INTEGER ," +
-                " FOREIGN KEY (" + ParadaEntry.COLUMN_PARADA_ACCESSIBILITAT + ") REFERENCES " +
-                AccessibilitatEntry.TABLE_NAME + " (" + AccessibilitatEntry._ID + "));";
+                ParadaEntry.COLUMN_PARADA_ACCESSIBILITAT + " TEXT );";
 
         final String SQL_CREATE_PERTANY_TABLE = "CREATE TABLE " + PertanyEntry.TABLE_NAME + " (" +
                 PertanyEntry.COLUMN_PERTANY_MAPA + " TEXT ," +
@@ -74,13 +72,6 @@ public class MetroDbHelper extends SQLiteOpenHelper {
                 " PRIMARY KEY (" + PertanyEntry.COLUMN_PERTANY_MAPA + ", " +
                                     PertanyEntry.COLUMN_PERTANY_LINIA + ", " +
                                     PertanyEntry.COLUMN_PERTANY_PARADA + "));";
-
-        final String SQL_CREATE_ACCESSIBILITAT_TABLE = "CREATE TABLE " + AccessibilitatEntry.TABLE_NAME + " (" +
-                AccessibilitatEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                AccessibilitatEntry.COLUMN_ACCESSIBILITAT_ASCENSOR + " BOOLEAN NOT NULL ," +
-                AccessibilitatEntry.COLUMN_ACCESSIBILITAT_GUIES + " BOOLEAN NOT NULL ," +
-                AccessibilitatEntry.COLUMN_ACCESSIBILITAT_RAMPES + " BOOLEAN NOT NULL ," +
-                AccessibilitatEntry.COLUMN_ACCESSIBILITAT_ESCMEC + " BOOLEAN NOT NULL);";
 
         final String SQL_CREATE_RUTAPARADA_TABLE = "CREATE TABLE " + RutaparadaEntry.TABLE_NAME + " (" +
                 RutaparadaEntry.COLUMN_RUTAPARADA_RUTA + " TEXT ," +
@@ -98,7 +89,6 @@ public class MetroDbHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(SQL_CREATE_LINIA_TABLE);
         sqLiteDatabase.execSQL(SQL_CREATE_PARADA_TABLE);
         sqLiteDatabase.execSQL(SQL_CREATE_PERTANY_TABLE);
-        sqLiteDatabase.execSQL(SQL_CREATE_ACCESSIBILITAT_TABLE);
         sqLiteDatabase.execSQL(SQL_CREATE_RUTAPARADA_TABLE);
     }
 
@@ -116,7 +106,6 @@ public class MetroDbHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + LiniaEntry.TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + ParadaEntry.TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + PertanyEntry.TABLE_NAME);
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + AccessibilitatEntry.TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + RutaparadaEntry.TABLE_NAME);
         onCreate(sqLiteDatabase);
     }
