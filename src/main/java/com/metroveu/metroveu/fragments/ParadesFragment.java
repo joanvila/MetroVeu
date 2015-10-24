@@ -29,7 +29,7 @@ public class ParadesFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.parades_fragment, container, false);
 
         Bundle paradesBundle = getArguments();
-        String linia = paradesBundle.getString("linia_nom");
+        final String linia = paradesBundle.getString("linia_nom");
 
         Cursor parades = new MetroDbHelper(getActivity().getApplicationContext()).getReadableDatabase().
                 rawQuery("select * from pertany where pertany_linia =?", new String[] {linia});
@@ -58,6 +58,7 @@ public class ParadesFragment extends Fragment {
                 Bundle paradaBundle = new Bundle();
                 paradaBundle.putStringArrayList("parades_data", paradesData);
                 paradaBundle.putString("parada_nom", paradesData.get(position));
+                paradaBundle.putString("linia_nom", linia);
                 paradaFragment.setArguments(paradaBundle);
                 ft = getFragmentManager().beginTransaction();
                 ft.replace(R.id.content_frame, paradaFragment);
