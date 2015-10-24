@@ -47,7 +47,7 @@ public class MetroDbHelper extends SQLiteOpenHelper {
                 LiniaEntry.COLUMN_LINIA_NOM + " TEXT ," +
                 LiniaEntry.COLUMN_LINIA_ORDRE + " INTEGER ," +
                 LiniaEntry.COLUMN_LINIA_COLOR + " TEXT ," +
-                LiniaEntry.COLUMN_LINIA_FREQUENCIA + " TEXT ," +
+                LiniaEntry.COLUMN_LINIA_FREQUENCIA + " INTEGER ," +
                 LiniaEntry.COLUMN_LINIA_MAPA +  " TEXT ," +
                 " FOREIGN KEY (" + LiniaEntry.COLUMN_LINIA_MAPA + ") REFERENCES " +
                 MapaEntry.TABLE_NAME + " (" + MapaEntry.COLUMN_MAPA_NOM + "), " +

@@ -23,6 +23,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 
 /**
  * Created by Florencia Tarditti on 13/10/15.
@@ -67,7 +68,7 @@ public class FetchParadesTask extends AsyncTask<String, Void, String[]> {
         return mapaId;
     }
 
-    long addLinia(String nomLinia, int ordreLinia, String colorLinia, String frequencia, String nomMapa) {
+    long addLinia(String nomLinia, int ordreLinia, String colorLinia, int frequencia, String nomMapa) {
         long liniaId;
 
         Cursor liniaCursor = mContext.getContentResolver().query(
@@ -102,7 +103,7 @@ public class FetchParadesTask extends AsyncTask<String, Void, String[]> {
 
 
 
-    long addPertany(String mapa, String linia, String parada) {
+    long addPertany(String mapa, String linia, String parada, int ordre) {
         long pertanyId;
 
         Cursor pertanyCursor = mContext.getContentResolver().query(
@@ -110,7 +111,8 @@ public class FetchParadesTask extends AsyncTask<String, Void, String[]> {
                 null,
                 MetroContract.PertanyEntry.COLUMN_PERTANY_MAPA + " = ? AND " +
                         MetroContract.PertanyEntry.COLUMN_PERTANY_LINIA + " = ? AND " +
-                        MetroContract.PertanyEntry.COLUMN_PERTANY_PARADA + " = ?",
+                        MetroContract.PertanyEntry.COLUMN_PERTANY_PARADA + " = ? AND " +
+                        MetroContract.PertanyEntry.COLUMN_PERTANY_ORDRE + " = ?",
                 new String[]{mapa, linia, parada},
                 null);
 
@@ -122,6 +124,7 @@ public class FetchParadesTask extends AsyncTask<String, Void, String[]> {
             pertanyValues.put(MetroContract.PertanyEntry.COLUMN_PERTANY_MAPA, mapa);
             pertanyValues.put(MetroContract.PertanyEntry.COLUMN_PERTANY_LINIA, linia);
             pertanyValues.put(MetroContract.PertanyEntry.COLUMN_PERTANY_PARADA, parada);
+            pertanyValues.put(MetroContract.PertanyEntry.COLUMN_PERTANY_ORDRE, ordre);
 
             Uri insertedUri = mContext.getContentResolver().insert(
                     MetroContract.PertanyEntry.CONTENT_URI,
@@ -172,46 +175,29 @@ public class FetchParadesTask extends AsyncTask<String, Void, String[]> {
             JSONObject paradesJson = new JSONObject(paradesJsonStr);
             paradesJson = paradesJson.getJSONObject("data");
             JSONArray metroArray = paradesJson.getJSONArray("metro");
-            ArrayList<Pair<String, String>> paradesArray = new ArrayList<>();
-            ArrayList<Pair<Integer,String>> liniesArray = new ArrayList<>();
-            ArrayList<Pair<String,String>> pertanyensaList = new ArrayList<>();
-            String liniaNom;
-            for (int i = 0; i < metroArray.length(); ++i) {
-                String parada = metroArray.getJSONObject(i).getString("name");
-                String accessibilitatParada = metroArray.getJSONObject(i).getString("accessibility");
-                paradesArray.add(new Pair(parada, accessibilitatParada));
-                liniaNom = metroArray.getJSONObject(i).getString("line");
-                if (liniaNom.equals("L9|L10")) {
-                    int linia9Index = 5; //TODO: Maybe there is a way to get the index
-                    int linia10Index = 6;
-                    pertanyensaList.add(new Pair("L9", parada));
-                    pertanyensaList.add(new Pair("L10", parada));
-                    if (!liniesArray.contains(new Pair(linia9Index, "L9"))) {
-                        liniesArray.add(new Pair(linia9Index, "L9"));
-                    }
-                    if (!liniesArray.contains(new Pair(linia10Index, "L10"))) {
-                        liniesArray.add(new Pair(linia10Index, "L10"));
-                    }
-                } else {
-                    int liniaIndex = Integer.parseInt(metroArray.getJSONObject(i).getString("lineorder"));
-                    pertanyensaList.add(new Pair(liniaNom, parada));
-                    if (!liniesArray.contains(new Pair(liniaIndex, liniaNom))) {
-                        liniesArray.add(new Pair(liniaIndex, liniaNom));
-                    }
-                }
-            }
+            JSONObject linesColor = paradesJson.getJSONObject("linesColor");
+            JSONArray linesOrder = paradesJson.getJSONArray("linesOrder");
 
             addMapa("Barcelona");
-            for (int i = 0; i < liniesArray.size(); ++i) {
-                addLinia(liniesArray.get(i).getR(), liniesArray.get(i).getL(), null, null, "Barcelona");
+
+            //Linies
+            for (int i = 0; i < linesOrder.length(); ++i) {
+                String lineName = linesOrder.get(i).toString();
+                String lineColor = linesColor.getString(lineName.replaceAll(" ", ""));
+                addLinia(lineName, i, lineColor, -1, "Barcelona");
             }
 
-            for (int i = 0; i < paradesArray.size(); ++i) {
-                addParada(paradesArray.get(i).getL(), paradesArray.get(i).getR());
+            //Parades
+            for (int i = 0; i < metroArray.length(); ++i) {
+                String nomParada = metroArray.getJSONObject(i).getString("name");
+                String accessibilitatParada = metroArray.getJSONObject(i).getString("accessibility");
+                String liniaParada = metroArray.getJSONObject(i).getString("line");
+                int ordreParada = metroArray.getJSONObject(i).getInt("paradaorder");
+
+                addParada(nomParada, accessibilitatParada);
+                addPertany("Barcelona", liniaParada, nomParada, ordreParada);
             }
-            for (int i = 0; i < pertanyensaList.size(); ++i) {
-                addPertany("Barcelona", pertanyensaList.get(i).getL(), pertanyensaList.get(i).getR());
-            }
+
         } catch (JSONException e) {
             Log.e(LOG_TAG, e.getMessage(), e);
             e.printStackTrace();
