@@ -9,6 +9,9 @@
 
     <!-- parada fragment -->
     <string name="parada">Parada</string>
+    <string name="adaptada">Adaptada</string>
+    <string name="noAdaptada">No adaptada</string>
+
 
     <!-- lines fragment -->
     <string name="lines_title">Selecciona una línia</string>

@@ -3,6 +3,7 @@ package com.metroveu.metroveu;
 import android.support.test.espresso.assertion.ViewAssertions;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+import android.view.View;
 
 import com.metroveu.metroveu.activities.MainActivity;
 
@@ -306,7 +307,7 @@ public class MainActivityTest {
     /**
      * Test per comprovar que les linies estan ordenades
      */
-    @Test public void OrderedLines() {
+    @Test public void orderedLines() {
         onView(withId(R.id.show_lines_button))
                 .perform(click());
         onView(withText("L2")).check(isBelow(withText("L1")));
@@ -324,7 +325,7 @@ public class MainActivityTest {
     /**
      * Test per comprovar que les parades estan ordenades
      */
-    @Test public void OrdereStations() {
+    @Test public void ordereStations() {
         onView(withId(R.id.show_lines_button))
                 .perform(click());
         onView(withText("L3"))
@@ -333,6 +334,54 @@ public class MainActivityTest {
         onView(withText("Maria Cristina")).check(isBelow(withText("Palau Reial")));
         onView(withText("Les Corts")).check(isBelow(withText("Maria Cristina")));
         onView(withText("Plaça del Centre")).check(isBelow(withText("Les Corts")));
+    }
+
+    /**
+     * Test per comprovar que surt la accessibilitat correcta que tenen les parades
+     */
+    @Test public void checkAdaptadaNoAdaptada() {
+        onView(withId(R.id.show_lines_button))
+                .perform(click());
+        onView(withText("L4"))
+                .perform(click());
+        onView(withText("Jaume I"))
+                .perform(click());
+        onView(withText("No adaptada"))
+                .check(ViewAssertions.matches(isDisplayed()))
+                .perform(pressBack());
+        onView(withText("Passeig de Gràcia"))
+                .perform(click());
+        onView(withText("Adaptada"))
+                .check(ViewAssertions.matches(isDisplayed()))
+                .perform(pressBack());
+        onView(withText("Verdaguer"))
+                .perform(click());
+        onView(withText("No adaptada"))
+                .check(ViewAssertions.matches(isDisplayed()));
+    }
+
+    /**
+     * Test per comprovar que surt la accessibilitat correcta que tenen les parades quan naveguem per una línia
+     */
+    @Test public void checkSwipeAdaptadaNoAdaptada() {
+        onView(withId(R.id.show_lines_button))
+                .perform(click());
+        onView(withText("L4"))
+                .perform(click());
+        onView(withText("Jaume I"))
+                .perform(click());
+        onView(withText("No adaptada"))
+                .check(ViewAssertions.matches(isDisplayed()))
+                .perform(swipeLeft());
+        onView(withText("Passeig de Gràcia"))
+                .check(ViewAssertions.matches(isDisplayed()));
+        onView(withText("Adaptada"))
+                .check(ViewAssertions.matches(isDisplayed()))
+                .perform(swipeLeft());
+        onView(withText("Verdaguer"))
+                .check(ViewAssertions.matches(isDisplayed()));
+        onView(withText("No adaptada"))
+                .check(ViewAssertions.matches(isDisplayed()));
     }
 
 

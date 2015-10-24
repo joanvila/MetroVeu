@@ -15,6 +15,8 @@ import android.widget.TextView;
 import com.metroveu.metroveu.R;
 import com.metroveu.metroveu.data.MetroDbHelper;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 /**
@@ -27,7 +29,7 @@ public class ParadaFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Creates view and links it to the parada fragment layout in res/layout
-        View rootView = inflater.inflate(R.layout.parada_fragment, container, false);
+        final View rootView = inflater.inflate(R.layout.parada_fragment, container, false);
         rootView.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED);
 
         Bundle paradesBundle = getArguments();
@@ -46,6 +48,8 @@ public class ParadaFragment extends Fragment {
         final TextView nomParadaView = (TextView) rootView.findViewById(R.id.nomParada);
         nomParadaView.setText(nomParada);
         nomParadaView.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_CLICKED);
+
+        setAccessibilitataDeParada(rootView, parada);
 
         final GestureDetector gesture = new GestureDetector(getActivity(),
                 new GestureDetector.SimpleOnGestureListener() {
@@ -71,6 +75,7 @@ public class ParadaFragment extends Fragment {
                                 int index = paradesList.lastIndexOf(nomParadaView.getText())+1;
                                 if(paradesList.get(index) != null)
                                     nomParadaView.setText(paradesList.get(index));
+                                    setAccessibilitataDeParada(rootView, paradesList.get(index));
                             } else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE
                                     && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
                                 Log.i("FLOR", "Left to Right");
@@ -78,6 +83,7 @@ public class ParadaFragment extends Fragment {
                                 int index = paradesList.lastIndexOf(nomParadaView.getText())-1;
                                 if(index >= 0) {
                                     nomParadaView.setText(paradesList.get(index));
+                                    setAccessibilitataDeParada(rootView, paradesList.get(index));
                                 }
                             }
                             nomParadaView.sendAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED);
@@ -98,5 +104,23 @@ public class ParadaFragment extends Fragment {
 
         return rootView;
     }
-    
+
+    //TODO: Potser podem carregar totes les accessibilitats al principi a una estructura de dades
+    private void setAccessibilitataDeParada(View rootView, String nomParada) {
+        Cursor parades = new MetroDbHelper(getActivity().getApplicationContext()).getReadableDatabase().
+                rawQuery("select * from parada where parada_nom =?", new String[]{nomParada});
+
+        String accessibilitat = "";
+        if (parades != null && parades.moveToFirst()){
+            accessibilitat = parades.getString(parades.getColumnIndex("parada_accessibilitat"));
+            parades.close();
+        }
+
+        final TextView accessibilitatView = (TextView) rootView.findViewById(R.id.accessibilitat);
+        if (accessibilitat.equals("Adaptada"))
+            accessibilitatView.setText(R.string.adaptada);
+        else
+            accessibilitatView.setText(R.string.noAdaptada);
+    }
+
 }
