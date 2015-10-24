@@ -1,5 +1,6 @@
 package com.metroveu.metroveu;
 
+import android.support.test.espresso.Espresso;
 import android.support.test.espresso.assertion.ViewAssertions;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -25,6 +26,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.isEnabled;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.anything;
+import static org.hamcrest.core.IsNot.not;
 
 /**
  * Created by joanvila on 13/10/15.
@@ -384,5 +386,28 @@ public class MainActivityTest {
                 .check(ViewAssertions.matches(isDisplayed()));
     }
 
+    /**
+     * Test per comprovar que surten les connexions de les parades
+     */
+    @Test public void checkStationConnections() {
+        onView(withId(R.id.show_lines_button))
+                .perform(click());
+        onView(withText("L3"))
+                .perform(click());
+        onView(withText("Sants Estació"))
+                .perform(click());
+        onView(withText("L5\n"))
+                .check(ViewAssertions.matches(isDisplayed()))
+                .perform(pressBack());
+        onView(withText("Espanya"))
+                .perform(click());
+        onView(withText("L1\n"))
+                .check(ViewAssertions.matches(isDisplayed()))
+                .perform(pressBack());
+        /*onView(withText("Trinitat Nova"))
+                .perform(click());
+        onView(withText("L1\nL11\n"))
+                .check(ViewAssertions.matches(isDisplayed()));*/
+    }
 
 }
