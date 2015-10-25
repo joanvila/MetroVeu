@@ -1,6 +1,7 @@
 package com.metroveu.metroveu.fragments;
 
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -48,8 +49,10 @@ public class ParadaFragment extends Fragment {
         nomParadaView.setText(nomParada);
         nomParadaView.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_CLICKED);
 
+        //Set station information
         setAccessibilitataDeParada(rootView, parada);
         setConnexions(rootView, linia, parada);
+        setBGColor(rootView, linia);
 
         final GestureDetector gesture = new GestureDetector(getActivity(),
                 new GestureDetector.SimpleOnGestureListener() {
@@ -105,6 +108,19 @@ public class ParadaFragment extends Fragment {
 
 
         return rootView;
+    }
+
+    private void setBGColor(View rootView, String nomLinia) {
+        Cursor linia = new MetroDbHelper(getActivity().getApplicationContext()).getReadableDatabase().
+                rawQuery("select * from linia where linia_nom =?", new String[]{nomLinia});
+
+        String color = "#000000";
+        if (linia != null && linia.moveToFirst()){
+            color = linia.getString(linia.getColumnIndex("linia_color"));
+            linia.close();
+        }
+
+        rootView.setBackgroundColor(Color.parseColor(color));
     }
 
     private void setConnexions(View rootView, String linia, String nomParada) {
