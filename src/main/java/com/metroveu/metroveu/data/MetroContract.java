@@ -150,8 +150,12 @@ public class MetroContract {
         public static final String TABLE_NAME = "tarifa";
 
         public static final String COLUMN_TARIFA_NOM = "tarifa_nom";
+        public static final String COLUMN_TARIFA_TIPUS = "tarifa_tipus";
+        public static final String COLUMN_TARIFA_DESCRIPCIO = "tarifa_descripcio";
         public static final String COLUMN_TARIFA_PREU = "tarifa_preu";
         public static final String COLUMN_TARIFA_MAPA = "tarifa_mapa";
+        public static final String COLUMN_TARIFA_IDIOMA = "tarifa_idioma";
+
 
         public static Uri buildTarifaUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);
