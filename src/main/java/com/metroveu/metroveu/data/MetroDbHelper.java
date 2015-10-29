@@ -28,12 +28,16 @@ public class MetroDbHelper extends SQLiteOpenHelper {
 
         final String SQL_CREATE_TARIFA_TABLE = "CREATE TABLE " + TarifaEntry.TABLE_NAME + " (" +
                 TarifaEntry.COLUMN_TARIFA_NOM + " TEXT ," +
+                TarifaEntry.COLUMN_TARIFA_TIPUS + " TEXT ," +
+                TarifaEntry.COLUMN_TARIFA_DESCRIPCIO + " TEXT ," +
                 TarifaEntry.COLUMN_TARIFA_PREU + " FLOAT NOT NULL ," +
+                TarifaEntry.COLUMN_TARIFA_IDIOMA + " TEXT , " +
                 TarifaEntry.COLUMN_TARIFA_MAPA + " TEXT ," +
                 " FOREIGN KEY (" + TarifaEntry.COLUMN_TARIFA_MAPA + ") REFERENCES " +
                 MapaEntry.TABLE_NAME + " (" + MapaEntry.COLUMN_MAPA_NOM + "), " +
                 "PRIMARY KEY (" + TarifaEntry.COLUMN_TARIFA_NOM + ", " +
-                                  TarifaEntry.COLUMN_TARIFA_MAPA + ")" +
+                                  TarifaEntry.COLUMN_TARIFA_MAPA + ", " +
+                                    TarifaEntry.COLUMN_TARIFA_IDIOMA + ")" +
                 ");";
 
         final String SQL_CREATE_RUTA_TABLE = "CREATE TABLE " + RutaEntry.TABLE_NAME + " (" +
