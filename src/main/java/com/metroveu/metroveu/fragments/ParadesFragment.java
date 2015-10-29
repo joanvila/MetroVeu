@@ -1,6 +1,7 @@
 package com.metroveu.metroveu.fragments;
 
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -10,10 +11,10 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.metroveu.metroveu.R;
 import com.metroveu.metroveu.data.MetroDbHelper;
-import com.metroveu.metroveu.data.Pair;
 
 import java.util.ArrayList;
 
@@ -31,6 +32,17 @@ public class ParadesFragment extends Fragment {
 
         Bundle paradesBundle = getArguments();
         final String linia = paradesBundle.getString("linia_nom");
+
+        Cursor liniaInfo = new MetroDbHelper(getActivity().getApplicationContext()).getReadableDatabase().
+                rawQuery("select * from linia where linia_nom = ?", new String[] {linia});
+        String colorLinia = "#FFF";
+        if (liniaInfo != null && liniaInfo.moveToFirst()) {
+            colorLinia = liniaInfo.getString(liniaInfo.getColumnIndex("linia_color"));
+        }
+
+        TextView liniaTextView = (TextView) rootView.findViewById(R.id.lineName);
+        liniaTextView.setText(linia);
+        rootView.setBackgroundColor(Color.parseColor(colorLinia));
 
         Cursor parades = new MetroDbHelper(getActivity().getApplicationContext()).getReadableDatabase().
                 rawQuery("select * from pertany where pertany_linia = ? order by pertany_ordre", new String[] {linia});
