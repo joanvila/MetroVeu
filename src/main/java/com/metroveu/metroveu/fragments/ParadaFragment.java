@@ -11,6 +11,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityEvent;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.metroveu.metroveu.R;
@@ -136,12 +138,17 @@ public class ParadaFragment extends Fragment {
             } while (pertany.moveToNext());
         }
 
-        TextView connexionsView = (TextView) rootView.findViewById(R.id.conexions);
-        connexionsView.setText("");
+        LinearLayout connexionsLayout = (LinearLayout) rootView.findViewById(R.id.connexionsLayout);
+        ((LinearLayout) connexionsLayout).removeAllViews();
+
         for (int i = 0; i < connexions.size(); ++i) {
-            connexionsView.setText(
-                    connexionsView.getText() + connexions.get(i) + "\n"
-            );
+            Log.v("connexio", connexions.get(i));
+            Button btnTag = new Button(getActivity().getApplicationContext());
+            btnTag.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            btnTag.setText(connexions.get(i));
+            btnTag.setId(i);
+            connexionsLayout.addView(btnTag);
+
         }
     }
 
