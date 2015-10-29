@@ -49,6 +49,11 @@ public class ParadaFragment extends Fragment {
         nomParadaView.setText(nomParada);
         nomParadaView.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_CLICKED);
 
+        final TextView finalLinia = (TextView) rootView.findViewById(R.id.finalLinia);
+        if (paradesList.get(0).equals(parada)) finalLinia.setText("Final de línia");
+        else if (paradesList.get(paradesList.size()-1).equals(parada)) finalLinia.setText("Final de línia");
+        else finalLinia.setText("");
+
         //Set station information
         setAccessibilitataDeParada(rootView, parada);
         setConnexions(rootView, linia, parada);
@@ -80,6 +85,9 @@ public class ParadaFragment extends Fragment {
                                     nomParadaView.setText(paradesList.get(index));
                                     setAccessibilitataDeParada(rootView, paradesList.get(index));
                                     setConnexions(rootView, linia, paradesList.get(index));
+                                if (paradesList.get(0).equals(paradesList.get(index))) finalLinia.setText("Final de línia");
+                                else if (paradesList.get(paradesList.size()-1).equals(paradesList.get(index))) finalLinia.setText("Final de línia");
+                                else finalLinia.setText("");
                             } else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE
                                     && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
                                 Log.i("FLOR", "Left to Right");
@@ -89,6 +97,9 @@ public class ParadaFragment extends Fragment {
                                     nomParadaView.setText(paradesList.get(index));
                                     setAccessibilitataDeParada(rootView, paradesList.get(index));
                                     setConnexions(rootView, linia, paradesList.get(index));
+                                    if (paradesList.get(0).equals(paradesList.get(index))) finalLinia.setText("Final de línia");
+                                    else if (paradesList.get(paradesList.size()-1).equals(paradesList.get(index))) finalLinia.setText("Final de línia");
+                                    else finalLinia.setText("");
                                 }
                             }
                             nomParadaView.sendAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED);

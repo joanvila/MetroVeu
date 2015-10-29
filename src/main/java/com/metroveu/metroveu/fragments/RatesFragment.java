@@ -25,7 +25,7 @@ public class RatesFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.linies_fragment, container, false);
+        View rootView = inflater.inflate(R.layout.rate_fragment, container, false);
 
 
         return rootView;

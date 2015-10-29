@@ -13,6 +13,7 @@ import android.widget.ListView;
 
 import com.metroveu.metroveu.R;
 import com.metroveu.metroveu.data.MetroDbHelper;
+import com.metroveu.metroveu.data.Pair;
 
 import java.util.ArrayList;
 
