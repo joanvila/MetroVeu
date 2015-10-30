@@ -153,13 +153,51 @@ public class ParadaFragment extends Fragment {
         ((LinearLayout) connexionsLayout).removeAllViews();
 
         for (int i = 0; i < connexions.size(); ++i) {
-            Log.v("connexio", connexions.get(i));
             Button btnTag = new Button(getActivity().getApplicationContext());
+            setBtnDrawable(btnTag, connexions.get(i));
             btnTag.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             btnTag.setText(connexions.get(i));
             btnTag.setId(i);
             connexionsLayout.addView(btnTag);
 
+        }
+    }
+
+    private void setBtnDrawable(Button btnTag, String connexio) {
+        switch (connexio) {
+            case "L1":
+                btnTag.setBackgroundResource(R.drawable.buttonl1);
+                break;
+            case "L2":
+                btnTag.setBackgroundResource(R.drawable.buttonl2);
+                break;
+            case "L3":
+                btnTag.setBackgroundResource(R.drawable.buttonl3);
+                break;
+            case "L4":
+                btnTag.setBackgroundResource(R.drawable.buttonl4);
+                break;
+            case "L5":
+                btnTag.setBackgroundResource(R.drawable.buttonl5);
+                break;
+            case "L9":
+                btnTag.setBackgroundResource(R.drawable.buttonl9);
+                break;
+            case "L10":
+                btnTag.setBackgroundResource(R.drawable.buttonl10);
+                break;
+            case "L11":
+                btnTag.setBackgroundResource(R.drawable.buttonl11);
+                break;
+            case "TRAMVIA BLAU":
+                btnTag.setBackgroundResource(R.drawable.buttontb);
+                break;
+            case "FUNICULAR DE MONTJUÏC":
+                btnTag.setBackgroundResource(R.drawable.buttonfm);
+                break;
+            case "TELEFÈRIC DE MONTJUÏC":
+                btnTag.setBackgroundResource(R.drawable.buttontm);
+                break;
         }
     }
 
