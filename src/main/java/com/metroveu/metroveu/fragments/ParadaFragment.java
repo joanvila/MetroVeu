@@ -4,6 +4,7 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
@@ -23,10 +24,13 @@ import java.util.ArrayList;
 /**
  * Created by Florencia Tarditti on 12/10/15.
  */
-public class ParadaFragment extends Fragment {
+public class ParadaFragment extends Fragment implements View.OnClickListener {
 
+    private FragmentTransaction ft;
     float x1,x2;
     float y1, y2;
+    String nomParada = "";
+    ArrayList<String> paradesList;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Creates view and links it to the parada fragment layout in res/layout
@@ -34,14 +38,13 @@ public class ParadaFragment extends Fragment {
         rootView.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED);
 
         Bundle paradesBundle = getArguments();
-        final ArrayList<String> paradesList = paradesBundle.getStringArrayList("parades_data");
+        paradesList = paradesBundle.getStringArrayList("parades_data");
         String parada = paradesBundle.getString("parada_nom");
         final String linia = paradesBundle.getString("linia_nom");
 
         Cursor parades = new MetroDbHelper(getActivity().getApplicationContext()).getReadableDatabase().
                 rawQuery("select * from parada where parada_nom =?", new String[]{parada});
 
-        String nomParada = "";
         if (parades != null && parades.moveToFirst()){
             nomParada = parades.getString(parades.getColumnIndex("parada_nom"));
             parades.close();
@@ -84,6 +87,7 @@ public class ParadaFragment extends Fragment {
                                 // Right to Left
                                 int index = paradesList.lastIndexOf(nomParadaView.getText())+1;
                                 if(paradesList.get(index) != null)
+                                    nomParada = paradesList.get(index);
                                     nomParadaView.setText(paradesList.get(index));
                                     setAccessibilitataDeParada(rootView, paradesList.get(index));
                                     setConnexions(rootView, linia, paradesList.get(index));
@@ -96,6 +100,7 @@ public class ParadaFragment extends Fragment {
                                 // Left to Right
                                 int index = paradesList.lastIndexOf(nomParadaView.getText())-1;
                                 if(index >= 0) {
+                                    nomParada = paradesList.get(index);
                                     nomParadaView.setText(paradesList.get(index));
                                     setAccessibilitataDeParada(rootView, paradesList.get(index));
                                     setConnexions(rootView, linia, paradesList.get(index));
@@ -158,6 +163,7 @@ public class ParadaFragment extends Fragment {
             btnTag.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             btnTag.setText(connexions.get(i));
             btnTag.setId(i);
+            btnTag.setOnClickListener(this);
             connexionsLayout.addView(btnTag);
 
         }
@@ -217,6 +223,33 @@ public class ParadaFragment extends Fragment {
             accessibilitatView.setText(R.string.adaptada);
         else
             accessibilitatView.setText(R.string.noAdaptada);
+    }
+
+    @Override
+    public void onClick(View v) {
+        Button button = (Button) v;
+        String btnText = button.getText().toString();
+
+        Cursor parades = new MetroDbHelper(getActivity().getApplicationContext()).getReadableDatabase().
+                rawQuery("select * from pertany where pertany_linia = ? order by pertany_ordre", new String[]{btnText});
+        ArrayList<String> paradesData = new ArrayList<>();
+        if (parades != null && parades.moveToFirst()){
+            do {
+                paradesData.add(parades.getString(parades.getColumnIndex("pertany_parada")));
+            } while(parades.moveToNext());
+            parades.close();
+        }
+
+        ParadaFragment paradaFragment = new ParadaFragment();
+        Bundle paradaBundle = new Bundle();
+        paradaBundle.putStringArrayList("parades_data", paradesData);
+        paradaBundle.putString("parada_nom", nomParada);
+        paradaBundle.putString("linia_nom", btnText);
+        paradaFragment.setArguments(paradaBundle);
+        ft = getFragmentManager().beginTransaction();
+        ft.replace(R.id.content_frame, paradaFragment);
+        //ft.addToBackStack(null);
+        ft.commit();
     }
 
 }
