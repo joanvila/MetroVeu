@@ -62,8 +62,6 @@ public class MainActivityTest {
         onView(withText("L9")).check(ViewAssertions.matches(isDisplayed()));
         onView(withText("L10")).check(ViewAssertions.matches(isDisplayed()));
         onView(withText("L11")).check(ViewAssertions.matches(isDisplayed()));
-        onView(withText("TELEFÈRIC DE MONTJUÏC")).check(ViewAssertions.matches(isDisplayed()));
-        onView(withText("TRAMVIA BLAU")).check(ViewAssertions.matches(isDisplayed()));
     }
 
     /**
