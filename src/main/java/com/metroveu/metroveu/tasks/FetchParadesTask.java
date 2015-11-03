@@ -95,6 +95,38 @@ public class FetchParadesTask extends AsyncTask<String, Void, String[]> {
         return liniaId;
     }
 
+    long addTarifa(String tarifa_nom, String tarifa_tipus, String tarifa_descripcio, String tarifa_preu, String nomMapa, String idioma) {
+        long tarifaId;
+
+        Cursor tarifaCursor = mContext.getContentResolver().query(
+                MetroContract.TarifaEntry.CONTENT_URI,
+                null,
+                MetroContract.TarifaEntry.COLUMN_TARIFA_NOM + " = ?",
+                new String[]{tarifa_nom},
+                null);
+
+        if (tarifaCursor != null && tarifaCursor.moveToFirst()) {
+            int tarifaNomIndex = tarifaCursor.getColumnIndex(MetroContract.TarifaEntry.COLUMN_TARIFA_NOM);
+            tarifaId = tarifaCursor.getLong(tarifaNomIndex);
+            tarifaCursor.close();
+        } else {
+            ContentValues tarifaValues = new ContentValues();
+            tarifaValues.put(MetroContract.TarifaEntry.COLUMN_TARIFA_NOM, tarifa_nom);
+            tarifaValues.put(MetroContract.TarifaEntry.COLUMN_TARIFA_TIPUS, tarifa_tipus);
+            tarifaValues.put(MetroContract.TarifaEntry.COLUMN_TARIFA_DESCRIPCIO, tarifa_descripcio);
+            tarifaValues.put(MetroContract.TarifaEntry.COLUMN_TARIFA_PREU, tarifa_preu);
+            tarifaValues.put(MetroContract.TarifaEntry.COLUMN_TARIFA_MAPA, nomMapa);
+            tarifaValues.put(MetroContract.TarifaEntry.COLUMN_TARIFA_IDIOMA, idioma);
+
+            Uri insertedUri = mContext.getContentResolver().insert(
+                    MetroContract.TarifaEntry.CONTENT_URI,
+                    tarifaValues
+            );
+
+            tarifaId = ContentUris.parseId(insertedUri);
+        }
+        return tarifaId;
+    }
 
 
     long addPertany(String mapa, String linia, String parada, int ordre) {

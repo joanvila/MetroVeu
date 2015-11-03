@@ -27,6 +27,9 @@ public class RatesFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.rate_fragment, container, false);
 
+        Cursor tarifes = new MetroDbHelper(getActivity().getApplicationContext()).getReadableDatabase().
+                rawQuery("select * from tarifa", null);
+
 
         return rootView;
     }

@@ -95,6 +95,8 @@ public class MetroContract {
         }
     }
 
+
+
     public static final class PertanyEntry implements BaseColumns {
 
         public static final Uri CONTENT_URI =
