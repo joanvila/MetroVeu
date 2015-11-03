@@ -1,6 +1,7 @@
 package com.metroveu.metroveu.activities;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -57,6 +58,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void transbord(ArrayList<String> paradesData, String nomParada, String btnText) {
+
+        FragmentManager manager = getSupportFragmentManager();
+        manager.popBackStack();
+
         ParadaFragment paradaFragment = new ParadaFragment();
         Bundle paradaBundle = new Bundle();
         paradaBundle.putStringArrayList("parades_data", paradesData);
