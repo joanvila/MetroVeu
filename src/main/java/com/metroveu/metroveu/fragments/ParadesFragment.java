@@ -38,6 +38,7 @@ public class ParadesFragment extends Fragment {
         String colorLinia = "#FFF";
         if (liniaInfo != null && liniaInfo.moveToFirst()) {
             colorLinia = liniaInfo.getString(liniaInfo.getColumnIndex("linia_color"));
+            liniaInfo.close();
         }
 
         TextView liniaTextView = (TextView) rootView.findViewById(R.id.lineName);

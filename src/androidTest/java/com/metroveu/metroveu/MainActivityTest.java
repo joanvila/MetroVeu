@@ -401,12 +401,12 @@ public class MainActivityTest {
                 .perform(click());
         onView(withText("Sants Estació"))
                 .perform(click());
-        onView(withText("L5\n"))
+        onView(withText("L5"))
                 .check(ViewAssertions.matches(isDisplayed()))
                 .perform(pressBack());
         onView(withText("Espanya"))
                 .perform(click());
-        onView(withText("L1\n"))
+        onView(withText("L1"))
                 .check(ViewAssertions.matches(isDisplayed()))
                 .perform(pressBack());
         /*onView(withText("Trinitat Nova"))
