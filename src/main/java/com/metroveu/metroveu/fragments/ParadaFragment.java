@@ -244,7 +244,7 @@ public class ParadaFragment extends Fragment implements View.OnClickListener {
         paradaFragment.setArguments(paradaBundle);
         ft = getFragmentManager().beginTransaction();
         ft.replace(R.id.content_frame, paradaFragment);
-        ft.addToBackStack(null);
+        //ft.addToBackStack(null);
         ft.commit();
     }
 
