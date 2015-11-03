@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -27,8 +26,6 @@ import java.util.ArrayList;
 public class ParadaFragment extends Fragment implements View.OnClickListener {
 
     private FragmentTransaction ft;
-    float x1,x2;
-    float y1, y2;
     String nomParada = "";
     ArrayList<String> paradesList;
 
@@ -83,7 +80,6 @@ public class ParadaFragment extends Fragment implements View.OnClickListener {
                                 return false;
                             if (e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE
                                     && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-                                Log.i("FLOR", "Right to Left");
                                 // Right to Left
                                 int index = paradesList.lastIndexOf(nomParadaView.getText())+1;
                                 if(paradesList.get(index) != null)
@@ -96,7 +92,6 @@ public class ParadaFragment extends Fragment implements View.OnClickListener {
                                 else finalLinia.setText("");
                             } else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE
                                     && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-                                Log.i("FLOR", "Left to Right");
                                 // Left to Right
                                 int index = paradesList.lastIndexOf(nomParadaView.getText())-1;
                                 if(index >= 0) {
@@ -152,6 +147,7 @@ public class ParadaFragment extends Fragment implements View.OnClickListener {
                 if (!connexioAux.equals(linia) && !connexions.contains(connexioAux))
                     connexions.add(connexioAux);
             } while (pertany.moveToNext());
+            pertany.close();
         }
 
         LinearLayout connexionsLayout = (LinearLayout) rootView.findViewById(R.id.connexionsLayout);

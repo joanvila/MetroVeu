@@ -9,7 +9,6 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.metroveu.metroveu.data.MetroContract;
-import com.metroveu.metroveu.data.Pair;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,9 +20,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
 
 /**
  * Created by Florencia Tarditti on 13/10/15.
@@ -48,9 +44,10 @@ public class FetchParadesTask extends AsyncTask<String, Void, String[]> {
                 new String[]{nomMapa},
                 null);
 
-        if (mapaCursor.moveToFirst()) {
+        if (mapaCursor != null && mapaCursor.moveToFirst()) {
             int mapaNomIndex = mapaCursor.getColumnIndex(MetroContract.MapaEntry.COLUMN_MAPA_NOM);
             mapaId = mapaCursor.getLong(mapaNomIndex);
+            mapaCursor.close();
         } else {
 
             ContentValues mapaValues = new ContentValues();
@@ -63,8 +60,6 @@ public class FetchParadesTask extends AsyncTask<String, Void, String[]> {
 
             mapaId = ContentUris.parseId(insertedUri);
         }
-
-        mapaCursor.close();
         return mapaId;
     }
 
@@ -78,9 +73,10 @@ public class FetchParadesTask extends AsyncTask<String, Void, String[]> {
                 new String[]{nomLinia},
                 null);
 
-        if (liniaCursor.moveToFirst()) {
+        if (liniaCursor != null && liniaCursor.moveToFirst()) {
             int liniaNomIndex = liniaCursor.getColumnIndex(MetroContract.LiniaEntry.COLUMN_LINIA_NOM);
             liniaId = liniaCursor.getLong(liniaNomIndex);
+            liniaCursor.close();
         } else {
             ContentValues liniaValues = new ContentValues();
             liniaValues.put(MetroContract.LiniaEntry.COLUMN_LINIA_NOM, nomLinia);
@@ -96,8 +92,6 @@ public class FetchParadesTask extends AsyncTask<String, Void, String[]> {
 
             liniaId = ContentUris.parseId(insertedUri);
         }
-
-        liniaCursor.close();
         return liniaId;
     }
 
@@ -115,9 +109,10 @@ public class FetchParadesTask extends AsyncTask<String, Void, String[]> {
                 new String[]{mapa, linia, parada},
                 null);
 
-        if (pertanyCursor.moveToFirst()) {
+        if (pertanyCursor != null && pertanyCursor.moveToFirst()) {
             int pertanyIndex = pertanyCursor.getColumnIndex(MetroContract.PertanyEntry.COLUMN_PERTANY_MAPA);
             pertanyId = pertanyCursor.getLong(pertanyIndex);
+            pertanyCursor.close();
         } else {
             ContentValues pertanyValues = new ContentValues();
             pertanyValues.put(MetroContract.PertanyEntry.COLUMN_PERTANY_MAPA, mapa);
@@ -132,8 +127,6 @@ public class FetchParadesTask extends AsyncTask<String, Void, String[]> {
 
             pertanyId = ContentUris.parseId(insertedUri);
         }
-
-        pertanyCursor.close();
         return pertanyId;
     }
 
