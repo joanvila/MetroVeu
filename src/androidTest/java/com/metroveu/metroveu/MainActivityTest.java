@@ -342,7 +342,7 @@ public class MainActivityTest {
         onView(withText("No adaptada"))
                 .check(ViewAssertions.matches(isDisplayed()))
                 .perform(pressBack());
-        onView(withText("Passeig de Gràcia"))
+        onView(withText("Joanic"))
                 .perform(click());
         onView(withText("Adaptada"))
                 .check(ViewAssertions.matches(isDisplayed()))
