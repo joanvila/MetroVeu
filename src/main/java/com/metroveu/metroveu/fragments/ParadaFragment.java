@@ -4,6 +4,7 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.metroveu.metroveu.R;
+import com.metroveu.metroveu.activities.MainActivity;
 import com.metroveu.metroveu.data.MetroDbHelper;
 
 import java.util.ArrayList;
@@ -25,7 +27,6 @@ import java.util.ArrayList;
  */
 public class ParadaFragment extends Fragment implements View.OnClickListener {
 
-    private FragmentTransaction ft;
     String nomParada = "";
     ArrayList<String> paradesList;
 
@@ -33,6 +34,12 @@ public class ParadaFragment extends Fragment implements View.OnClickListener {
         // Creates view and links it to the parada fragment layout in res/layout
         final View rootView = inflater.inflate(R.layout.parada_fragment, container, false);
         rootView.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED);
+
+        /*FragmentManager manager = getActivity().getSupportFragmentManager();
+        FragmentTransaction trans = manager.beginTransaction();
+        trans.remove(new ParadaFragment());
+        trans.commit();
+        manager.popBackStack();*/
 
         Bundle paradesBundle = getArguments();
         paradesList = paradesBundle.getStringArrayList("parades_data");
@@ -236,16 +243,8 @@ public class ParadaFragment extends Fragment implements View.OnClickListener {
             parades.close();
         }
 
-        ParadaFragment paradaFragment = new ParadaFragment();
-        Bundle paradaBundle = new Bundle();
-        paradaBundle.putStringArrayList("parades_data", paradesData);
-        paradaBundle.putString("parada_nom", nomParada);
-        paradaBundle.putString("linia_nom", btnText);
-        paradaFragment.setArguments(paradaBundle);
-        ft = getFragmentManager().beginTransaction();
-        ft.replace(R.id.content_frame, paradaFragment);
-        //ft.addToBackStack(null);
-        ft.commit();
+        ((MainActivity)getActivity()).transbord(paradesData, nomParada, btnText);
+
     }
 
 }

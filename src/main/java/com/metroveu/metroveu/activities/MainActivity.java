@@ -8,12 +8,16 @@ import android.view.View;
 import com.metroveu.metroveu.R;
 import com.metroveu.metroveu.fragments.HomeFragment;
 import com.metroveu.metroveu.fragments.LiniesFragment;
+import com.metroveu.metroveu.fragments.ParadaFragment;
 import com.metroveu.metroveu.fragments.RatesFragment;
 import com.metroveu.metroveu.tasks.FetchParadesTask;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
     private FragmentTransaction ft;
+    private ParadaFragment fragmentAnt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,4 +56,17 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void transbord(ArrayList<String> paradesData, String nomParada, String btnText) {
+        ParadaFragment paradaFragment = new ParadaFragment();
+        Bundle paradaBundle = new Bundle();
+        paradaBundle.putStringArrayList("parades_data", paradesData);
+        paradaBundle.putString("parada_nom", nomParada);
+        paradaBundle.putString("linia_nom", btnText);
+        paradaFragment.setArguments(paradaBundle);
+
+        ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.content_frame, paradaFragment);
+        ft.addToBackStack(null);
+        ft.commit();
+    }
 }
