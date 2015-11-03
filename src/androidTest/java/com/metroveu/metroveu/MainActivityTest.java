@@ -131,7 +131,7 @@ public class MainActivityTest {
                 .perform(click());
         onView(withText("L4"))
                 .perform(click());
-        onView(withText("Urquinaona"))
+        onView(withText("Maragall"))
                 .perform(click());
         onView(withId(R.id.nomParada))
                 .check(ViewAssertions.matches(isDisplayed()));
@@ -145,9 +145,9 @@ public class MainActivityTest {
                 .perform(click());
         onView(withText("L4"))
                 .perform(click());
-        onView(withText("Urquinaona"))
+        onView(withText("Maragall"))
                 .perform(click());
-        onView(withText("Urquinaona"))
+        onView(withText("Maragall"))
                 .check(ViewAssertions.matches(isDisplayed()));
     }
 
@@ -159,7 +159,7 @@ public class MainActivityTest {
                 .perform(click());
         onView(withText("L4"))
                 .perform(click());
-        onView(withText("Urquinaona"))
+        onView(withText("Maragall"))
                 .perform(click());
         onView(withId(R.id.nomParada))
                 .perform(pressBack());
@@ -313,7 +313,6 @@ public class MainActivityTest {
         onView(withText("L11")).check(isBelow(withText("L10")));
         onView(withText("TRAMVIA BLAU")).check(isBelow(withText("L11")));
         onView(withText("FUNICULAR DE MONTJUÏC")).check(isBelow(withText("TRAMVIA BLAU")));
-        onView(withText("TELEFÈRIC DE MONTJUÏC")).check(isBelow(withText("FUNICULAR DE MONTJUÏC")));
     }
 
     /**
@@ -343,7 +342,7 @@ public class MainActivityTest {
         onView(withText("No adaptada"))
                 .check(ViewAssertions.matches(isDisplayed()))
                 .perform(pressBack());
-        onView(withText("Passeig de Gràcia"))
+        onView(withText("Joanic"))
                 .perform(click());
         onView(withText("Adaptada"))
                 .check(ViewAssertions.matches(isDisplayed()))

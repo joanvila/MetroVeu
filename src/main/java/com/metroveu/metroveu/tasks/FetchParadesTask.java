@@ -172,9 +172,10 @@ public class FetchParadesTask extends AsyncTask<String, Void, String[]> {
                 new String[] {nomParada},
                 null);
 
-        if (paradaCursor.moveToFirst()) {
+        if (paradaCursor != null && paradaCursor.moveToFirst()) {
             int paradaNomIndex = paradaCursor.getColumnIndex(MetroContract.ParadaEntry.COLUMN_PARADA_NOM);
             paradaId = paradaCursor.getLong(paradaNomIndex);
+            paradaCursor.close();
         } else {
             ContentValues paradaValues = new ContentValues();
             paradaValues.put(MetroContract.ParadaEntry.COLUMN_PARADA_NOM, nomParada);
@@ -187,8 +188,6 @@ public class FetchParadesTask extends AsyncTask<String, Void, String[]> {
 
             paradaId = ContentUris.parseId(insertedUri);
         }
-
-        paradaCursor.close();
         return paradaId;
     }
 

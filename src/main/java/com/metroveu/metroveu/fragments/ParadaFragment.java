@@ -87,8 +87,8 @@ public class ParadaFragment extends Fragment implements View.OnClickListener {
                                     nomParadaView.setText(paradesList.get(index));
                                     setAccessibilitataDeParada(rootView, paradesList.get(index));
                                     setConnexions(rootView, linia, paradesList.get(index));
-                                if (paradesList.get(0).equals(paradesList.get(index))) finalLinia.setText("Final de línia");
-                                else if (paradesList.get(paradesList.size()-1).equals(paradesList.get(index))) finalLinia.setText("Final de línia");
+                                if (paradesList.get(0).equals(paradesList.get(index))) finalLinia.setText(R.string.final_linia);
+                                else if (paradesList.get(paradesList.size()-1).equals(paradesList.get(index))) finalLinia.setText(R.string.final_linia);
                                 else finalLinia.setText("");
                             } else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE
                                     && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
@@ -99,8 +99,8 @@ public class ParadaFragment extends Fragment implements View.OnClickListener {
                                     nomParadaView.setText(paradesList.get(index));
                                     setAccessibilitataDeParada(rootView, paradesList.get(index));
                                     setConnexions(rootView, linia, paradesList.get(index));
-                                    if (paradesList.get(0).equals(paradesList.get(index))) finalLinia.setText("Final de línia");
-                                    else if (paradesList.get(paradesList.size()-1).equals(paradesList.get(index))) finalLinia.setText("Final de línia");
+                                    if (paradesList.get(0).equals(paradesList.get(index))) finalLinia.setText(R.string.final_linia);
+                                    else if (paradesList.get(paradesList.size()-1).equals(paradesList.get(index))) finalLinia.setText(R.string.final_linia);
                                     else finalLinia.setText("");
                                 }
                             }
@@ -244,7 +244,7 @@ public class ParadaFragment extends Fragment implements View.OnClickListener {
         paradaFragment.setArguments(paradaBundle);
         ft = getFragmentManager().beginTransaction();
         ft.replace(R.id.content_frame, paradaFragment);
-        //ft.addToBackStack(null);
+        ft.addToBackStack(null);
         ft.commit();
     }
 
