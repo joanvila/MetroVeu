@@ -1,8 +1,8 @@
 package com.metroveu.metroveu.fragments;
 
+import android.app.Fragment;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,23 +16,26 @@ import com.metroveu.metroveu.data.MetroDbHelper;
 import java.util.ArrayList;
 
 /**
- * Created by carladivicuesta on 23/10/15.
+ * Created by Carla on 05/11/2015.
  */
-public class RatesFragment extends Fragment {
-
+public class RateFragment extends Fragment{
     private FragmentTransaction ft;
-    ArrayList<String> tarifesData;
+    ArrayList<String> tarifaData;
 
+    //falta moificar el onCreateView
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.rates_list_view, container, false);
+        View rootView = inflater.inflate(R.layout.rates_fragment, container, false);
 
-        Cursor tarifes = new MetroDbHelper(getActivity().getApplicationContext()).getReadableDatabase().
-                rawQuery("select * from tarifa", null);
-        tarifesData = new ArrayList<>();
+        Bundle paradesBundle = getArguments();
+        final String tipusTarifa = paradesBundle.getString("tarifa_tipus");
+
+        /*Cursor tarifes = new MetroDbHelper(getActivity().getApplicationContext()).getReadableDatabase().
+                rawQuery("select * from tarifa whre tarifa_tipus=?", null);
+        tarifaData = new ArrayList<>();
         if(tarifes != null && tarifes.moveToFirst()) {
             do {
-                tarifesData.add(tarifes.getString(tarifes.getColumnIndex("tarifa_tipus")));
+                tarifaData.add(tarifes.getString(tarifes.getColumnIndex("tarifa_tipus")));
             } while (tarifes.moveToNext());
             tarifes.close();
         }
@@ -52,9 +55,8 @@ public class RatesFragment extends Fragment {
                 ft.addToBackStack(null);
                 ft.commit();
             }
-        });
+        });*/
 
         return rootView;
     }
-
 }
