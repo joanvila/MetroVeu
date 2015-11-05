@@ -12,7 +12,7 @@
     <string name="adaptada">Adaptada</string>
     <string name="noAdaptada">No adaptada</string>
     <string name="conexions">L00</string>
-
+    <string name="comencar_ruta">Començar ruta</string>
 
     <!-- lines fragment -->
     <string name="lines_title">Selecciona una línia</string>

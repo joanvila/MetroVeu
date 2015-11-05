@@ -62,6 +62,7 @@ public class ParadesFragment extends Fragment {
         ListView paradesListView = (ListView) rootView.findViewById(R.id.paradesListView);
         paradesListView.setAdapter(adapter);
 
+        final String finalColorLinia = colorLinia;
         paradesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
@@ -73,6 +74,7 @@ public class ParadesFragment extends Fragment {
                 paradaBundle.putStringArrayList("parades_data", paradesData);
                 paradaBundle.putString("parada_nom", paradesData.get(position));
                 paradaBundle.putString("linia_nom", linia);
+                paradaBundle.putString("linia_color", finalColorLinia);
                 paradaFragment.setArguments(paradaBundle);
                 ft = getFragmentManager().beginTransaction();
                 ft.replace(R.id.content_frame, paradaFragment);
