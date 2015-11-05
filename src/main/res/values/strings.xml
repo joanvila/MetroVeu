@@ -17,5 +17,7 @@
     <!-- lines fragment -->
     <string name="lines_title">Selecciona una línia</string>
     <string name="final_linia">Final de línia</string>
+    <string name="linia">linia</string>
+    <string name="nom_linia">nomLinia</string>
 
 </resources>

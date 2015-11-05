@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="L1" type="id"/>
+    <item name="L2" type="id"/>
+    <item name="L3" type="id"/>
+    <item name="L4" type="id"/>
+    <item name="L5" type="id"/>
+    <item name="L9" type="id"/>
+    <item name="L10" type="id"/>
+    <item name="L11" type="id"/>
+    <item name="TRAMVIABLAU" type="id"/>
+    <item name="FUNICULARDEMONTJÜIC" type="id"/>
+    <item name="TELEFÈRICDEMONTJÜIC" type="id"/>
+
+</resources>

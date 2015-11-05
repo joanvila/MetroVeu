@@ -2,15 +2,17 @@ package com.metroveu.metroveu.fragments;
 
 import android.database.Cursor;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.view.GestureDetector;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityEvent;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -157,53 +159,30 @@ public class ParadaFragment extends Fragment implements View.OnClickListener {
         ((LinearLayout) connexionsLayout).removeAllViews();
 
         for (int i = 0; i < connexions.size(); ++i) {
-            Button btnTag = new Button(getActivity().getApplicationContext());
-            setBtnDrawable(btnTag, connexions.get(i));
-            btnTag.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-            btnTag.setText(connexions.get(i));
-            btnTag.setId(i);
-            btnTag.setOnClickListener(this);
-            connexionsLayout.addView(btnTag);
+            Cursor connexioLinia = new MetroDbHelper(getActivity().getApplicationContext()).getReadableDatabase().
+                    rawQuery("select linia_color from linia where linia_nom =?", new String[]{connexions.get(i)});
+            String colorLinia = "#aaa";
+            if (connexioLinia != null && connexioLinia.moveToFirst()) {
+                colorLinia = connexioLinia.getString(connexioLinia.getColumnIndex("linia_color"));
+                connexioLinia.close();
+            }
 
+            CardView cardView = new CardView(getActivity().getApplicationContext());
+            cardView.setLayoutParams(new ViewGroup.LayoutParams(200, ViewGroup.LayoutParams.WRAP_CONTENT));
+            cardView.setCardBackgroundColor(Color.parseColor(colorLinia));
+            cardView.setOnClickListener(this);
+            TextView connectionName = new TextView(getActivity().getApplicationContext());
+            connectionName.setText(connexions.get(i));
+            connectionName.setId(getResources().getIdentifier(connexions.get(i).trim(), "values",
+                    getActivity().getApplicationContext().getPackageName()));
+            connectionName.setTextSize(20);
+            connectionName.setTextColor(getResources().getColor(R.color.colorWhite));
+            connectionName.setTypeface(null, Typeface.BOLD);
+            connectionName.setGravity(Gravity.CENTER);
+            cardView.addView(connectionName);
+            connexionsLayout.addView(cardView);
         }
-    }
 
-    private void setBtnDrawable(Button btnTag, String connexio) {
-        switch (connexio) {
-            case "L1":
-                btnTag.setBackgroundResource(R.drawable.buttonl1);
-                break;
-            case "L2":
-                btnTag.setBackgroundResource(R.drawable.buttonl2);
-                break;
-            case "L3":
-                btnTag.setBackgroundResource(R.drawable.buttonl3);
-                break;
-            case "L4":
-                btnTag.setBackgroundResource(R.drawable.buttonl4);
-                break;
-            case "L5":
-                btnTag.setBackgroundResource(R.drawable.buttonl5);
-                break;
-            case "L9":
-                btnTag.setBackgroundResource(R.drawable.buttonl9);
-                break;
-            case "L10":
-                btnTag.setBackgroundResource(R.drawable.buttonl10);
-                break;
-            case "L11":
-                btnTag.setBackgroundResource(R.drawable.buttonl11);
-                break;
-            case "TRAMVIA BLAU":
-                btnTag.setBackgroundResource(R.drawable.buttontb);
-                break;
-            case "FUNICULAR DE MONTJUÏC":
-                btnTag.setBackgroundResource(R.drawable.buttonfm);
-                break;
-            case "TELEFÈRIC DE MONTJUÏC":
-                btnTag.setBackgroundResource(R.drawable.buttontm);
-                break;
-        }
     }
 
     //TODO: Potser podem carregar totes les accessibilitats al principi a una estructura de dades
@@ -226,11 +205,11 @@ public class ParadaFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        Button button = (Button) v;
-        String btnText = button.getText().toString();
+        TextView textView = (TextView) v.findViewById(0);
+        String text = (String) textView.getText();
 
         Cursor parades = new MetroDbHelper(getActivity().getApplicationContext()).getReadableDatabase().
-                rawQuery("select * from pertany where pertany_linia = ? order by pertany_ordre", new String[]{btnText});
+                rawQuery("select * from pertany where pertany_linia = ? order by pertany_ordre", new String[]{text});
         ArrayList<String> paradesData = new ArrayList<>();
         String novaLinia = "";
         if (parades != null && parades.moveToFirst()){
@@ -249,6 +228,6 @@ public class ParadaFragment extends Fragment implements View.OnClickListener {
             linia.close();
         }
 
-        ((MainActivity)getActivity()).transbord(paradesData, nomParada, btnText, color);
+        ((MainActivity)getActivity()).transbord(paradesData, nomParada, text, color);
     }
 }
