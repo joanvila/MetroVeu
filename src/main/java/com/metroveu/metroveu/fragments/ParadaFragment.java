@@ -120,6 +120,8 @@ public class ParadaFragment extends Fragment implements View.OnClickListener {
 
         if (parades != null && parades.moveToFirst()){
             accessibilitat = parades.getString(parades.getColumnIndex("parada_accessibilitat"));
+            if (!accessibilitat.equals(getResources().getString(R.string.adaptada)))
+                accessibilitat = getResources().getString(R.string.noAdaptada);
             parades.close();
         }
     }
@@ -168,10 +170,11 @@ public class ParadaFragment extends Fragment implements View.OnClickListener {
             }
 
             CardView cardView = new CardView(getActivity().getApplicationContext());
-            cardView.setLayoutParams(new ViewGroup.LayoutParams(300, ViewGroup.LayoutParams.WRAP_CONTENT));
+            cardView.setLayoutParams(new ViewGroup.LayoutParams(300, 70));
             cardView.setCardBackgroundColor(Color.parseColor(colorLinia));
             cardView.setOnClickListener(this);
             TextView connectionName = new TextView(getActivity().getApplicationContext());
+            connectionName.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
             connectionName.setText(connexions.get(i));
             connectionName.setId(getResources().getIdentifier(connexions.get(i).trim(), "values",
                     getActivity().getApplicationContext().getPackageName()));

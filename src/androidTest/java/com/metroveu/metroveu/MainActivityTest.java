@@ -339,7 +339,7 @@ public class MainActivityTest {
                 .perform(click());
         onView(withText("Verdaguer"))
                 .perform(click());
-        onView(withText("Projecte"))
+        onView(withText("No adaptada"))
                 .check(ViewAssertions.matches(isDisplayed()))
                 .perform(pressBack());
         onView(withText("Joanic"))
@@ -349,7 +349,7 @@ public class MainActivityTest {
                 .perform(pressBack());
         onView(withText("Maragall"))
                 .perform(click());
-        onView(withText("Projecte"))
+        onView(withText("No adaptada"))
                 .check(ViewAssertions.matches(isDisplayed()));
     }
 
@@ -363,7 +363,7 @@ public class MainActivityTest {
                 .perform(click());
         onView(withText("Verdaguer"))
                 .perform(click());
-        onView(withText("Projecte"))
+        onView(withText("No adaptada"))
                 .check(ViewAssertions.matches(isDisplayed()))
                 .perform(swipeLeft());
         onView(withText("Girona"))
