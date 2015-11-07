@@ -34,6 +34,8 @@ public class ParadaFragment extends Fragment implements View.OnClickListener {
     private String colorLinia;
     private TextView nomParadaView = null;
     private TextView finalLinia = null;
+    private Boolean rutaStarted = false;
+    private ArrayList<String> ruta;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -110,6 +112,15 @@ public class ParadaFragment extends Fragment implements View.OnClickListener {
             }
         });
 
+        final CardView rutaCard = (CardView) rootView.findViewById(R.id.rutaCard);
+        rutaCard.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if (!rutaStarted) rutaStarted = true;
+                ruta.add(nomParada);
+            }
+        });
 
         return rootView;
     }
