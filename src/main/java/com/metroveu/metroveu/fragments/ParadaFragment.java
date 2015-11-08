@@ -6,6 +6,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -35,7 +36,9 @@ public class ParadaFragment extends Fragment implements View.OnClickListener {
     private TextView nomParadaView = null;
     private TextView finalLinia = null;
     private Boolean rutaStarted = false;
-    private ArrayList<String> ruta;
+    private ArrayList<String> ruta = new ArrayList<>();
+    private LinearLayout finRutaLayout = null;
+    private TextView rutaText = null;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -113,14 +116,9 @@ public class ParadaFragment extends Fragment implements View.OnClickListener {
         });
 
         final CardView rutaCard = (CardView) rootView.findViewById(R.id.rutaCard);
-        rutaCard.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                if (!rutaStarted) rutaStarted = true;
-                ruta.add(nomParada);
-            }
-        });
+        finRutaLayout = (LinearLayout) rootView.findViewById(R.id.finRutaLayout);
+        rutaText = (TextView) rootView.findViewById(R.id.rutaText);
+        rutaCard.setOnClickListener(afegirARutaOnClick);
 
         return rootView;
     }
@@ -216,6 +214,51 @@ public class ParadaFragment extends Fragment implements View.OnClickListener {
         else
             accessibilitatView.setText(R.string.noAdaptada);
     }
+
+    public View.OnClickListener afegirARutaOnClick = new View.OnClickListener() {
+
+        @Override
+        public void onClick(View v) {
+            if (!rutaStarted) {
+                rutaStarted = true;
+                rutaText.setText(R.string.afegir_a_ruta);
+
+                CardView cardView = new CardView(getActivity().getApplicationContext());
+                CardView.LayoutParams cardViewLayout = new CardView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                cardViewLayout.setMargins(20, 20, 20, 20);
+                cardView.setRadius(14);
+                cardView.setLayoutParams(cardViewLayout);
+                cardView.setCardBackgroundColor(getResources().getColor(R.color.colorBGray));
+                cardView.setOnClickListener(acabarRutaOnClick);
+                TextView finishRuta = new TextView(getActivity().getApplicationContext());
+                finishRuta.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+                finishRuta.setText(getResources().getString(R.string.final_ruta));
+                finishRuta.setTextSize(20);
+                finishRuta.setTextColor(getResources().getColor(R.color.colorWhite));
+                finishRuta.setTypeface(null, Typeface.BOLD);
+                finishRuta.setGravity(Gravity.CENTER);
+                cardView.addView(finishRuta);
+                finRutaLayout.addView(cardView);
+            }
+            if (!ruta.contains(nomParada)) {
+                ruta.add(nomParada);
+            }
+        }
+    };
+
+    public View.OnClickListener acabarRutaOnClick = new View.OnClickListener() {
+
+        @Override
+        public void onClick(View v) {
+            ((LinearLayout) finRutaLayout).removeAllViews();
+            //TODO: Save ruta to database
+            //TODO: Save line name for each station
+            Log.v("Ruta ", String.valueOf(ruta));
+            rutaStarted = false;
+            ruta.clear();
+            rutaText.setText(R.string.comencar_ruta);
+        }
+    };
 
     @Override
     public void onClick(View v) {

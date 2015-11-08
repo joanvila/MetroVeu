@@ -13,6 +13,8 @@
     <string name="noAdaptada">No adaptada</string>
     <string name="conexions">L00</string>
     <string name="comencar_ruta">Començar ruta</string>
+    <string name="afegir_a_ruta">Afegir parada a ruta</string>
+    <string name="final_ruta">Finalitzar ruta</string>
 
     <!-- lines fragment -->
     <string name="lines_title">Selecciona una línia</string>
