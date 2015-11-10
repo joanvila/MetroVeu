@@ -496,7 +496,7 @@ public class MainActivityTest {
                 .check(ViewAssertions.matches(isDisplayed()));
         onView(withContentDescription("L1"))
                 .check(ViewAssertions.matches(isDisplayed()))
-                .perform(click());/*
+                .perform(click());
         onView(withText("Plaça de Sants"))
                 .check(ViewAssertions.matches(isDisplayed()))
                 .perform(swipeLeft());
@@ -523,7 +523,7 @@ public class MainActivityTest {
                 .check(ViewAssertions.matches(isDisplayed()))
                 .perform(pressBack());
         onView(withText("L5"))
-                .check(ViewAssertions.matches(isDisplayed()));*/
+                .check(ViewAssertions.matches(isDisplayed()));
     }
 
     @Test public void checkFinalDeLinia() {

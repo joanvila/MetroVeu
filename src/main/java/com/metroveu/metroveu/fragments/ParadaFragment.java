@@ -183,12 +183,11 @@ public class ParadaFragment extends Fragment implements View.OnClickListener {
             cardView.setCardBackgroundColor(Color.parseColor(colorLinia));
             cardView.setId(getResources().getIdentifier(connexions.get(i).trim(), "values",
                     getActivity().getApplicationContext().getPackageName()));
+            cardView.setContentDescription(connexions.get(i).trim());
             cardView.setOnClickListener(this);
             TextView connectionName = new TextView(getActivity().getApplicationContext());
             connectionName.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
             connectionName.setText(connexions.get(i));
-            connectionName.setId(getResources().getIdentifier(connexions.get(i).trim(), "values",
-                    getActivity().getApplicationContext().getPackageName()));
             connectionName.setTextSize(20);
             connectionName.setTextColor(getResources().getColor(R.color.colorWhite));
             connectionName.setTypeface(null, Typeface.BOLD);
