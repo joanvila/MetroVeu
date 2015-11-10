@@ -14,10 +14,13 @@ import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.pressBack;
+import static android.support.test.espresso.action.ViewActions.scrollTo;
 import static android.support.test.espresso.action.ViewActions.swipeLeft;
 import static android.support.test.espresso.action.ViewActions.swipeRight;
+import static android.support.test.espresso.action.ViewActions.swipeUp;
 import static android.support.test.espresso.assertion.PositionAssertions.isBelow;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.anything;
@@ -406,4 +409,176 @@ public class MainActivityTest {
                 .check(ViewAssertions.matches(isDisplayed()));*/
     }
 
+    @Test public void checkNavigateStationConnections() {
+        onView(withId(R.id.show_lines_button))
+                .perform(click());
+        onView(withText("L3"))
+                .perform(click());
+        onView(withText("Sants Estació"))
+                .perform(click());
+        onView(withText("L5"))
+                .check(ViewAssertions.matches(isDisplayed()))
+                .perform(click());
+        onView(withText("Sants Estació"))
+                .perform(click());
+        onView(withText("L3"))
+                .check(ViewAssertions.matches(isDisplayed()));
+    }
+
+    @Test public void checkBackStationConnections() {
+        onView(withId(R.id.show_lines_button))
+                .perform(click());
+        onView(withText("L3"))
+                .perform(click());
+        onView(withText("Sants Estació"))
+                .perform(click());
+        onView(withText("L5"))
+                .check(ViewAssertions.matches(isDisplayed()))
+                .perform(click());
+        onView(withText("Sants Estació"))
+                .perform(click());
+        onView(withText("L3"))
+                .check(ViewAssertions.matches(isDisplayed()));
+        onView(withText("Sants Estació"))
+                .perform(swipeRight());
+        onView(withText("Plaça de Sants"))
+                .check(ViewAssertions.matches(isDisplayed()))
+                .perform(pressBack());
+        onView(withText("L3"))
+                .check(ViewAssertions.matches(isDisplayed()));
+    }
+
+    @Test public void checkMoreThanOneConnections() {
+        onView(withId(R.id.show_lines_button))
+                .perform(click());
+        onView(withText("L3"))
+                .perform(click());
+        onView(withText("Sants Estació"))
+                .perform(click());
+        onView(withText("L5"))
+                .check(ViewAssertions.matches(isDisplayed()))
+                .perform(click());
+        onView(withText("Sants Estació"))
+                .perform(click());
+        onView(withText("L3"))
+                .check(ViewAssertions.matches(isDisplayed()));
+        onView(withText("Sants Estació"))
+                .perform(swipeRight());
+        onView(withText("Plaça de Sants"))
+                .check(ViewAssertions.matches(isDisplayed()));
+        onView(withText("L1"))
+                .check(ViewAssertions.matches(isDisplayed()))
+                .perform(click());
+        onView(withText("Plaça de Sants"))
+                .check(ViewAssertions.matches(isDisplayed()));
+        onView(withText("L5"))
+                .check(ViewAssertions.matches(isDisplayed()))
+                .perform(pressBack());
+        onView(withText("L3"))
+                .check(ViewAssertions.matches(isDisplayed()));
+    }
+
+    @Test public void checkBackToYourStationAfterConnection() {
+        onView(withId(R.id.show_lines_button))
+                .perform(click());
+        onView(withText("L5"))
+                .perform(click());
+        onView(withText("Collblanc"))
+                .check(ViewAssertions.matches(isDisplayed()))
+                .perform(click());
+        onView(withText("Collblanc"))
+                .check(ViewAssertions.matches(isDisplayed()))
+                .perform(swipeLeft());
+        onView(withText("Badal"))
+                .check(ViewAssertions.matches(isDisplayed()))
+                .perform(swipeLeft());
+        onView(withText("Plaça de Sants"))
+                .check(ViewAssertions.matches(isDisplayed()));
+        onView(withContentDescription("L1"))
+                .check(ViewAssertions.matches(isDisplayed()))
+                .perform(click());/*
+        onView(withText("Plaça de Sants"))
+                .check(ViewAssertions.matches(isDisplayed()))
+                .perform(swipeLeft());
+        onView(withText("Hostafrancs"))
+                .check(ViewAssertions.matches(isDisplayed()))
+                .perform(swipeLeft());
+        onView(withText("Espanya"))
+                .check(ViewAssertions.matches(isDisplayed()));
+        onView(withId(R.id.L3))
+                .check(ViewAssertions.matches(isDisplayed()))
+                .perform(click());
+        onView(withText("Espanya"))
+                .check(ViewAssertions.matches(isDisplayed()))
+                .perform(swipeRight());
+        onView(withText("Tarragona"))
+                .check(ViewAssertions.matches(isDisplayed()))
+                .perform(swipeRight());
+        onView(withText("Sants Estació"))
+                .check(ViewAssertions.matches(isDisplayed()));
+        onView(withId(R.id.L5))
+                .check(ViewAssertions.matches(isDisplayed()))
+                .perform(click());
+        onView(withText("Sants Estació"))
+                .check(ViewAssertions.matches(isDisplayed()))
+                .perform(pressBack());
+        onView(withText("L5"))
+                .check(ViewAssertions.matches(isDisplayed()));*/
+    }
+
+    @Test public void checkFinalDeLinia() {
+        onView(withId(R.id.show_lines_button))
+                .perform(click());
+        onView(withText("L4"))
+                .perform(click());
+        onView(withText("Trinitat Nova"))
+                .perform(click());
+        onView(withText("Final de línia"))
+                .check(ViewAssertions.matches(isDisplayed()))
+                .perform(pressBack());
+        onView(withId(R.id.paradesListView))
+                .perform(swipeUp())
+                .perform(swipeUp());
+        onView(withText("La Pau"))
+                .check(ViewAssertions.matches(isDisplayed()))
+                .perform(click());
+        onView(withText("Final de línia"))
+                .check(ViewAssertions.matches(isDisplayed()));
+    }
+
+    @Test public void checkFinalDeLiniaNavegant() {
+        onView(withId(R.id.show_lines_button))
+                .perform(click());
+        onView(withText("L9"))
+                .perform(click());
+        onView(withText("Onze de Setembre"))
+                .perform(click());
+        onView(withText("Onze de Setembre"))
+                .check(ViewAssertions.matches(isDisplayed()))
+                .perform(swipeRight());
+        onView(withText("Final de línia"))
+                .check(ViewAssertions.matches(isDisplayed()))
+                .perform(swipeRight());
+        onView(withText("Final de línia"))
+                .check(ViewAssertions.matches(isDisplayed()))
+                .perform(swipeLeft());
+        onView(withText("Onze de Setembre"))
+                .perform(swipeLeft());
+        onView(withText("Bon Pastor"))
+                .perform(swipeLeft());
+        onView(withText("Can Peixauet"))
+                .perform(swipeLeft());
+        onView(withText("Fondo"))
+                .perform(swipeLeft());
+        onView(withText("Església Major"))
+                .perform(swipeLeft());
+        onView(withText("Singuerlín"))
+                .perform(swipeLeft());
+        onView(withText("Final de línia"))
+                .check(ViewAssertions.matches(isDisplayed()))
+                .perform(swipeLeft());
+        onView(withText("Final de línia"))
+                .check(ViewAssertions.matches(isDisplayed()));
+    }
 }
+
