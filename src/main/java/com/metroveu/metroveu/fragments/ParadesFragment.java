@@ -75,6 +75,8 @@ public class ParadesFragment extends Fragment {
                 paradaBundle.putString("parada_nom", paradesData.get(position));
                 paradaBundle.putString("linia_nom", linia);
                 paradaBundle.putString("linia_color", finalColorLinia);
+                paradaBundle.putBoolean("rutaStarted", false);
+                paradaBundle.putStringArrayList("ruta", new ArrayList<String>());
                 paradaFragment.setArguments(paradaBundle);
                 ft = getFragmentManager().beginTransaction();
                 ft.replace(R.id.content_frame, paradaFragment);

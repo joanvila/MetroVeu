@@ -14,13 +14,11 @@ import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.pressBack;
-import static android.support.test.espresso.action.ViewActions.scrollTo;
 import static android.support.test.espresso.action.ViewActions.swipeLeft;
 import static android.support.test.espresso.action.ViewActions.swipeRight;
 import static android.support.test.espresso.action.ViewActions.swipeUp;
 import static android.support.test.espresso.assertion.PositionAssertions.isBelow;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.anything;
@@ -494,9 +492,6 @@ public class MainActivityTest {
                 .perform(swipeLeft());
         onView(withText("Plaça de Sants"))
                 .check(ViewAssertions.matches(isDisplayed()));
-        onView(withContentDescription("L1"))
-                .check(ViewAssertions.matches(isDisplayed()))
-                .perform(click());
         onView(withText("Plaça de Sants"))
                 .check(ViewAssertions.matches(isDisplayed()))
                 .perform(swipeLeft());

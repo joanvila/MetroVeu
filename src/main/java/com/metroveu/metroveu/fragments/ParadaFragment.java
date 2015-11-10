@@ -1,8 +1,11 @@
 package com.metroveu.metroveu.fragments;
 
+import android.content.ContentUris;
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
@@ -16,9 +19,11 @@ import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityEvent;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.metroveu.metroveu.R;
 import com.metroveu.metroveu.activities.MainActivity;
+import com.metroveu.metroveu.data.MetroContract;
 import com.metroveu.metroveu.data.MetroDbHelper;
 
 import java.util.ArrayList;
@@ -50,6 +55,13 @@ public class ParadaFragment extends Fragment implements View.OnClickListener {
         nomParada = paradesBundle.getString("parada_nom");
         nomLinia = paradesBundle.getString("linia_nom");
         colorLinia = paradesBundle.getString("linia_color");
+        rutaStarted = paradesBundle.getBoolean("rutaStarted");
+        ruta = paradesBundle.getStringArrayList("ruta");
+
+        Log.v("flor", String.valueOf(rutaStarted));
+        Log.v("flor", String.valueOf(ruta));
+        finRutaLayout = (LinearLayout) rootView.findViewById(R.id.finRutaLayout);
+        if (rutaStarted) checkRutaButtonIsDisplayed();
 
         getParadaInfo(nomParada);
         setParadaInfoInView(rootView);
@@ -116,11 +128,27 @@ public class ParadaFragment extends Fragment implements View.OnClickListener {
         });
 
         final CardView rutaCard = (CardView) rootView.findViewById(R.id.rutaCard);
-        finRutaLayout = (LinearLayout) rootView.findViewById(R.id.finRutaLayout);
         rutaText = (TextView) rootView.findViewById(R.id.rutaText);
         rutaCard.setOnClickListener(afegirARutaOnClick);
 
         return rootView;
+    }
+
+    private void checkRutaButtonIsDisplayed() {
+        CardView cardView = new CardView(getActivity().getApplicationContext());
+        CardView.LayoutParams cardViewLayout = new CardView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        cardView.setRadius(14);
+        cardView.setLayoutParams(cardViewLayout);
+        cardView.setCardBackgroundColor(getResources().getColor(R.color.colorBGray));
+        cardView.setOnClickListener(acabarRutaOnClick);
+        TextView finishRuta = new TextView(getActivity().getApplicationContext());
+        finishRuta.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        finishRuta.setText(getResources().getString(R.string.final_ruta));
+        finishRuta.setTextSize(20);
+        finishRuta.setTextColor(getResources().getColor(R.color.colorWhite));
+        finishRuta.setGravity(Gravity.CENTER);
+        cardView.addView(finishRuta);
+        finRutaLayout.addView(cardView);
     }
 
     private void getParadaInfo(String nomParada) {
@@ -181,10 +209,6 @@ public class ParadaFragment extends Fragment implements View.OnClickListener {
             CardView cardView = new CardView(getActivity().getApplicationContext());
             cardView.setLayoutParams(new ViewGroup.LayoutParams(300, 70));
             cardView.setCardBackgroundColor(Color.parseColor(colorLinia));
-            cardView.setId(getResources().getIdentifier(connexions.get(i).trim(), "values",
-                    getActivity().getApplicationContext().getPackageName()));
-            cardView.setId(getResources().getIdentifier(connexions.get(i).trim(), "id",
-                    getActivity().getApplicationContext().getPackageName()));
             cardView.setOnClickListener(this);
             TextView connectionName = new TextView(getActivity().getApplicationContext());
             connectionName.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
@@ -223,41 +247,74 @@ public class ParadaFragment extends Fragment implements View.OnClickListener {
 
         @Override
         public void onClick(View v) {
-            if (!rutaStarted) {
-                rutaStarted = true;
-                rutaText.setText(R.string.afegir_a_ruta);
+        if (!rutaStarted) {
+            rutaStarted = true;
+            rutaText.setText(R.string.afegir_a_ruta);
 
-                CardView cardView = new CardView(getActivity().getApplicationContext());
-                CardView.LayoutParams cardViewLayout = new CardView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                cardViewLayout.setMargins(20, 20, 20, 20);
-                cardView.setRadius(14);
-                cardView.setLayoutParams(cardViewLayout);
-                cardView.setCardBackgroundColor(getResources().getColor(R.color.colorBGray));
-                cardView.setOnClickListener(acabarRutaOnClick);
-                TextView finishRuta = new TextView(getActivity().getApplicationContext());
-                finishRuta.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-                finishRuta.setText(getResources().getString(R.string.final_ruta));
-                finishRuta.setTextSize(20);
-                finishRuta.setTextColor(getResources().getColor(R.color.colorWhite));
-                finishRuta.setTypeface(null, Typeface.BOLD);
-                finishRuta.setGravity(Gravity.CENTER);
-                cardView.addView(finishRuta);
-                finRutaLayout.addView(cardView);
-            }
-            if (!ruta.contains(nomParada)) {
-                ruta.add(nomParada);
-            }
+            CardView cardView = new CardView(getActivity().getApplicationContext());
+            CardView.LayoutParams cardViewLayout = new CardView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            cardView.setRadius(14);
+            cardView.setLayoutParams(cardViewLayout);
+            cardView.setCardBackgroundColor(getResources().getColor(R.color.colorBGray));
+            cardView.setOnClickListener(acabarRutaOnClick);
+            TextView finishRuta = new TextView(getActivity().getApplicationContext());
+            finishRuta.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+            finishRuta.setText(getResources().getString(R.string.final_ruta));
+            finishRuta.setTextSize(20);
+            finishRuta.setTextColor(getResources().getColor(R.color.colorWhite));
+            finishRuta.setGravity(Gravity.CENTER);
+            cardView.addView(finishRuta);
+            finRutaLayout.addView(cardView);
+        }
+        if (!ruta.contains(nomParada)) {
+            ruta.add(nomLinia + "-" + nomParada);
+        }
         }
     };
+
+    long addRuta(ArrayList<String> ruta) {
+
+        long rutaId = 0;
+        String nomRuta = "";
+
+        if (ruta.get(0) != null && ruta.get(ruta.size()-1) != null)
+            nomRuta = ruta.get(0) + " " + ruta.get(ruta.size()-1);
+
+        Cursor rutaCursor = getActivity().getApplicationContext().getContentResolver().query(
+                MetroContract.RutaEntry.CONTENT_URI,
+                null,
+                MetroContract.RutaEntry.COLUMN_RUTA_NOM + " = ?",
+                new String[]{nomRuta},
+                null);
+
+        if (rutaCursor != null && rutaCursor.moveToFirst()) {
+            Toast rutaToast = Toast.makeText(getActivity().getApplicationContext(),
+                    R.string.ruta_exists, Toast.LENGTH_LONG);
+            rutaToast.show();
+        } else {
+
+            ContentValues rutaValues = new ContentValues();
+            rutaValues.put(MetroContract.RutaEntry.COLUMN_RUTA_NOM, nomRuta);
+            rutaValues.put(MetroContract.RutaEntry.COLUMN_RUTA_NOM, String.valueOf(ruta));
+            rutaValues.put(MetroContract.RutaEntry.COLUMN_RUTA_LLOCSINTERES, "");
+
+            Uri insertedUri = getActivity().getApplicationContext().getContentResolver().insert(
+                    MetroContract.RutaEntry.CONTENT_URI,
+                    rutaValues
+            );
+
+            rutaId = ContentUris.parseId(insertedUri);
+        }
+        if (rutaCursor != null) rutaCursor.close();
+        return rutaId;
+    }
 
     public View.OnClickListener acabarRutaOnClick = new View.OnClickListener() {
 
         @Override
         public void onClick(View v) {
             ((LinearLayout) finRutaLayout).removeAllViews();
-            //TODO: Save ruta to database
-            //TODO: Save line name for each station
-            Log.v("Ruta ", String.valueOf(ruta));
+            addRuta(ruta);
             rutaStarted = false;
             ruta.clear();
             rutaText.setText(R.string.comencar_ruta);
@@ -289,6 +346,6 @@ public class ParadaFragment extends Fragment implements View.OnClickListener {
             linia.close();
         }
 
-        ((MainActivity)getActivity()).transbord(paradesData, nomParada, text, color);
+        ((MainActivity)getActivity()).transbord(paradesData, nomParada, text, color, rutaStarted, ruta);
     }
 }

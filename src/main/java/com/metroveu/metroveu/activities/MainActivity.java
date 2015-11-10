@@ -57,7 +57,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void transbord(ArrayList<String> paradesData, String nomParada, String btnText, String colorLinia) {
+    public void transbord(ArrayList<String> paradesData, String nomParada, String btnText, String colorLinia,
+        boolean rutaStarted, ArrayList<String> ruta) {
 
         FragmentManager manager = getSupportFragmentManager();
         manager.popBackStack();
@@ -68,6 +69,8 @@ public class MainActivity extends AppCompatActivity {
         paradaBundle.putString("parada_nom", nomParada);
         paradaBundle.putString("linia_nom", btnText);
         paradaBundle.putString("linia_color", colorLinia);
+        paradaBundle.putBoolean("rutaStarted", rutaStarted);
+        paradaBundle.putStringArrayList("ruta", ruta);
         paradaFragment.setArguments(paradaBundle);
 
         ft = getSupportFragmentManager().beginTransaction();

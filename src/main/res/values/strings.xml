@@ -15,6 +15,7 @@
     <string name="comencar_ruta">Començar ruta</string>
     <string name="afegir_a_ruta">Afegir parada a ruta</string>
     <string name="final_ruta">Finalitzar ruta</string>
+    <string name="ruta_exists">Ja existeix una ruta entre aquestes parades</string>
 
     <!-- lines fragment -->
     <string name="lines_title">Selecciona una línia</string>
