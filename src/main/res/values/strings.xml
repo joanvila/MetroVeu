@@ -23,5 +23,6 @@
     <string name="final_linia">Final de línia</string>
     <string name="linia">linia</string>
     <string name="nom_linia">nomLinia</string>
+    <string name="show_routes_button">Rutes</string>
 
 </resources>

@@ -11,6 +11,7 @@ import com.metroveu.metroveu.fragments.HomeFragment;
 import com.metroveu.metroveu.fragments.LiniesFragment;
 import com.metroveu.metroveu.fragments.ParadaFragment;
 import com.metroveu.metroveu.fragments.RatesFragment;
+import com.metroveu.metroveu.fragments.RoutesFragment;
 import com.metroveu.metroveu.tasks.FetchParadesTask;
 
 import java.util.ArrayList;
@@ -43,6 +44,14 @@ public class MainActivity extends AppCompatActivity {
                 LiniesFragment liniesFragment = new LiniesFragment();
                 ft = getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.content_frame, liniesFragment);
+                ft.addToBackStack(null);
+                ft.commit();
+                break;
+
+            case R.id.show_routes_button:
+                RoutesFragment routesFragment = new RoutesFragment();
+                ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.content_frame, routesFragment);
                 ft.addToBackStack(null);
                 ft.commit();
                 break;
