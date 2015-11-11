@@ -65,6 +65,7 @@ public class MetroContract {
 
         public static final String COLUMN_RUTA_NOM = "ruta_nom";
         public static final String COLUMN_RUTA_LLOCSINTERES = "ruta_llocsinteres";
+        public static final String COLUMN_RUTA_PARADES = "ruta_parades";
         public static final String COLUMN_RUTA_MAPA = "ruta_mapa";
 
         public static Uri buildRutaUri(long id) {

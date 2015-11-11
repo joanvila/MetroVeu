@@ -60,8 +60,7 @@
                 android:layout_gravity="center_horizontal"
                 android:id="@+id/rutaCard"
                 card_view:cardBackgroundColor="#bbb"
-                card_view:cardCornerRadius="14dp"
-                card_view:cardElevation="2dp"
+                card_view:cardCornerRadius="8dp"
                 android:layout_marginLeft="6dp"
                 android:layout_marginRight="6dp">
 

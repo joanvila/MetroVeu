@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.Gravity;
@@ -60,6 +61,7 @@ public class ParadaFragment extends Fragment implements View.OnClickListener {
 
         Log.v("flor", String.valueOf(rutaStarted));
         Log.v("flor", String.valueOf(ruta));
+        rutaText = (TextView) rootView.findViewById(R.id.rutaText);
         finRutaLayout = (LinearLayout) rootView.findViewById(R.id.finRutaLayout);
         if (rutaStarted) checkRutaButtonIsDisplayed();
 
@@ -97,7 +99,8 @@ public class ParadaFragment extends Fragment implements View.OnClickListener {
                                         paradesList.get(paradesList.size()-1).equals(paradesList.get(index)))
                                     finalLinia.setText(R.string.final_linia);
                                 else finalLinia.setText("");
-                                if (rutaStarted && !ruta.contains(nomParada)) ruta.add(nomLinia + "-" + nomParada);
+                                String proxParada = nomLinia + "-" + nomParada;
+                                if (rutaStarted && !ruta.contains(proxParada)) ruta.add(proxParada);
                             } else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE
                                     && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
                                 // Left to Right
@@ -111,7 +114,8 @@ public class ParadaFragment extends Fragment implements View.OnClickListener {
                                             paradesList.get(paradesList.size()-1).equals(paradesList.get(index)))
                                         finalLinia.setText(R.string.final_linia);
                                     else finalLinia.setText("");
-                                    if (rutaStarted && !ruta.contains(nomParada)) ruta.add(nomLinia + "-" + nomParada);
+                                    String proxParada = nomLinia + "-" + nomParada;
+                                    if (rutaStarted && !ruta.contains(proxParada)) ruta.add(proxParada);
                                 }
                             }
                             nomParadaView.sendAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED);
@@ -130,7 +134,6 @@ public class ParadaFragment extends Fragment implements View.OnClickListener {
         });
 
         final CardView rutaCard = (CardView) rootView.findViewById(R.id.rutaCard);
-        rutaText = (TextView) rootView.findViewById(R.id.rutaText);
         rutaCard.setOnClickListener(afegirARutaOnClick);
 
         return rootView;
@@ -211,7 +214,7 @@ public class ParadaFragment extends Fragment implements View.OnClickListener {
             }
 
             CardView cardView = new CardView(getActivity().getApplicationContext());
-            cardView.setLayoutParams(new ViewGroup.LayoutParams(300, 70));
+            cardView.setLayoutParams(new ViewGroup.LayoutParams(300, ViewGroup.LayoutParams.WRAP_CONTENT));
             cardView.setCardBackgroundColor(Color.parseColor(colorLinia));
             cardView.setOnClickListener(this);
             TextView connectionName = new TextView(getActivity().getApplicationContext());
@@ -223,6 +226,7 @@ public class ParadaFragment extends Fragment implements View.OnClickListener {
             connectionName.setTextColor(getResources().getColor(R.color.colorWhite));
             connectionName.setTypeface(null, Typeface.BOLD);
             connectionName.setGravity(Gravity.CENTER);
+            connectionName.setEllipsize(TextUtils.TruncateAt.MIDDLE);
             cardView.addView(connectionName);
             connexionsLayout.addView(cardView);
         }
@@ -282,7 +286,7 @@ public class ParadaFragment extends Fragment implements View.OnClickListener {
         String nomRuta = "";
 
         if (ruta.get(0) != null && ruta.get(ruta.size()-1) != null)
-            nomRuta = ruta.get(0) + " " + ruta.get(ruta.size()-1);
+            nomRuta = ruta.get(0) + " / " + ruta.get(ruta.size()-1);
 
         Cursor rutaCursor = getActivity().getApplicationContext().getContentResolver().query(
                 MetroContract.RutaEntry.CONTENT_URI,
@@ -299,8 +303,9 @@ public class ParadaFragment extends Fragment implements View.OnClickListener {
 
             ContentValues rutaValues = new ContentValues();
             rutaValues.put(MetroContract.RutaEntry.COLUMN_RUTA_NOM, nomRuta);
-            rutaValues.put(MetroContract.RutaEntry.COLUMN_RUTA_NOM, String.valueOf(ruta));
             rutaValues.put(MetroContract.RutaEntry.COLUMN_RUTA_LLOCSINTERES, "");
+            rutaValues.put(MetroContract.RutaEntry.COLUMN_RUTA_PARADES, String.valueOf(ruta));
+            rutaValues.put(MetroContract.RutaEntry.COLUMN_RUTA_MAPA, "Barcelona");
 
             Uri insertedUri = getActivity().getApplicationContext().getContentResolver().insert(
                     MetroContract.RutaEntry.CONTENT_URI,
@@ -350,6 +355,9 @@ public class ParadaFragment extends Fragment implements View.OnClickListener {
             color = linia.getString(linia.getColumnIndex("linia_color"));
             linia.close();
         }
+
+        String proxParada = text + "-" + nomParada;
+        if (rutaStarted && !ruta.contains(proxParada)) ruta.add(proxParada);
 
         ((MainActivity)getActivity()).transbord(paradesData, nomParada, text, color, rutaStarted, ruta);
     }
