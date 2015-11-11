@@ -11,7 +11,7 @@ import com.metroveu.metroveu.data.MetroContract.*;
  */
 public class MetroDbHelper extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     static final String DATABASE_NAME = "metroveu.db";
 
