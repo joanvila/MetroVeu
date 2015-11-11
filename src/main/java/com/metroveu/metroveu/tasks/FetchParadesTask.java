@@ -20,6 +20,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Iterator;
 
 /**
  * Created by Florencia Tarditti on 13/10/15.
@@ -101,8 +102,10 @@ public class FetchParadesTask extends AsyncTask<String, Void, String[]> {
         Cursor tarifaCursor = mContext.getContentResolver().query(
                 MetroContract.TarifaEntry.CONTENT_URI,
                 null,
-                MetroContract.TarifaEntry.COLUMN_TARIFA_NOM + " = ?",
-                new String[]{tarifa_nom},
+                MetroContract.TarifaEntry.COLUMN_TARIFA_NOM + " = ? and " +
+                        MetroContract.TarifaEntry.COLUMN_TARIFA_MAPA + " = ? AND " +
+                        MetroContract.TarifaEntry.COLUMN_TARIFA_IDIOMA + " = ?",
+                new String[]{tarifa_nom, nomMapa, idioma},
                 null);
 
         if (tarifaCursor != null && tarifaCursor.moveToFirst()) {
@@ -220,6 +223,54 @@ public class FetchParadesTask extends AsyncTask<String, Void, String[]> {
                 addParada(nomParada, accessibilitatParada);
                 addPertany("Barcelona", liniaParada, nomParada, ordreParada);
             }
+
+            // Tarifes
+            //TODO: Es podria fer menys hardcoded amb nested loops agafant el nom de l'idioma
+            JSONObject tarifes = paradesJson.getJSONObject("tarifes");
+            JSONObject tarifesBarcelona = tarifes.getJSONObject("Barelona");
+            JSONObject tarifesCatala = tarifesBarcelona.getJSONObject("Catala");
+            JSONObject tarifesCastella = tarifesBarcelona.getJSONObject("Castella");
+            JSONObject tarifesAngles = tarifesBarcelona.getJSONObject("Angles");
+
+            // Catala
+            Iterator<String> iter = tarifesCatala.keys();
+            JSONObject objectKey;
+            while (iter.hasNext()) {
+                String key = iter.next();
+                objectKey = tarifesCatala.getJSONObject(key);
+                String nomTarifa = objectKey.get("nomTarifa").toString();
+                String tipusTarifa = objectKey.get("tipusTarifa").toString();
+                String descripcio = objectKey.get("descripcio").toString();
+                String preu = objectKey.get("preu").toString();
+                addTarifa(nomTarifa, tipusTarifa, descripcio, preu, "Barcelona", "Catala");
+            }
+
+            // Castella
+            Iterator<String> iter2 = tarifesCastella.keys();
+            JSONObject objectKey2;
+            while (iter2.hasNext()) {
+                String key = iter2.next();
+                objectKey2 = tarifesCastella.getJSONObject(key);
+                String nomTarifa = objectKey2.get("nomTarifa").toString();
+                String tipusTarifa = objectKey2.get("tipusTarifa").toString();
+                String descripcio = objectKey2.get("descripcio").toString();
+                String preu = objectKey2.get("preu").toString();
+                addTarifa(nomTarifa, tipusTarifa, descripcio, preu, "Barcelona", "Castella");
+            }
+
+            // Angles
+            Iterator<String> iter3 = tarifesAngles.keys();
+            JSONObject objectKey3;
+            while (iter3.hasNext()) {
+                String key = iter3.next();
+                objectKey3 = tarifesAngles.getJSONObject(key);
+                String nomTarifa = objectKey3.get("nomTarifa").toString();
+                String tipusTarifa = objectKey3.get("tipusTarifa").toString();
+                String descripcio = objectKey3.get("descripcio").toString();
+                String preu = objectKey3.get("preu").toString();
+                addTarifa(nomTarifa, tipusTarifa, descripcio, preu, "Barcelona", "Angles");
+            }
+
 
         } catch (JSONException e) {
             Log.e(LOG_TAG, e.getMessage(), e);
