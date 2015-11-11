@@ -14,6 +14,7 @@
     <string name="conexions">L00</string>
     <string name="comencar_ruta">Començar ruta</string>
     <string name="afegir_a_ruta">Afegir parada a ruta</string>
+    <string name="eliminar_ultima_parada_afegida">Eliminar ultima parada afegida</string>
     <string name="final_ruta">Finalitzar ruta</string>
     <string name="ruta_exists">Ja existeix una ruta entre aquestes parades</string>
 

@@ -97,6 +97,7 @@ public class ParadaFragment extends Fragment implements View.OnClickListener {
                                         paradesList.get(paradesList.size()-1).equals(paradesList.get(index)))
                                     finalLinia.setText(R.string.final_linia);
                                 else finalLinia.setText("");
+                                if (rutaStarted && !ruta.contains(nomParada)) ruta.add(nomLinia + "-" + nomParada);
                             } else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE
                                     && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
                                 // Left to Right
@@ -110,6 +111,7 @@ public class ParadaFragment extends Fragment implements View.OnClickListener {
                                             paradesList.get(paradesList.size()-1).equals(paradesList.get(index)))
                                         finalLinia.setText(R.string.final_linia);
                                     else finalLinia.setText("");
+                                    if (rutaStarted && !ruta.contains(nomParada)) ruta.add(nomLinia + "-" + nomParada);
                                 }
                             }
                             nomParadaView.sendAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED);
@@ -135,6 +137,8 @@ public class ParadaFragment extends Fragment implements View.OnClickListener {
     }
 
     private void checkRutaButtonIsDisplayed() {
+        rutaText.setText(R.string.eliminar_ultima_parada_afegida);
+
         CardView cardView = new CardView(getActivity().getApplicationContext());
         CardView.LayoutParams cardViewLayout = new CardView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         cardView.setRadius(14);
@@ -249,7 +253,8 @@ public class ParadaFragment extends Fragment implements View.OnClickListener {
         public void onClick(View v) {
         if (!rutaStarted) {
             rutaStarted = true;
-            rutaText.setText(R.string.afegir_a_ruta);
+            ruta.add(nomLinia + "-" + nomParada);
+            rutaText.setText(R.string.eliminar_ultima_parada_afegida);
 
             CardView cardView = new CardView(getActivity().getApplicationContext());
             CardView.LayoutParams cardViewLayout = new CardView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -265,9 +270,8 @@ public class ParadaFragment extends Fragment implements View.OnClickListener {
             finishRuta.setGravity(Gravity.CENTER);
             cardView.addView(finishRuta);
             finRutaLayout.addView(cardView);
-        }
-        if (!ruta.contains(nomParada)) {
-            ruta.add(nomLinia + "-" + nomParada);
+        } else if (ruta != null && ruta.size() > 0) {
+            ruta.remove(ruta.size()-1);
         }
         }
     };
@@ -316,6 +320,7 @@ public class ParadaFragment extends Fragment implements View.OnClickListener {
             ((LinearLayout) finRutaLayout).removeAllViews();
             addRuta(ruta);
             rutaStarted = false;
+            Log.v("ruta", String.valueOf(ruta));
             ruta.clear();
             rutaText.setText(R.string.comencar_ruta);
         }
