@@ -527,5 +527,51 @@ public class MainActivityTest {
         onView(withText("De L3-Palau Reial a L3-Les Corts"))
                 .check(ViewAssertions.matches(isDisplayed()));
     }
+
+    @Test public void checkRatesBitlletSenzill() {
+        onView(withId(R.id.show_rate_button))
+                .perform(click());
+        onView(withText("BitlletsSenzills"))
+                .check(ViewAssertions.matches(isDisplayed()))
+                .perform(click());
+        onView(withText("BitlletSenzill"))
+                .check(ViewAssertions.matches(isDisplayed()))
+                .perform(click());
+        onView(withText("2.15€"))
+                .check(ViewAssertions.matches(isDisplayed()))
+                .perform(pressBack());
+    }
+
+    @Test public void checkRatesAbmes onamentsPerDies() {
+        onView(withId(R.id.show_rate_button))
+                .perform(click());
+        onView(withText("AbonamentsPerDies"))
+                .check(ViewAssertions.matches(isDisplayed()))
+                .perform(click());
+        onView(withText("5Dies"))
+                .check(ViewAssertions.matches(isDisplayed()))
+                .perform(click());
+        onView(withText("32€"))
+                .check(ViewAssertions.matches(isDisplayed()))
+                .perform(pressBack());
+        onView(withText("4Dies"))
+                .check(ViewAssertions.matches(isDisplayed()))
+                .perform(click());
+        onView(withText("26.50€"))
+                .check(ViewAssertions.matches(isDisplayed()))
+                .perform(pressBack());
+        onView(withText("3Dies"))
+                .check(ViewAssertions.matches(isDisplayed()))
+                .perform(click());
+        onView(withText("20.50€"))
+                .check(ViewAssertions.matches(isDisplayed()))
+                .perform(pressBack());
+        onView(withText("2Dies"))
+                .check(ViewAssertions.matches(isDisplayed()))
+                .perform(click());
+        onView(withText("14€"))
+                .check(ViewAssertions.matches(isDisplayed()))
+                .perform(pressBack());
+    }
 }
 
