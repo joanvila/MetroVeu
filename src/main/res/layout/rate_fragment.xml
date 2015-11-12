@@ -3,4 +3,22 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nom tarifa"
+        android:id="@+id/nomTarifa" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Descripcio tarifa"
+        android:id="@+id/descripcioTarifa" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Preu tarifa"
+        android:id="@+id/preuTarifa" />
+
 </LinearLayout>
