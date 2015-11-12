@@ -20,6 +20,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Iterator;
 
 /**
  * Created by Florencia Tarditti on 13/10/15.
@@ -47,7 +48,6 @@ public class FetchParadesTask extends AsyncTask<String, Void, String[]> {
         if (mapaCursor != null && mapaCursor.moveToFirst()) {
             int mapaNomIndex = mapaCursor.getColumnIndex(MetroContract.MapaEntry.COLUMN_MAPA_NOM);
             mapaId = mapaCursor.getLong(mapaNomIndex);
-            mapaCursor.close();
         } else {
 
             ContentValues mapaValues = new ContentValues();
@@ -60,6 +60,7 @@ public class FetchParadesTask extends AsyncTask<String, Void, String[]> {
 
             mapaId = ContentUris.parseId(insertedUri);
         }
+        if (mapaCursor != null) mapaCursor.close();
         return mapaId;
     }
 
@@ -76,7 +77,6 @@ public class FetchParadesTask extends AsyncTask<String, Void, String[]> {
         if (liniaCursor != null && liniaCursor.moveToFirst()) {
             int liniaNomIndex = liniaCursor.getColumnIndex(MetroContract.LiniaEntry.COLUMN_LINIA_NOM);
             liniaId = liniaCursor.getLong(liniaNomIndex);
-            liniaCursor.close();
         } else {
             ContentValues liniaValues = new ContentValues();
             liniaValues.put(MetroContract.LiniaEntry.COLUMN_LINIA_NOM, nomLinia);
@@ -92,6 +92,7 @@ public class FetchParadesTask extends AsyncTask<String, Void, String[]> {
 
             liniaId = ContentUris.parseId(insertedUri);
         }
+        if (liniaCursor != null) liniaCursor.close();
         return liniaId;
     }
 
@@ -101,14 +102,15 @@ public class FetchParadesTask extends AsyncTask<String, Void, String[]> {
         Cursor tarifaCursor = mContext.getContentResolver().query(
                 MetroContract.TarifaEntry.CONTENT_URI,
                 null,
-                MetroContract.TarifaEntry.COLUMN_TARIFA_NOM + " = ?",
-                new String[]{tarifa_nom},
+                MetroContract.TarifaEntry.COLUMN_TARIFA_NOM + " = ? and " +
+                        MetroContract.TarifaEntry.COLUMN_TARIFA_MAPA + " = ? AND " +
+                        MetroContract.TarifaEntry.COLUMN_TARIFA_IDIOMA + " = ?",
+                new String[]{tarifa_nom, nomMapa, idioma},
                 null);
 
         if (tarifaCursor != null && tarifaCursor.moveToFirst()) {
             int tarifaNomIndex = tarifaCursor.getColumnIndex(MetroContract.TarifaEntry.COLUMN_TARIFA_NOM);
             tarifaId = tarifaCursor.getLong(tarifaNomIndex);
-            tarifaCursor.close();
         } else {
             ContentValues tarifaValues = new ContentValues();
             tarifaValues.put(MetroContract.TarifaEntry.COLUMN_TARIFA_NOM, tarifa_nom);
@@ -125,6 +127,7 @@ public class FetchParadesTask extends AsyncTask<String, Void, String[]> {
 
             tarifaId = ContentUris.parseId(insertedUri);
         }
+        if (tarifaCursor != null) tarifaCursor.close();
         return tarifaId;
     }
 
@@ -144,7 +147,6 @@ public class FetchParadesTask extends AsyncTask<String, Void, String[]> {
         if (pertanyCursor != null && pertanyCursor.moveToFirst()) {
             int pertanyIndex = pertanyCursor.getColumnIndex(MetroContract.PertanyEntry.COLUMN_PERTANY_MAPA);
             pertanyId = pertanyCursor.getLong(pertanyIndex);
-            pertanyCursor.close();
         } else {
             ContentValues pertanyValues = new ContentValues();
             pertanyValues.put(MetroContract.PertanyEntry.COLUMN_PERTANY_MAPA, mapa);
@@ -159,6 +161,7 @@ public class FetchParadesTask extends AsyncTask<String, Void, String[]> {
 
             pertanyId = ContentUris.parseId(insertedUri);
         }
+        if (pertanyCursor != null) pertanyCursor.close();
         return pertanyId;
     }
 
@@ -175,7 +178,6 @@ public class FetchParadesTask extends AsyncTask<String, Void, String[]> {
         if (paradaCursor != null && paradaCursor.moveToFirst()) {
             int paradaNomIndex = paradaCursor.getColumnIndex(MetroContract.ParadaEntry.COLUMN_PARADA_NOM);
             paradaId = paradaCursor.getLong(paradaNomIndex);
-            paradaCursor.close();
         } else {
             ContentValues paradaValues = new ContentValues();
             paradaValues.put(MetroContract.ParadaEntry.COLUMN_PARADA_NOM, nomParada);
@@ -188,6 +190,7 @@ public class FetchParadesTask extends AsyncTask<String, Void, String[]> {
 
             paradaId = ContentUris.parseId(insertedUri);
         }
+        if (paradaCursor != null) paradaCursor.close();
         return paradaId;
     }
 
@@ -221,6 +224,54 @@ public class FetchParadesTask extends AsyncTask<String, Void, String[]> {
                 addPertany("Barcelona", liniaParada, nomParada, ordreParada);
             }
 
+            // Tarifes
+            //TODO: Es podria fer menys hardcoded amb nested loops agafant el nom de l'idioma
+            JSONObject tarifes = paradesJson.getJSONObject("tarifes");
+            JSONObject tarifesBarcelona = tarifes.getJSONObject("Barelona");
+            JSONObject tarifesCatala = tarifesBarcelona.getJSONObject("Catala");
+            JSONObject tarifesCastella = tarifesBarcelona.getJSONObject("Castella");
+            JSONObject tarifesAngles = tarifesBarcelona.getJSONObject("Angles");
+
+            // Catala
+            Iterator<String> iter = tarifesCatala.keys();
+            JSONObject objectKey;
+            while (iter.hasNext()) {
+                String key = iter.next();
+                objectKey = tarifesCatala.getJSONObject(key);
+                String nomTarifa = objectKey.get("nomTarifa").toString();
+                String tipusTarifa = objectKey.get("tipusTarifa").toString();
+                String descripcio = objectKey.get("descripcio").toString();
+                String preu = objectKey.get("preu").toString();
+                addTarifa(nomTarifa, tipusTarifa, descripcio, preu, "Barcelona", "Catala");
+            }
+
+            // Castella
+            Iterator<String> iter2 = tarifesCastella.keys();
+            JSONObject objectKey2;
+            while (iter2.hasNext()) {
+                String key = iter2.next();
+                objectKey2 = tarifesCastella.getJSONObject(key);
+                String nomTarifa = objectKey2.get("nomTarifa").toString();
+                String tipusTarifa = objectKey2.get("tipusTarifa").toString();
+                String descripcio = objectKey2.get("descripcio").toString();
+                String preu = objectKey2.get("preu").toString();
+                addTarifa(nomTarifa, tipusTarifa, descripcio, preu, "Barcelona", "Castella");
+            }
+
+            // Angles
+            Iterator<String> iter3 = tarifesAngles.keys();
+            JSONObject objectKey3;
+            while (iter3.hasNext()) {
+                String key = iter3.next();
+                objectKey3 = tarifesAngles.getJSONObject(key);
+                String nomTarifa = objectKey3.get("nomTarifa").toString();
+                String tipusTarifa = objectKey3.get("tipusTarifa").toString();
+                String descripcio = objectKey3.get("descripcio").toString();
+                String preu = objectKey3.get("preu").toString();
+                addTarifa(nomTarifa, tipusTarifa, descripcio, preu, "Barcelona", "Angles");
+            }
+
+
         } catch (JSONException e) {
             Log.e(LOG_TAG, e.getMessage(), e);
             e.printStackTrace();
@@ -252,7 +303,6 @@ public class FetchParadesTask extends AsyncTask<String, Void, String[]> {
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("GET");
             urlConnection.connect();
-            Log.v(LOG_TAG, "CONEXION HECHA");
 
             // Read the input stream into a String
             InputStream inputStream = urlConnection.getInputStream();

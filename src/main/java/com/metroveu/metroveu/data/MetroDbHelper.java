@@ -11,7 +11,7 @@ import com.metroveu.metroveu.data.MetroContract.*;
  */
 public class MetroDbHelper extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 3;
 
     static final String DATABASE_NAME = "metroveu.db";
 
@@ -42,6 +42,7 @@ public class MetroDbHelper extends SQLiteOpenHelper {
         final String SQL_CREATE_RUTA_TABLE = "CREATE TABLE " + RutaEntry.TABLE_NAME + " (" +
                 RutaEntry.COLUMN_RUTA_NOM + " TEXT PRIMARY KEY ," +
                 RutaEntry.COLUMN_RUTA_LLOCSINTERES + " TEXT ," +
+                RutaEntry.COLUMN_RUTA_PARADES + " TEXT ," +
                 RutaEntry.COLUMN_RUTA_MAPA + " TEXT ," +
                 " FOREIGN KEY (" + RutaEntry.COLUMN_RUTA_MAPA + ") REFERENCES " +
                 MapaEntry.TABLE_NAME + " (" + MapaEntry.COLUMN_MAPA_NOM + "));";

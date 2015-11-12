@@ -11,6 +11,7 @@ import com.metroveu.metroveu.fragments.HomeFragment;
 import com.metroveu.metroveu.fragments.LiniesFragment;
 import com.metroveu.metroveu.fragments.ParadaFragment;
 import com.metroveu.metroveu.fragments.RatesFragment;
+import com.metroveu.metroveu.fragments.RoutesFragment;
 import com.metroveu.metroveu.tasks.FetchParadesTask;
 
 import java.util.ArrayList;
@@ -47,6 +48,14 @@ public class MainActivity extends AppCompatActivity {
                 ft.commit();
                 break;
 
+            case R.id.show_routes_button:
+                RoutesFragment routesFragment = new RoutesFragment();
+                ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.content_frame, routesFragment);
+                ft.addToBackStack(null);
+                ft.commit();
+                break;
+
             case R.id.show_rate_button:
                 RatesFragment rateFragment = new RatesFragment();
                 ft = getSupportFragmentManager().beginTransaction();
@@ -57,7 +66,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void transbord(ArrayList<String> paradesData, String nomParada, String btnText, String colorLinia) {
+    public void transbord(ArrayList<String> paradesData, String nomParada, String btnText, String colorLinia,
+        boolean rutaStarted, ArrayList<String> ruta) {
 
         FragmentManager manager = getSupportFragmentManager();
         manager.popBackStack();
@@ -68,6 +78,8 @@ public class MainActivity extends AppCompatActivity {
         paradaBundle.putString("parada_nom", nomParada);
         paradaBundle.putString("linia_nom", btnText);
         paradaBundle.putString("linia_color", colorLinia);
+        paradaBundle.putBoolean("rutaStarted", rutaStarted);
+        paradaBundle.putStringArrayList("ruta", ruta);
         paradaFragment.setArguments(paradaBundle);
 
         ft = getSupportFragmentManager().beginTransaction();

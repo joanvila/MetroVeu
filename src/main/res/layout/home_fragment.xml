@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/colorBlack">
+    android:background="@color/colorBlack"
+    android:paddingTop="150dp">
 
     <TextView android:text="@string/home" android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -12,26 +13,37 @@
         android:textColor="@color/colorWhite"
         android:textStyle="bold"
         android:textSize="32sp"
-        android:layout_centerInParent="true"
         android:id="@+id/textView" />
 
-    <Button
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:text="@string/show_lines_button"
-        android:id="@+id/show_lines_button"
-        android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="70dp"
-        android:onClick="buttonClick" />
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical"
+        android:layout_marginTop="70dp">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/show_rate_button"
-        android:id="@+id/show_rate_button"
-        android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="130dp"
-        android:onClick="buttonClick" />
-</RelativeLayout>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/show_lines_button"
+            android:id="@+id/show_lines_button"
+            android:layout_marginTop="20dp"
+            android:onClick="buttonClick" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/show_routes_button"
+            android:id="@+id/show_routes_button"
+            android:layout_marginTop="20dp"
+            android:onClick="buttonClick" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/show_rate_button"
+            android:id="@+id/show_rate_button"
+            android:layout_marginTop="20dp"
+            android:onClick="buttonClick" />
+    </LinearLayout>
+</LinearLayout>
