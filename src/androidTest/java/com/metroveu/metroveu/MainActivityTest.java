@@ -437,5 +437,95 @@ public class MainActivityTest {
         onView(withText("Final de línia"))
                 .check(ViewAssertions.matches(isDisplayed()));
     }
+
+    @Test public void checkCreateRoute() {
+        onView(withId(R.id.show_lines_button))
+                .perform(click());
+        onView(withText("L5"))
+                .perform(click());
+        onView(withText("Badal"))
+                .perform(click());
+        onView(withText("Començar ruta"))
+                .perform(click());
+        onView(withText("Badal"))
+                .perform(swipeLeft());
+        onView(withText("Plaça de Sants"))
+                .perform(swipeLeft());
+        onView(withText("Sants Estació"))
+                .perform(swipeLeft());
+        onView(withText("Entença"))
+                .perform(swipeLeft());
+        onView(withText("Hospital Clínic"))
+                .check(ViewAssertions.matches(isDisplayed()));
+        onView(withText("Finalitzar ruta"))
+                .perform(click());
+        onView(withText("Començar ruta"))
+                .check(ViewAssertions.matches(isDisplayed()));
+    }
+
+    @Test public void checkRouteCreated() {
+        onView(withId(R.id.show_routes_button))
+                .perform(click());
+        onView(withText("De L5-Badal a L5-Hospital Clínic"))
+                .check(ViewAssertions.matches(isDisplayed()))
+                .perform(click());
+        onView(withText("L5-Badal"))
+                .check(ViewAssertions.matches(isDisplayed()));
+        onView(withText("L5-Plaça de Sants"))
+                .check(ViewAssertions.matches(isDisplayed()));
+        onView(withText("L5-Sants Estació"))
+                .check(ViewAssertions.matches(isDisplayed()));
+        onView(withText("L5-Entença"))
+                .check(ViewAssertions.matches(isDisplayed()));
+        onView(withText("L5-Hospital Clínic"))
+                .check(ViewAssertions.matches(isDisplayed()))
+                .perform(pressBack());
+        onView(withText("De L5-Badal a L5-Hospital Clínic"))
+                .check(ViewAssertions.matches(isDisplayed()));
+    }
+
+    @Test public void checkCreateRouteDeletingLastStation() {
+        onView(withId(R.id.show_lines_button))
+                .perform(click());
+        onView(withText("L3"))
+                .perform(click());
+        onView(withText("Palau Reial"))
+                .perform(click());
+        onView(withText("Començar ruta"))
+                .perform(click());
+        onView(withText("Palau Reial"))
+                .perform(swipeLeft());
+        onView(withText("Maria Cristina"))
+                .perform(swipeLeft());
+        onView(withText("Les Corts"))
+                .perform(swipeLeft());
+        onView(withText("Plaça del Centre"))
+                .check(ViewAssertions.matches(isDisplayed()));
+        onView(withText("Eliminar ultima parada afegida"))
+                .check(ViewAssertions.matches(isDisplayed()))
+                .perform(click());
+        onView(withText("Finalitzar ruta"))
+                .perform(click());
+        onView(withText("Plaça del Centre"))
+                .check(ViewAssertions.matches(isDisplayed()))
+                .perform(pressBack());
+        onView(withText("L3"))
+                .perform(pressBack())
+                .perform(pressBack());
+        onView(withId(R.id.show_routes_button))
+                .perform(click());
+        onView(withText("De L3-Palau Reial a L3-Les Corts"))
+                .check(ViewAssertions.matches(isDisplayed()))
+                .perform(click());
+        onView(withText("L3-Palau Reial"))
+                .check(ViewAssertions.matches(isDisplayed()));
+        onView(withText("L3-Maria Cristina"))
+                .check(ViewAssertions.matches(isDisplayed()));
+        onView(withText("L3-Les Corts"))
+                .check(ViewAssertions.matches(isDisplayed()))
+                .perform(pressBack());
+        onView(withText("De L3-Palau Reial a L3-Les Corts"))
+                .check(ViewAssertions.matches(isDisplayed()));
+    }
 }
 
