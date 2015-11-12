@@ -1,9 +1,9 @@
 package com.metroveu.metroveu.fragments;
 
-import android.app.Fragment;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +22,7 @@ import java.util.ArrayList;
  * Created by Carla on 05/11/2015.
  */
 public class RateFragment extends Fragment{
-    private android.app.FragmentTransaction ft;
+    private FragmentTransaction ft;
     ArrayList<String> tarifaData;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -33,7 +33,7 @@ public class RateFragment extends Fragment{
         final String tipusTarifa = tarifaBundle.getString("tarifa_tipus");
 
         Cursor tarifes = new MetroDbHelper(getActivity().getApplicationContext()).getReadableDatabase().
-                rawQuery("select * from tarifa whre tarifa_tipus=?", new String[]{tipusTarifa});
+                rawQuery("select * from tarifa where tarifa_tipus=?", new String[]{tipusTarifa});
 
         tarifaData = new ArrayList<>();
 
@@ -43,19 +43,30 @@ public class RateFragment extends Fragment{
             } while (tarifes.moveToNext());
             tarifes.close();
         }
-        ListView tarifesListView = (ListView) rootView.findViewById(R.id.tarifesListView);
+
+
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity()
+                .getApplicationContext(), android.R.layout.simple_list_item_1,
+                android.R.id.text1, tarifaData);
+
+        ListView tarifesListView = (ListView) rootView.findViewById(R.id.tarifesList);
+        tarifesListView.setAdapter(adapter);
+
+
+
         tarifesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
 
-                RateFragment rateFragment = new RateFragment();
+                RateInfoFragment rateInfoFragment = new RateInfoFragment();
                 Bundle tarifesBundle = new Bundle();
                 tarifesBundle.putString("tarifa_nom", tarifaData.get(position));
-                rateFragment.setArguments(tarifesBundle);
+                rateInfoFragment.setArguments(tarifesBundle);
                 ft = getFragmentManager().beginTransaction();
-                ft.replace(R.id.content_frame, rateFragment);
+                ft.replace(R.id.content_frame, rateInfoFragment);
                 ft.addToBackStack(null);
                 ft.commit();
             }

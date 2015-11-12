@@ -11,9 +11,11 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.metroveu.metroveu.R;
+import com.metroveu.metroveu.adapters.RatesAdapter;
 import com.metroveu.metroveu.data.MetroDbHelper;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 /**
  * Created by carladivicuesta on 23/10/15.
@@ -27,8 +29,10 @@ public class RatesFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.rates_list_view, container, false);
 
+        String idioma = Locale.getDefault().getDisplayLanguage();
+        if (idioma != "Catala") idioma = "Catala";
         Cursor tarifes = new MetroDbHelper(getActivity().getApplicationContext()).getReadableDatabase().
-                rawQuery("select * from tarifa", null);
+                rawQuery("select * from tarifa where tarifa_idioma = ? group by tarifa_tipus", new String[] {idioma});
         tarifesData = new ArrayList<>();
         if(tarifes != null && tarifes.moveToFirst()) {
             do {
@@ -36,19 +40,25 @@ public class RatesFragment extends Fragment {
             } while (tarifes.moveToNext());
             tarifes.close();
         }
+
+
+
+        RatesAdapter RAdapter = new RatesAdapter(getActivity().getBaseContext(), tarifesData);
         ListView tarifesListView = (ListView) rootView.findViewById(R.id.tarifesListView);
+        tarifesListView.setAdapter(RAdapter);
+
         tarifesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
 
-                RatesFragment ratesFragment = new RatesFragment();
+                RateFragment rateFragment = new RateFragment();
                 Bundle tarifesBundle = new Bundle();
                 tarifesBundle.putString("tarifa_tipus", tarifesData.get(position));
-                ratesFragment.setArguments(tarifesBundle);
+                rateFragment.setArguments(tarifesBundle);
                 ft = getFragmentManager().beginTransaction();
-                ft.replace(R.id.content_frame, ratesFragment);
+                ft.replace(R.id.content_frame, rateFragment);
                 ft.addToBackStack(null);
                 ft.commit();
             }
