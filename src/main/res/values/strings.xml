@@ -25,4 +25,8 @@
     <string name="nom_linia">nomLinia</string>
     <string name="show_routes_button">Rutes</string>
 
+    <!-- routes fragment -->
+    <string name="de">De</string>
+    <string name="a">a</string>
+
 </resources>
