@@ -542,7 +542,7 @@ public class MainActivityTest {
                 .perform(pressBack());
     }
 
-    @Test public void checkRatesAbmes onamentsPerDies() {
+    @Test public void checkRatesAbmesonamentsPerDies() {
         onView(withId(R.id.show_rate_button))
                 .perform(click());
         onView(withText("AbonamentsPerDies"))

@@ -8,10 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.metroveu.metroveu.R;
-import com.metroveu.metroveu.adapters.RatesAdapter;
 import com.metroveu.metroveu.data.MetroDbHelper;
 
 import java.util.ArrayList;
@@ -43,7 +43,11 @@ public class RatesFragment extends Fragment {
 
 
 
-        RatesAdapter RAdapter = new RatesAdapter(getActivity().getBaseContext(), tarifesData);
+        //RatesAdapter RAdapter = new RatesAdapter(getActivity().getBaseContext(), tarifesData);
+        //ListView tarifesListView = (ListView) rootView.findViewById(R.id.tarifesListView);
+        //tarifesListView.setAdapter(RAdapter);
+
+        ArrayAdapter<String> RAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),android.R.layout.simple_list_item_1,android.R.id.text1,tarifesData);
         ListView tarifesListView = (ListView) rootView.findViewById(R.id.tarifesListView);
         tarifesListView.setAdapter(RAdapter);
 
