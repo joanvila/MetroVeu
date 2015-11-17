@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,8 +30,9 @@ public class RateFragment extends Fragment{
 
         View rootView = inflater.inflate(R.layout.rates_fragment, container, false);
 
-        Bundle tarifaBundle = getArguments();
+        final Bundle tarifaBundle = getArguments();
         final String tipusTarifa = tarifaBundle.getString("tarifa_tipus");
+        final String idiomaTarifa = tarifaBundle.getString("tarifa_idioma");
 
         Cursor tarifes = new MetroDbHelper(getActivity().getApplicationContext()).getReadableDatabase().
                 rawQuery("select * from tarifa where tarifa_tipus=?", new String[]{tipusTarifa});
@@ -64,6 +66,7 @@ public class RateFragment extends Fragment{
                 RateInfoFragment rateInfoFragment = new RateInfoFragment();
                 Bundle tarifesBundle = new Bundle();
                 tarifesBundle.putString("tarifa_nom", tarifaData.get(position));
+                tarifesBundle.putString("tarifa_idioma", idiomaTarifa);
                 rateInfoFragment.setArguments(tarifesBundle);
                 ft = getFragmentManager().beginTransaction();
                 ft.replace(R.id.content_frame, rateInfoFragment);

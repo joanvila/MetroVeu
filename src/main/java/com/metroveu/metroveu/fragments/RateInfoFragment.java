@@ -4,6 +4,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,11 +36,11 @@ public class RateInfoFragment extends Fragment {
 
         Bundle tarifaBundle = getArguments();
         final String nomT= tarifaBundle.getString("tarifa_nom");
+        final String idiomaT = tarifaBundle.getString("tarifa_idioma");
         //final String descrT = tarifaBundle.getString("tarifa_descripcio");
         //final String preuT = tarifaBundle.getString("tarifa_preu");
-
         Cursor tarifa = new MetroDbHelper(getActivity().getApplicationContext()).getReadableDatabase().
-                rawQuery("select * from tarifa where tarifa_nom =?", new String[]{nomT});
+                rawQuery("select * from tarifa where tarifa_nom = ? and tarifa_idioma = ?", new String[]{nomT, idiomaT});
 
         if (tarifa != null && tarifa.moveToFirst()){
             descrT = tarifa.getString(tarifa.getColumnIndex("tarifa_descripcio"));
