@@ -4,6 +4,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,13 +25,14 @@ public class RatesFragment extends Fragment {
 
     private FragmentTransaction ft;
     ArrayList<String> tarifesData;
+    private String idioma = null;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.rates_list_view, container, false);
 
-        String idioma = Locale.getDefault().getDisplayLanguage();
-        if (idioma != "Catala") idioma = "Catala";
+        idioma = Locale.getDefault().getDisplayLanguage();
+        if (!idioma.equals("Catala")) idioma = "Catala";
         Cursor tarifes = new MetroDbHelper(getActivity().getApplicationContext()).getReadableDatabase().
                 rawQuery("select * from tarifa where tarifa_idioma = ? group by tarifa_tipus", new String[] {idioma});
         tarifesData = new ArrayList<>();
@@ -60,6 +62,7 @@ public class RatesFragment extends Fragment {
                 RateFragment rateFragment = new RateFragment();
                 Bundle tarifesBundle = new Bundle();
                 tarifesBundle.putString("tarifa_tipus", tarifesData.get(position));
+                tarifesBundle.putString("tarifa_idioma", idioma);
                 rateFragment.setArguments(tarifesBundle);
                 ft = getFragmentManager().beginTransaction();
                 ft.replace(R.id.content_frame, rateFragment);
