@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">MetroVeu</string>
+    <string name="action_settings">Configuration</string>
+
+    <!-- home fragment -->
+    <string name="home">Metro Veu</string>
+    <string name="show_lines_button">Lines</string>
+    <string name="show_rate_button">Rates</string>
+
+    <!-- parada fragment -->
+    <string name="parada">Station</string>
+    <string name="adaptada">Adapted</string>
+    <string name="noAdaptada">Not adapted</string>
+    <string name="conexions">L00</string>
+    <string name="comencar_ruta">Start route</string>
+    <string name="afegir_a_ruta">Add station to route</string>
+    <string name="eliminar_ultima_parada_afegida">Delete last added station</string>
+    <string name="final_ruta">End route</string>
+    <string name="ruta_exists">There is another route between those stations in the system</string>
+
+    <!-- lines fragment -->
+    <string name="lines_title">Select one line</string>
+    <string name="final_linia">Line end</string>
+    <string name="linia">line</string>
+    <string name="nom_linia">nomLinia</string>
+    <string name="show_routes_button">Routes</string>
+
+    <!-- routes fragment -->
+    <string name="de">From</string>
+    <string name="a">to</string>
+
+</resources>
