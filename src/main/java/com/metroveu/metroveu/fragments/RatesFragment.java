@@ -31,8 +31,15 @@ public class RatesFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.rates_list_view, container, false);
 
-        idioma = Locale.getDefault().getDisplayLanguage();
-        if (!idioma.equals("Catala")) idioma = "Catala";
+        String systemLanguage = Locale.getDefault().getDisplayLanguage();
+        if (systemLanguage.equals("català")) {
+            idioma = "Catala";
+        } else if (systemLanguage.equals("español")) {
+            idioma = "Castella";
+        } else {
+            idioma = "Angles";
+        }
+
         Cursor tarifes = new MetroDbHelper(getActivity().getApplicationContext()).getReadableDatabase().
                 rawQuery("select * from tarifa where tarifa_idioma = ? group by tarifa_tipus", new String[] {idioma});
         tarifesData = new ArrayList<>();
