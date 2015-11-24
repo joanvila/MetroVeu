@@ -3,14 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/colorBlack"
     android:paddingTop="150dp">
 
     <TextView android:text="@string/home" android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:layout_gravity="center"
-        android:textColor="@color/colorWhite"
         android:textStyle="bold"
         android:textSize="32sp"
         android:id="@+id/textView" />
@@ -28,6 +26,7 @@
             android:text="@string/show_lines_button"
             android:id="@+id/show_lines_button"
             android:layout_marginTop="20dp"
+            android:background="@color/color5Gray"
             android:onClick="buttonClick" />
 
         <Button
@@ -36,6 +35,7 @@
             android:text="@string/show_routes_button"
             android:id="@+id/show_routes_button"
             android:layout_marginTop="20dp"
+            android:background="@color/color5Gray"
             android:onClick="buttonClick" />
 
         <Button
@@ -44,6 +44,7 @@
             android:text="@string/show_rate_button"
             android:id="@+id/show_rate_button"
             android:layout_marginTop="20dp"
+            android:background="@color/color5Gray"
             android:onClick="buttonClick" />
     </LinearLayout>
 </LinearLayout>

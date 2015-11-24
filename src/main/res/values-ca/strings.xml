@@ -29,4 +29,9 @@
     <string name="de">De</string>
     <string name="a">a</string>
 
+    <!-- rates fragment -->
+    <string name="nom_tarifa">Nom tarifa</string>
+    <string name="descripcio_tarifa">Descripcio tarifa</string>
+    <string name="preu_tarifa">Preu tarifa</string>
+
 </resources>

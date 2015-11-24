@@ -1,12 +1,15 @@
 package com.metroveu.metroveu.activities;
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 
 import com.metroveu.metroveu.R;
+import com.metroveu.metroveu.data.MetroDbHelper;
 import com.metroveu.metroveu.fragments.HomeFragment;
 import com.metroveu.metroveu.fragments.LiniesFragment;
 import com.metroveu.metroveu.fragments.ParadaFragment;
@@ -19,11 +22,20 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private FragmentTransaction ft;
-    private ParadaFragment fragmentAnt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Cursor linies = new MetroDbHelper(this).getReadableDatabase().
+                rawQuery("select * from linia", null);
+        if (linies != null && linies.moveToFirst()){
+            do {
+                Log.v("test", "in the do");
+            } while(linies.moveToNext());
+            linies.close();
+        }
+
         super.onCreate(savedInstanceState);
+        Log.v("test", "after");
         setContentView(R.layout.activity_main);
 
         // Get info from API and fill db

@@ -4,19 +4,16 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/lineName"
+        android:id="@+id/mainName"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:paddingTop="5dip"
         android:paddingBottom="5dip"
-        android:textSize="15sp"
+        android:textSize="18sp"
         android:layout_weight="0.5"
         android:gravity="start"
-        android:background="@color/colorBlue"
-        android:textColor="@color/colorWhite"
         android:singleLine="false"
         android:padding="20dip"
-        android:textStyle="bold"
         style="@style/ListViewStyle"/>
 
 </LinearLayout>

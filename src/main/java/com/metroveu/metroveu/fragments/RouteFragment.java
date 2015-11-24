@@ -4,15 +4,14 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.metroveu.metroveu.R;
+import com.metroveu.metroveu.adapters.GenericAdapter;
 import com.metroveu.metroveu.data.MetroDbHelper;
 
 import java.util.ArrayList;
@@ -23,7 +22,6 @@ import java.util.Arrays;
  */
 public class RouteFragment extends Fragment {
 
-    private ArrayList<String> routeData;
     ArrayList<String> routeParades;
     private FragmentTransaction ft;
     ArrayList<String> paradesData;
@@ -37,7 +35,7 @@ public class RouteFragment extends Fragment {
 
         Cursor routeInfo = new MetroDbHelper(getActivity().getApplicationContext()).getReadableDatabase().
                 rawQuery("select * from ruta where ruta_nom =?", new String[] {originalName});
-        routeData = new ArrayList<>();
+        ArrayList<String> routeData = new ArrayList<>();
         if(routeInfo != null && routeInfo.moveToFirst()) {
             do {
                 String parades = routeInfo.getString(routeInfo.getColumnIndex("ruta_parades"));
@@ -48,10 +46,7 @@ public class RouteFragment extends Fragment {
             routeInfo.close();
         }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity()
-                .getApplicationContext(), android.R.layout.simple_list_item_1,
-                android.R.id.text1, routeParades);
-
+        GenericAdapter adapter = new GenericAdapter(getActivity().getBaseContext(), routeParades);
         ListView routesListView = (ListView) rootView.findViewById(R.id.routeListView);
         routesListView.setAdapter(adapter);
 

@@ -51,14 +51,14 @@ public class LiniesFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
 
-                ParadesFragment paradesFragment = new ParadesFragment();
-                Bundle paradesBundle = new Bundle();
-                paradesBundle.putString("linia_nom", liniesData.get(position));
-                paradesFragment.setArguments(paradesBundle);
-                ft = getFragmentManager().beginTransaction();
-                ft.replace(R.id.content_frame, paradesFragment);
-                ft.addToBackStack(null);
-                ft.commit();
+            ParadesFragment paradesFragment = new ParadesFragment();
+            Bundle paradesBundle = new Bundle();
+            paradesBundle.putString("linia_nom", liniesData.get(position));
+            paradesFragment.setArguments(paradesBundle);
+            ft = getFragmentManager().beginTransaction();
+            ft.replace(R.id.content_frame, paradesFragment);
+            ft.addToBackStack(null);
+            ft.commit();
             }
         });
 

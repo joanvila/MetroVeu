@@ -59,8 +59,6 @@ public class ParadaFragment extends Fragment implements View.OnClickListener {
         rutaStarted = paradesBundle.getBoolean("rutaStarted");
         ruta = paradesBundle.getStringArrayList("ruta");
 
-        Log.v("flor", String.valueOf(rutaStarted));
-        Log.v("flor", String.valueOf(ruta));
         rutaText = (TextView) rootView.findViewById(R.id.rutaText);
         finRutaLayout = (LinearLayout) rootView.findViewById(R.id.finRutaLayout);
         if (rutaStarted) checkRutaButtonIsDisplayed();
@@ -245,7 +243,7 @@ public class ParadaFragment extends Fragment implements View.OnClickListener {
         }
 
         final TextView accessibilitatView = (TextView) rootView.findViewById(R.id.accessibilitat);
-        if (accessibilitat.equals("Adaptada"))
+        if (accessibilitat.equals(R.string.adaptada))
             accessibilitatView.setText(R.string.adaptada);
         else
             accessibilitatView.setText(R.string.noAdaptada);

@@ -29,4 +29,9 @@
     <string name="de">From</string>
     <string name="a">to</string>
 
+    <!-- rates fragment -->
+    <string name="nom_tarifa">Rate name</string>
+    <string name="descripcio_tarifa">Rate description</string>
+    <string name="preu_tarifa">Rate price</string>
+
 </resources>

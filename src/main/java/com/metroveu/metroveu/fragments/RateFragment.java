@@ -1,20 +1,17 @@
 package com.metroveu.metroveu.fragments;
 
 import android.database.Cursor;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.metroveu.metroveu.R;
+import com.metroveu.metroveu.adapters.GenericAdapter;
 import com.metroveu.metroveu.data.MetroDbHelper;
 
 import java.util.ArrayList;
@@ -22,7 +19,8 @@ import java.util.ArrayList;
 /**
  * Created by Carla on 05/11/2015.
  */
-public class RateFragment extends Fragment{
+public class RateFragment extends Fragment {
+
     private FragmentTransaction ft;
     ArrayList<String> tarifaData;
 
@@ -46,16 +44,9 @@ public class RateFragment extends Fragment{
             tarifes.close();
         }
 
-
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity()
-                .getApplicationContext(), android.R.layout.simple_list_item_1,
-                android.R.id.text1, tarifaData);
-
+        GenericAdapter adapter = new GenericAdapter(getActivity().getBaseContext(), tarifaData);
         ListView tarifesListView = (ListView) rootView.findViewById(R.id.tarifesList);
         tarifesListView.setAdapter(adapter);
-
-
 
         tarifesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -74,6 +65,7 @@ public class RateFragment extends Fragment{
                 ft.commit();
             }
         });
+
         return rootView;
     }
 

@@ -9,11 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.metroveu.metroveu.R;
+import com.metroveu.metroveu.adapters.GenericAdapter;
 import com.metroveu.metroveu.data.MetroDbHelper;
 
 import java.util.ArrayList;
@@ -55,10 +55,7 @@ public class ParadesFragment extends Fragment {
             parades.close();
         }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity()
-                .getApplicationContext(), android.R.layout.simple_list_item_1,
-                android.R.id.text1, paradesData);
-
+        GenericAdapter adapter = new GenericAdapter(getActivity().getBaseContext(), paradesData);
         ListView paradesListView = (ListView) rootView.findViewById(R.id.paradesListView);
         paradesListView.setAdapter(adapter);
 
