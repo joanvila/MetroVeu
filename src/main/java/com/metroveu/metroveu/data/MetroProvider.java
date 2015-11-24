@@ -23,6 +23,7 @@ public class MetroProvider extends ContentProvider {
     static final int RUTA = 600;
     static final int RUTAPARADA = 700;
     static final int TARIFA = 800;
+    static final int TEMA = 900;
 
     static UriMatcher buildUriMatcher() {
 
@@ -39,6 +40,7 @@ public class MetroProvider extends ContentProvider {
         matcher.addURI(authority, MetroContract.PATH_RUTA, RUTA);
         matcher.addURI(authority, MetroContract.PATH_RUTAPARADA, PARADA);
         matcher.addURI(authority, MetroContract.PATH_TARIFA, TARIFA);
+        matcher.addURI(authority, MetroContract.PATH_TEMA, TEMA);
         return matcher;
     }
 
@@ -137,6 +139,18 @@ public class MetroProvider extends ContentProvider {
                 );
                 break;
             }
+            case TEMA: {
+                retCursor = mOpenHelper.getReadableDatabase().query(
+                        MetroContract.TemaEntry.TABLE_NAME,
+                        projection,
+                        selection,
+                        selectionArgs,
+                        null,
+                        null,
+                        sortOrder
+                );
+                break;
+            }
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
@@ -209,6 +223,14 @@ public class MetroProvider extends ContentProvider {
                 long _id = db.insert(MetroContract.TarifaEntry.TABLE_NAME, null, values);
                 if ( _id > 0 )
                     returnUri = MetroContract.TarifaEntry.buildTarifaUri(_id);
+                else
+                    throw new android.database.SQLException("Failed to insert row into " + uri);
+                break;
+            }
+            case TEMA: {
+                long _id = db.insert(MetroContract.TemaEntry.TABLE_NAME, null, values);
+                if ( _id > 0 )
+                    returnUri = MetroContract.TemaEntry.buildTemaUri(_id);
                 else
                     throw new android.database.SQLException("Failed to insert row into " + uri);
                 break;

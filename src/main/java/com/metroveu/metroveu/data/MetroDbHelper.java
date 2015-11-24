@@ -11,7 +11,7 @@ import com.metroveu.metroveu.data.MetroContract.*;
  */
 public class MetroDbHelper extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 4;
 
     static final String DATABASE_NAME = "metroveu.db";
 
@@ -87,6 +87,9 @@ public class MetroDbHelper extends SQLiteOpenHelper {
                 " PRIMARY KEY (" + RutaparadaEntry.COLUMN_RUTAPARADA_RUTA + ", " +
                                     RutaparadaEntry.COLUMN_RUTAPARADA_PARADA + "));";
 
+        final String SQL_CREATE_TEMA_TABLE = "CREATE TABLE " + TemaEntry.TABLE_NAME + " (" +
+                TemaEntry.COLUMN_TEMA_ACTUAL + " TEXT PRIMARY KEY);";
+
         sqLiteDatabase.execSQL(SQL_CREATE_MAPA_TABLE);
         sqLiteDatabase.execSQL(SQL_CREATE_TARIFA_TABLE);
         sqLiteDatabase.execSQL(SQL_CREATE_RUTA_TABLE);
@@ -94,6 +97,7 @@ public class MetroDbHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(SQL_CREATE_PARADA_TABLE);
         sqLiteDatabase.execSQL(SQL_CREATE_PERTANY_TABLE);
         sqLiteDatabase.execSQL(SQL_CREATE_RUTAPARADA_TABLE);
+        sqLiteDatabase.execSQL(SQL_CREATE_TEMA_TABLE);
     }
 
     @Override
@@ -105,6 +109,7 @@ public class MetroDbHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + ParadaEntry.TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + PertanyEntry.TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + RutaparadaEntry.TABLE_NAME);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TemaEntry.TABLE_NAME);
         onCreate(sqLiteDatabase);
     }
 }

@@ -30,6 +30,7 @@ public class MetroContract {
     public static final String PATH_PARADA = "parada";
     public static final String PATH_TARIFA = "tarifa";
     public static final String PATH_RUTAPARADA = "rutaparada";
+    public static final String PATH_TEMA = "tema";
 
     /* Inner class that defines the table contents of the mapa table */
     public static final class MapaEntry implements BaseColumns {
@@ -181,6 +182,25 @@ public class MetroContract {
         public static final String COLUMN_RUTAPARADA_PARADA = "rutaparada_parada";
 
         public static Uri buildRutaparadaUri(long id) {
+            return ContentUris.withAppendedId(CONTENT_URI, id);
+        }
+    }
+
+    public static final class TemaEntry implements BaseColumns {
+
+        public static final Uri CONTENT_URI =
+                BASE_CONTENT_URI.buildUpon().appendPath(PATH_TEMA).build();
+
+        public static final String CONTENT_TYPE =
+                ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_TEMA;
+        public static final String CONTENT_ITEM_TYPE =
+                ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_TEMA;
+
+        public static final String TABLE_NAME = "tema";
+
+        public static final String COLUMN_TEMA_ACTUAL = "tema_temaactual";
+
+        public static Uri buildTemaUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);
         }
     }
