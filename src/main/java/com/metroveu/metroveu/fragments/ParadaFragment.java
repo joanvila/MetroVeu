@@ -161,9 +161,9 @@ public class ParadaFragment extends Fragment implements View.OnClickListener {
                 rawQuery("select * from parada where parada_nom =?", new String[]{nomParada});
 
         if (parades != null && parades.moveToFirst()){
-            accessibilitat = parades.getString(parades.getColumnIndex("parada_accessibilitat"));
-            if (!accessibilitat.equals(getResources().getString(R.string.adaptada)))
-                accessibilitat = getResources().getString(R.string.noAdaptada);
+            this.accessibilitat = parades.getString(parades.getColumnIndex("parada_accessibilitat"));
+            if (!this.accessibilitat.equals(getResources().getString(R.string.adaptada)))
+                this.accessibilitat = getResources().getString(R.string.noAdaptada);
             parades.close();
         }
     }
@@ -180,7 +180,7 @@ public class ParadaFragment extends Fragment implements View.OnClickListener {
         else finalLinia.setText("");
 
         final TextView accessibilitatView = (TextView) rootView.findViewById(R.id.accessibilitat);
-        accessibilitatView.setText(accessibilitat);
+        accessibilitatView.setText(this.accessibilitat);
 
         rootView.setBackgroundColor(Color.parseColor(colorLinia));
     }
@@ -238,12 +238,12 @@ public class ParadaFragment extends Fragment implements View.OnClickListener {
 
         String accessibilitat = "";
         if (parades != null && parades.moveToFirst()){
-            accessibilitat = parades.getString(parades.getColumnIndex("parada_accessibilitat"));
+            this.accessibilitat = parades.getString(parades.getColumnIndex("parada_accessibilitat"));
             parades.close();
         }
 
         final TextView accessibilitatView = (TextView) rootView.findViewById(R.id.accessibilitat);
-        if (accessibilitat.equals(R.string.adaptada))
+        if (this.accessibilitat.equals("Adaptada"))
             accessibilitatView.setText(R.string.adaptada);
         else
             accessibilitatView.setText(R.string.noAdaptada);

@@ -338,11 +338,6 @@ public class MainActivityTest {
                 .perform(click());
         onView(withText("L4"))
                 .perform(click());
-        onView(withText("Verdaguer"))
-                .perform(click());
-        onView(withText("No adaptada"))
-                .check(ViewAssertions.matches(isDisplayed()))
-                .perform(pressBack());
         onView(withText("Joanic"))
                 .perform(click());
         onView(withText("Adaptada"))
@@ -362,8 +357,13 @@ public class MainActivityTest {
                 .perform(click());
         onView(withText("L4"))
                 .perform(click());
-        onView(withText("Verdaguer"))
+        onView(withText("Joanic"))
                 .perform(click());
+        onView(withText("Adaptada"))
+                .check(ViewAssertions.matches(isDisplayed()))
+                .perform(swipeLeft());
+        onView(withText("Verdaguer"))
+                .check(ViewAssertions.matches(isDisplayed()));
         onView(withText("No adaptada"))
                 .check(ViewAssertions.matches(isDisplayed()))
                 .perform(swipeLeft());
@@ -394,6 +394,7 @@ public class MainActivityTest {
                 .check(ViewAssertions.matches(isDisplayed()))
                 .perform(pressBack());
         onView(withId(R.id.paradesListView))
+                .perform(swipeUp())
                 .perform(swipeUp())
                 .perform(swipeUp());
         onView(withText("La Pau"))
@@ -443,10 +444,12 @@ public class MainActivityTest {
                 .perform(click());
         onView(withText("L5"))
                 .perform(click());
-        onView(withText("Badal"))
+        onView(withText("Collblanc"))
                 .perform(click());
         onView(withText("Començar ruta"))
                 .perform(click());
+        onView(withText("Collblanc"))
+                .perform(swipeLeft());
         onView(withText("Badal"))
                 .perform(swipeLeft());
         onView(withText("Plaça de Sants"))
@@ -454,8 +457,6 @@ public class MainActivityTest {
         onView(withText("Sants Estació"))
                 .perform(swipeLeft());
         onView(withText("Entença"))
-                .perform(swipeLeft());
-        onView(withText("Hospital Clínic"))
                 .check(ViewAssertions.matches(isDisplayed()));
         onView(withText("Finalitzar ruta"))
                 .perform(click());
@@ -466,9 +467,11 @@ public class MainActivityTest {
     @Test public void checkRouteCreated() {
         onView(withId(R.id.show_routes_button))
                 .perform(click());
-        onView(withText("De L5-Badal a L5-Hospital Clínic"))
+        onView(withText("De L5-Collblanc a L5-Entença"))
                 .check(ViewAssertions.matches(isDisplayed()))
                 .perform(click());
+        onView(withText("L5-Collblanc"))
+                .check(ViewAssertions.matches(isDisplayed()));
         onView(withText("L5-Badal"))
                 .check(ViewAssertions.matches(isDisplayed()));
         onView(withText("L5-Plaça de Sants"))
@@ -476,11 +479,9 @@ public class MainActivityTest {
         onView(withText("L5-Sants Estació"))
                 .check(ViewAssertions.matches(isDisplayed()));
         onView(withText("L5-Entença"))
-                .check(ViewAssertions.matches(isDisplayed()));
-        onView(withText("L5-Hospital Clínic"))
                 .check(ViewAssertions.matches(isDisplayed()))
                 .perform(pressBack());
-        onView(withText("De L5-Badal a L5-Hospital Clínic"))
+        onView(withText("De L5-Collblanc a L5-Entença"))
                 .check(ViewAssertions.matches(isDisplayed()));
     }
 
@@ -501,7 +502,7 @@ public class MainActivityTest {
                 .perform(swipeLeft());
         onView(withText("Plaça del Centre"))
                 .check(ViewAssertions.matches(isDisplayed()));
-        onView(withText("Eliminar ultima parada afegida"))
+        onView(withText("Eliminar última parada afegida"))
                 .check(ViewAssertions.matches(isDisplayed()))
                 .perform(click());
         onView(withText("Finalitzar ruta"))
