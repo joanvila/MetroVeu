@@ -6,6 +6,7 @@
     <string name="home">Metro Veu</string>
     <string name="show_lines_button">Línies</string>
     <string name="show_rate_button">Tarifes</string>
+    <string name="configuration_button">Configuració</string>
 
     <!-- parada fragment -->
     <string name="parada">Parada</string>
@@ -33,5 +34,10 @@
     <string name="nom_tarifa">Nom tarifa</string>
     <string name="descripcio_tarifa">Descripcio tarifa</string>
     <string name="preu_tarifa">Preu tarifa</string>
+
+    <!-- config fragment -->
+    <string name="config1">Configuració 1</string>
+    <string name="config2">Configuració 2</string>
+    <string name="config3">Configuració 3</string>
 
 </resources>

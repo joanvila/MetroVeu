@@ -4,8 +4,9 @@
 
     <!-- home fragment -->
     <string name="home">Metro Veu</string>
-    <string name="show_lines_button">Lineas</string>
+    <string name="show_lines_button">Líneas</string>
     <string name="show_rate_button">Tarifas</string>
+    <string name="configuration_button">Configuración</string>
 
     <!-- parada fragment -->
     <string name="parada">Parada</string>
@@ -19,9 +20,9 @@
     <string name="ruta_exists">Ya existe una ruta entre estas paradas</string>
 
     <!-- lines fragment -->
-    <string name="lines_title">Selecciona una linea</string>
-    <string name="final_linia">Final de linea</string>
-    <string name="linia">linea</string>
+    <string name="lines_title">Selecciona una línea</string>
+    <string name="final_linia">Final de línea</string>
+    <string name="linia">línea</string>
     <string name="nom_linia">nomLinia</string>
     <string name="show_routes_button">Rutas</string>
 
@@ -33,5 +34,10 @@
     <string name="nom_tarifa">Nombre de la tarifa</string>
     <string name="descripcio_tarifa">Descripción de la tarifa</string>
     <string name="preu_tarifa">Precio de la tarifa</string>
+
+    <!-- config fragment -->
+    <string name="config1">Configuración 1</string>
+    <string name="config2">Configuración 2</string>
+    <string name="config3">Configuración 3</string>
 
 </resources>

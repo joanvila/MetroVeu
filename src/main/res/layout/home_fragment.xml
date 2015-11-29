@@ -16,9 +16,9 @@
     <LinearLayout
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
         android:orientation="vertical"
-        android:layout_marginTop="70dp">
+        android:layout_gravity="center_horizontal"
+        android:gravity="bottom" >
 
         <Button
             android:layout_width="match_parent"
@@ -43,6 +43,15 @@
             android:layout_height="wrap_content"
             android:text="@string/show_rate_button"
             android:id="@+id/show_rate_button"
+            android:layout_marginTop="20dp"
+            android:background="@color/color5Gray"
+            android:onClick="buttonClick" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/configuration_button"
+            android:id="@+id/configuration_button"
             android:layout_marginTop="20dp"
             android:background="@color/color5Gray"
             android:onClick="buttonClick" />

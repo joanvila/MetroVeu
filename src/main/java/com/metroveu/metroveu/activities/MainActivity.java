@@ -10,6 +10,7 @@ import android.view.View;
 
 import com.metroveu.metroveu.R;
 import com.metroveu.metroveu.data.MetroDbHelper;
+import com.metroveu.metroveu.fragments.ConfigFragment;
 import com.metroveu.metroveu.fragments.HomeFragment;
 import com.metroveu.metroveu.fragments.LiniesFragment;
 import com.metroveu.metroveu.fragments.ParadaFragment;
@@ -72,6 +73,14 @@ public class MainActivity extends AppCompatActivity {
                 RatesFragment rateFragment = new RatesFragment();
                 ft = getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.content_frame, rateFragment);
+                ft.addToBackStack(null);
+                ft.commit();
+                break;
+
+            case R.id.configuration_button:
+                ConfigFragment configFragment = new ConfigFragment();
+                ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.content_frame, configFragment);
                 ft.addToBackStack(null);
                 ft.commit();
                 break;
