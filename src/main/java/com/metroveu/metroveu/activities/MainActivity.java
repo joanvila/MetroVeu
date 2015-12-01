@@ -1,19 +1,17 @@
 package com.metroveu.metroveu.activities;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.metroveu.metroveu.R;
 import com.metroveu.metroveu.data.MetroContract;
-import com.metroveu.metroveu.data.MetroDbHelper;
 import com.metroveu.metroveu.fragments.ConfigFragment;
 import com.metroveu.metroveu.fragments.HomeFragment;
 import com.metroveu.metroveu.fragments.LiniesFragment;
@@ -30,17 +28,29 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Cursor linies = new MetroDbHelper(this).getReadableDatabase().
-                rawQuery("select * from linia", null);
-        if (linies != null && linies.moveToFirst()){
+
+        Cursor tema = this.getContentResolver().query(
+                MetroContract.TemaEntry.CONTENT_URI,
+                null,
+                MetroContract.TemaEntry.COLUMN_TEMA_ACTUAL,
+                null,
+                null);
+        String idTema = "3";
+        if (tema != null && tema.moveToFirst()){
             do {
-                Log.v("test", "in the do");
-            } while(linies.moveToNext());
-            linies.close();
+                idTema = tema.getString(tema.getColumnIndex("tema_temaactual"));
+            } while(tema.moveToNext());
+            tema.close();
         }
 
+        if (idTema.equals("1"))
+            setTheme(R.style.AppTheme2);
+        else if (idTema.equals("2"))
+            setTheme(R.style.AppTheme3);
+        else
+            setTheme(R.style.AppTheme1);
+
         super.onCreate(savedInstanceState);
-        Log.v("test", "after");
         setContentView(R.layout.activity_main);
 
         // Get info from API and fill db
@@ -92,7 +102,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void changeConfig(View v) {
-        //Uri deltedUri = this.getContentResolver().delete();
+        // Delete current set theme
+        int mRowsDeleted = getContentResolver().delete(
+                MetroContract.TemaEntry.CONTENT_URI,
+                null,
+                null
+        );
+
         switch (v.getId()) {
             case R.id.config1_button:
                 ContentValues temaValues = new ContentValues();
@@ -113,8 +129,24 @@ public class MainActivity extends AppCompatActivity {
                         temaValues2
                 );
                 break;
-        }
 
+            case R.id.config3_button:
+                ContentValues temaValues3 = new ContentValues();
+                temaValues3.put(MetroContract.TemaEntry.COLUMN_TEMA_ACTUAL, 2);
+
+                Uri insertedUri3 = this.getContentResolver().insert(
+                        MetroContract.TemaEntry.CONTENT_URI,
+                        temaValues3
+                );
+                break;
+        }
+        themeSwitcher();
+    }
+
+    private void themeSwitcher() {
+        Intent currentActivity = getIntent();
+        finish();
+        startActivity(currentActivity);
     }
 
     public void transbord(ArrayList<String> paradesData, String nomParada, String btnText, String colorLinia,

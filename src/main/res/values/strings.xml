@@ -36,8 +36,9 @@
     <string name="preu_tarifa">Rate price</string>
 
     <!-- config fragment -->
-    <string name="config1">Configuration 1</string>
-    <string name="config2">Configuration 2</string>
-    <string name="config3">Configuration 3</string>
+    <string name="config_title">Application configuration</string>
+    <string name="config1">Yellow over black</string>
+    <string name="config2">Red over green</string>
+    <string name="config3">White over purple</string>
 
 </resources>

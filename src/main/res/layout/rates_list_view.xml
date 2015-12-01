@@ -8,6 +8,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tarifesListView"
-        android:clickable="false"
-        style="@style/ListViewStyle"/>
+        android:clickable="false"/>
 </RelativeLayout>

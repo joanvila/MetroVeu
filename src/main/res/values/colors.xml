@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorBlue">#2765BB</color>
-    <color name="colorWhite">#FFF</color>
     <color name="colorYellow">#efef13</color>
     <color name="colorBlack">#000</color>
+    <color name="colorGreen">#0DFF00</color>
+    <color name="colorRed">#FB0000</color>
+    <color name="colorPurple">#6E006D</color>
+    <color name="colorWhite">#FFF</color>
     <color name="colorBGray">#bbbbbb</color>
     <color name="color5Gray">#555</color>
 </resources>

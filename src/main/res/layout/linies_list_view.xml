@@ -16,7 +16,6 @@
         android:textColor="@color/colorWhite"
         android:singleLine="false"
         android:padding="20dip"
-        android:textStyle="bold"
-        style="@style/ListViewStyle"/>
+        android:textStyle="bold"/>
 
 </LinearLayout>

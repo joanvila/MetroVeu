@@ -6,6 +6,5 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/routesListView"
-        style="@style/ListViewStyle" />
+        android:id="@+id/routesListView" />
 </LinearLayout>
