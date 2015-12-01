@@ -1,14 +1,18 @@
 package com.metroveu.metroveu.activities;
 
+import android.content.ContentValues;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.metroveu.metroveu.R;
+import com.metroveu.metroveu.data.MetroContract;
 import com.metroveu.metroveu.data.MetroDbHelper;
 import com.metroveu.metroveu.fragments.ConfigFragment;
 import com.metroveu.metroveu.fragments.HomeFragment;
@@ -85,6 +89,32 @@ public class MainActivity extends AppCompatActivity {
                 ft.commit();
                 break;
         }
+    }
+
+    public void changeConfig(View v) {
+        //Uri deltedUri = this.getContentResolver().delete();
+        switch (v.getId()) {
+            case R.id.config1_button:
+                ContentValues temaValues = new ContentValues();
+                temaValues.put(MetroContract.TemaEntry.COLUMN_TEMA_ACTUAL, 0);
+
+                Uri insertedUri = this.getContentResolver().insert(
+                        MetroContract.TemaEntry.CONTENT_URI,
+                        temaValues
+                );
+                break;
+
+            case R.id.config2_button:
+                ContentValues temaValues2 = new ContentValues();
+                temaValues2.put(MetroContract.TemaEntry.COLUMN_TEMA_ACTUAL, 1);
+
+                Uri insertedUri2 = this.getContentResolver().insert(
+                        MetroContract.TemaEntry.CONTENT_URI,
+                        temaValues2
+                );
+                break;
+        }
+
     }
 
     public void transbord(ArrayList<String> paradesData, String nomParada, String btnText, String colorLinia,
