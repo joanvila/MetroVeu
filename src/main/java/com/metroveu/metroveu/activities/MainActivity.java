@@ -29,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        int color = R.color.color5Gray;
+
         Cursor tema = this.getContentResolver().query(
                 MetroContract.TemaEntry.CONTENT_URI,
                 null,
@@ -43,11 +45,13 @@ public class MainActivity extends AppCompatActivity {
             tema.close();
         }
 
-        if (idTema.equals("1"))
+        if (idTema.equals("1")) {
             setTheme(R.style.AppTheme2);
-        else if (idTema.equals("2"))
+            color = R.color.colorGreen;
+        } else if (idTema.equals("2")) {
             setTheme(R.style.AppTheme3);
-        else
+            color = R.color.colorPurple;
+        } else
             setTheme(R.style.AppTheme1);
 
         super.onCreate(savedInstanceState);
@@ -57,6 +61,9 @@ public class MainActivity extends AppCompatActivity {
         updateParades();
 
         HomeFragment homeFragment = new HomeFragment();
+        Bundle homeBundle = new Bundle();
+        homeBundle.putInt("button_color", color);
+        homeFragment.setArguments(homeBundle);
         getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, homeFragment).commit();
     }
 

@@ -4,15 +4,7 @@
     <!-- Yellow over black -->
     <style name="AppTheme1" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:textColor">@color/colorYellow</item>
-        <item name="android:buttonStyle">@style/YellowBlackButtonStyle</item>
         <item name="android:listViewStyle">@style/YellowBlackListViewStyle</item>
-    </style>
-    <style name="YellowBlackButtonStyle">
-        <item name="android:background">@color/colorBlack</item>
-        <item name="android:textColor">@color/colorYellow</item>
-        <item name="android:height">@dimen/button_height</item>
-        <item name="android:gravity">center</item>
-        <item name="android:textSize">20sp</item>
     </style>
     <style name="YellowBlackListViewStyle">
         <item name="android:background">@color/colorBlack</item>
@@ -31,16 +23,7 @@
     <!-- Red over green -->
     <style name="AppTheme2" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:textColor">@color/colorRed</item>
-        <item name="android:buttonStyle">@style/GreenRedButtonStyle</item>
         <item name="android:listViewStyle">@style/GreenRedListViewStyle</item>
-    </style>
-    <style name="GreenRedButtonStyle">
-        <item name="android:background">@color/colorGreen</item>
-        <item name="android:textColor">@color/colorRed</item>
-        <item name="android:height">@dimen/button_height</item>
-        <item name="android:gravity">center</item>
-        <item name="android:textSize">20sp</item>
-
     </style>
     <style name="GreenRedListViewStyle">
         <item name="android:background">@color/colorGreen</item>
@@ -59,15 +42,7 @@
     <!-- White over purple -->
     <style name="AppTheme3" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:textColor">@color/colorWhite</item>
-        <item name="android:buttonStyle">@style/PurpleWhiteButtonStyle</item>
         <item name="android:listViewStyle">@style/PurpleWhiteListViewStyle</item>
-    </style>
-    <style name="PurpleWhiteButtonStyle">
-        <item name="android:background">@color/colorPurple</item>
-        <item name="android:textColor">@color/colorWhite</item>
-        <item name="android:height">@dimen/button_height</item>
-        <item name="android:gravity">center</item>
-        <item name="android:textSize">20sp</item>
     </style>
     <style name="PurpleWhiteListViewStyle">
         <item name="android:background">@color/colorPurple</item>
