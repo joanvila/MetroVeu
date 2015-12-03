@@ -26,7 +26,6 @@
             android:text="@string/show_lines_button"
             android:id="@+id/show_lines_button"
             android:layout_marginTop="20dp"
-            android:background="@color/color5Gray"
             android:onClick="buttonClick" />
 
         <Button
@@ -35,7 +34,6 @@
             android:text="@string/show_routes_button"
             android:id="@+id/show_routes_button"
             android:layout_marginTop="20dp"
-            android:background="@color/color5Gray"
             android:onClick="buttonClick" />
 
         <Button
@@ -44,7 +42,6 @@
             android:text="@string/show_rate_button"
             android:id="@+id/show_rate_button"
             android:layout_marginTop="20dp"
-            android:background="@color/color5Gray"
             android:onClick="buttonClick" />
 
         <Button
@@ -53,7 +50,6 @@
             android:text="@string/configuration_button"
             android:id="@+id/configuration_button"
             android:layout_marginTop="20dp"
-            android:background="@color/color5Gray"
             android:onClick="buttonClick" />
     </LinearLayout>
 </LinearLayout>
