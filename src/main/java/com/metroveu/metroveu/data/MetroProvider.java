@@ -254,6 +254,10 @@ public class MetroProvider extends ContentProvider {
                 rowsDeleted = db.delete(
                         MetroContract.TemaEntry.TABLE_NAME, null, null);
                 break;
+            case RUTA:
+                rowsDeleted = db.delete(
+                        MetroContract.RutaEntry.TABLE_NAME, selection, selectionArgs);
+                break;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }

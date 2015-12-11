@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">MetroVeu</string>
     <string name="action_settings">Configuració</string>
+    <string name="accept">ACEPTAR</string>
+    <string name="cancel">CANCEL·LAR</string>
 
     <!-- home fragment -->
     <string name="home">Metro Veu</string>
@@ -18,6 +20,10 @@
     <string name="eliminar_ultima_parada_afegida">Eliminar última parada afegida</string>
     <string name="final_ruta">Finalitzar ruta</string>
     <string name="ruta_exists">Ja existeix una ruta entre aquestes parades</string>
+    <string name="start_ruta_warning">ATENCIÓ</string>
+    <string name="start_ruta_desc">És a punt de començar a definir una nova ruta.\nVol continuar?</string>
+    <string name="delete_ruta">Botó per esborrar la ruta</string>
+    <string name="delete_ruta_desc">És a punt d\'esborrar una ruta.\nVol continuar?</string>
 
     <!-- lines fragment -->
     <string name="lines_title">Selecciona una línia</string>
