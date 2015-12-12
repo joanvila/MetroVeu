@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">MetroVeu</string>
     <string name="action_settings">Configuration</string>
+    <string name="accept">ACCEPT</string>
+    <string name="cancel">CANCEL</string>
 
     <!-- home fragment -->
     <string name="home">Metro Veu</string>
@@ -18,6 +20,11 @@
     <string name="eliminar_ultima_parada_afegida">Delete last added station</string>
     <string name="final_ruta">End route</string>
     <string name="ruta_exists">There is another route between those stations in the system</string>
+    <string name="start_ruta_warning">ATTENTION</string>
+    <string name="start_ruta_desc">You\'re about to start defining a route.\nDo you want to continue?</string>
+    <string name="delete_ruta">Delete route button</string>
+    <string name="delete_ruta_desc">You\'re about to delete a route.\nDo you want to continue?</string>
+    <string name="delete_parada_ruta_desc">You\'re about to delete the last stop added.\nDo you want to continue?</string>
 
     <!-- lines fragment -->
     <string name="lines_title">Select one line</string>

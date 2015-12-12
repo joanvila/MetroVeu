@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:layout_centerVertical="true">
+
+    <TextView
+        android:id="@+id/mainName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dip"
+        android:paddingBottom="5dip"
+        android:textSize="18sp"
+        android:layout_weight="0.5"
+        android:gravity="start"
+        android:singleLine="false"
+        android:padding="20dip"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/deleteRouteClickable"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:clickable="true">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:id="@+id/deleteRoute"
+            android:src="@mipmap/ic_action_close"
+            android:layout_gravity="center_vertical|end"
+            android:layout_marginEnd="20dp"
+            android:contentDescription="@string/delete_ruta"/>
+
+    </LinearLayout>
+
+</LinearLayout>

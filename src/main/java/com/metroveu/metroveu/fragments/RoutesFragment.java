@@ -11,7 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.metroveu.metroveu.R;
-import com.metroveu.metroveu.adapters.GenericAdapter;
+import com.metroveu.metroveu.adapters.RoutesAdapter;
 import com.metroveu.metroveu.data.MetroDbHelper;
 
 import java.util.ArrayList;
@@ -45,7 +45,7 @@ public class RoutesFragment extends Fragment {
             routes.close();
         }
 
-        GenericAdapter adapter = new GenericAdapter(getActivity().getBaseContext(), routesData);
+        RoutesAdapter adapter = new RoutesAdapter(getActivity().getBaseContext(), routesData);
         ListView routesListView = (ListView) rootView.findViewById(R.id.routesListView);
         routesListView.setAdapter(adapter);
 

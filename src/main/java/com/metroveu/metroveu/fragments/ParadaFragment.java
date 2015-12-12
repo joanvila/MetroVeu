@@ -1,5 +1,6 @@
 package com.metroveu.metroveu.fragments;
 
+import android.app.AlertDialog;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -17,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.accessibility.AccessibilityEvent;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -46,9 +48,13 @@ public class ParadaFragment extends Fragment implements View.OnClickListener {
     private LinearLayout finRutaLayout = null;
     private TextView rutaText = null;
 
+    private View rootView;
+    private int previousStopIndex;
+    private int actualStopIndex;
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        final View rootView = inflater.inflate(R.layout.parada_fragment, container, false);
+        rootView = inflater.inflate(R.layout.parada_fragment, container, false);
         rootView.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED);
 
         Bundle paradesBundle = getArguments();
@@ -87,7 +93,9 @@ public class ParadaFragment extends Fragment implements View.OnClickListener {
                             else if (e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE
                                     && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
                                 // Right to Left
+                                previousStopIndex = paradesList.lastIndexOf(nomParadaView.getText());
                                 int index = paradesList.lastIndexOf(nomParadaView.getText())+1;
+                                actualStopIndex = index;
                                 if(paradesList.get(index) != null)
                                     nomParada = paradesList.get(index);
                                     nomParadaView.setText(paradesList.get(index));
@@ -102,7 +110,9 @@ public class ParadaFragment extends Fragment implements View.OnClickListener {
                             } else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE
                                     && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
                                 // Left to Right
+                                previousStopIndex = paradesList.lastIndexOf(nomParadaView.getText());
                                 int index = paradesList.lastIndexOf(nomParadaView.getText())-1;
+                                actualStopIndex = index;
                                 if(index >= 0) {
                                     nomParada = paradesList.get(index);
                                     nomParadaView.setText(paradesList.get(index));
@@ -255,29 +265,115 @@ public class ParadaFragment extends Fragment implements View.OnClickListener {
         @Override
         public void onClick(View v) {
         if (!rutaStarted) {
-            rutaStarted = true;
-            ruta.add(nomLinia + "-" + nomParada);
-            rutaText.setText(R.string.eliminar_ultima_parada_afegida);
+            final AlertDialog dialog = new AlertDialog.Builder(getActivity()).create();
+            dialog.show();
 
-            CardView cardView = new CardView(getActivity().getApplicationContext());
-            CardView.LayoutParams cardViewLayout = new CardView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            cardView.setRadius(14);
-            cardView.setLayoutParams(cardViewLayout);
-            cardView.setCardBackgroundColor(getResources().getColor(R.color.colorBGray));
-            cardView.setOnClickListener(acabarRutaOnClick);
-            TextView finishRuta = new TextView(getActivity().getApplicationContext());
-            finishRuta.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-            finishRuta.setText(getResources().getString(R.string.final_ruta));
-            finishRuta.setTextSize(20);
-            finishRuta.setTextColor(getResources().getColor(R.color.colorWhite));
-            finishRuta.setGravity(Gravity.CENTER);
-            cardView.addView(finishRuta);
-            finRutaLayout.addView(cardView);
+            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+            dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+            dialog.setContentView(R.layout.pop_up_start_ruta);
+            dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+
+            TextView add = (TextView) dialog.findViewById(R.id.add);
+            TextView cancel = (TextView) dialog.findViewById(R.id.cancel);
+
+            add.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    rutaStarted = true;
+                    ruta.add(nomLinia + "-" + nomParada);
+                    rutaText.setText(R.string.eliminar_ultima_parada_afegida);
+
+                    CardView cardView = new CardView(getActivity().getApplicationContext());
+                    CardView.LayoutParams cardViewLayout = new CardView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    cardView.setRadius(14);
+                    cardView.setLayoutParams(cardViewLayout);
+                    cardView.setCardBackgroundColor(getResources().getColor(R.color.colorBGray));
+                    cardView.setOnClickListener(acabarRutaOnClick);
+                    TextView finishRuta = new TextView(getActivity().getApplicationContext());
+                    finishRuta.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+                    finishRuta.setText(getResources().getString(R.string.final_ruta));
+                    finishRuta.setTextSize(20);
+                    finishRuta.setTextColor(getResources().getColor(R.color.colorWhite));
+                    finishRuta.setGravity(Gravity.CENTER);
+                    cardView.addView(finishRuta);
+                    finRutaLayout.addView(cardView);
+                    dialog.dismiss();
+                }
+
+            });
+
+            cancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+
+            });
+
         } else if (ruta != null && ruta.size() > 0) {
-            ruta.remove(ruta.size()-1);
+            final AlertDialog dialog = new AlertDialog.Builder(getActivity()).create();
+            dialog.show();
+
+            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+            dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+            dialog.setContentView(R.layout.pop_up_delete_last_stop);
+            dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+
+            TextView add = (TextView) dialog.findViewById(R.id.add);
+            TextView cancel = (TextView) dialog.findViewById(R.id.cancel);
+
+            add.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                ruta.remove(ruta.size() - 1);
+                if (ruta.size() > 0) {
+                    goToPreviousStop();
+                } else {
+                    ((LinearLayout) finRutaLayout).removeAllViews();
+                    rutaStarted = false;
+                    ruta.clear();
+                    rutaText.setText(R.string.comencar_ruta);
+                }
+                dialog.dismiss();
+                }
+
+            });
+
+            cancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+
+            });
+
         }
         }
     };
+
+    private void goToPreviousStop() {
+        if(previousStopIndex >= 0) {
+            nomParada = paradesList.get(previousStopIndex);
+            nomParadaView.setText(paradesList.get(previousStopIndex));
+            setAccessibilitatDeParada(rootView, paradesList.get(previousStopIndex));
+            setConnexions(rootView, nomLinia, paradesList.get(previousStopIndex));
+            if (paradesList.get(0).equals(paradesList.get(previousStopIndex)) ||
+                    paradesList.get(paradesList.size()-1).equals(paradesList.get(previousStopIndex)))
+                finalLinia.setText(R.string.final_linia);
+            else finalLinia.setText("");
+            String proxParada = nomLinia + "-" + nomParada;
+            if (rutaStarted && !ruta.contains(proxParada)) ruta.add(proxParada);
+
+            //Actualitzar last index
+            if (previousStopIndex < actualStopIndex) {
+                --previousStopIndex;
+                --actualStopIndex;
+            } else {
+                ++previousStopIndex;
+                ++actualStopIndex;
+            }
+        }
+    }
 
     long addRuta(ArrayList<String> ruta) {
 

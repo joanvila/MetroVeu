@@ -7,6 +7,7 @@
     <color name="colorRed">#FB0000</color>
     <color name="colorPurple">#6E006D</color>
     <color name="colorWhite">#FFF</color>
+    <color name="colorBurgundy">#8A2E31</color>
     <color name="colorBGray">#bbbbbb</color>
     <color name="color5Gray">#555</color>
 </resources>
