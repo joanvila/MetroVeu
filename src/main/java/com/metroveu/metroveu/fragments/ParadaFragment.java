@@ -116,6 +116,7 @@ public class ParadaFragment extends Fragment implements View.OnClickListener {
                                     if (rutaStarted && !ruta.contains(proxParada)) ruta.add(proxParada);
                                 }
                             }
+                            nomParadaView.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_CLICKED);
                             nomParadaView.sendAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED);
                         } catch (Exception e) {
                             // nothing
