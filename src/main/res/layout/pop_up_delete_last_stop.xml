@@ -37,7 +37,7 @@
 
                 <TextView
                     android:id="@+id/description"
-                    android:text="@string/delete_ruta_desc"
+                    android:text="@string/delete_parada_ruta_desc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="start"

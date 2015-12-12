@@ -24,6 +24,7 @@
     <string name="start_ruta_desc">You\'re about to start defining a route.\nDo you want to continue?</string>
     <string name="delete_ruta">Delete route button</string>
     <string name="delete_ruta_desc">You\'re about to delete a route.\nDo you want to continue?</string>
+    <string name="delete_parada_ruta_desc">You\'re about to delete the last stop added.\nDo you want to continue?</string>
 
     <!-- lines fragment -->
     <string name="lines_title">Select one line</string>

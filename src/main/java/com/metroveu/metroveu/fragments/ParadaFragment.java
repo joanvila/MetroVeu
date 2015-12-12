@@ -310,16 +310,42 @@ public class ParadaFragment extends Fragment implements View.OnClickListener {
             });
 
         } else if (ruta != null && ruta.size() > 0) {
-            // TODO: Popup a confirmation here plz
-            ruta.remove(ruta.size() - 1);
-            if (ruta.size() > 0) {
-                goToPreviousStop();
-            } else {
-                ((LinearLayout) finRutaLayout).removeAllViews();
-                rutaStarted = false;
-                ruta.clear();
-                rutaText.setText(R.string.comencar_ruta);
-            }
+            final AlertDialog dialog = new AlertDialog.Builder(getActivity()).create();
+            dialog.show();
+
+            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+            dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+            dialog.setContentView(R.layout.pop_up_delete_last_stop);
+            dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+
+            TextView add = (TextView) dialog.findViewById(R.id.add);
+            TextView cancel = (TextView) dialog.findViewById(R.id.cancel);
+
+            add.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                ruta.remove(ruta.size() - 1);
+                if (ruta.size() > 0) {
+                    goToPreviousStop();
+                } else {
+                    ((LinearLayout) finRutaLayout).removeAllViews();
+                    rutaStarted = false;
+                    ruta.clear();
+                    rutaText.setText(R.string.comencar_ruta);
+                }
+                dialog.dismiss();
+                }
+
+            });
+
+            cancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+
+            });
+
         }
         }
     };

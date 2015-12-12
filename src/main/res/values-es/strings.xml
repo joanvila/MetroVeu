@@ -24,6 +24,7 @@
     <string name="start_ruta_desc">Está a punto de empezar a definir una nueva ruta.\nQuiere continuar?</string>
     <string name="delete_ruta">Botón para borrar la ruta</string>
     <string name="delete_ruta_desc">Está a punto de borrar una ruta.\nQuiere continuar?</string>
+    <string name="delete_parada_ruta_desc">Está a punto de borrar la última parada añadida.\nQuiere continuar?</string>
 
     <!-- lines fragment -->
     <string name="lines_title">Selecciona una línea</string>
