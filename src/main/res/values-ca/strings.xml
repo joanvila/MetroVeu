@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">MetroVeu</string>
     <string name="action_settings">Configuració</string>
-    <string name="accept">ACEPTAR</string>
+    <string name="accept">ACCEPTAR</string>
     <string name="cancel">CANCEL·LAR</string>
     <string name="ajuda">Ajuda</string>
     <string name="info">Més informació</string>
