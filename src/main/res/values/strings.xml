@@ -48,4 +48,14 @@
     <string name="config2">Red over green</string>
     <string name="config3">White over purple</string>
 
+    <!-- line colors -->
+    <string name="L1">red</string>
+    <string name="L2">purple</string>
+    <string name="L3">green</string>
+    <string name="L4">yellow</string>
+    <string name="L5">blue</string>
+    <string name="L9">orange</string>
+    <string name="L10">light blue</string>
+    <string name="L11">light green</string>
+
 </resources>

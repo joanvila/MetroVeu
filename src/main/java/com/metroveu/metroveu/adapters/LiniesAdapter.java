@@ -58,6 +58,34 @@ public class LiniesAdapter extends BaseAdapter {
         String nomLinia = linies.get(position);
         linia.setText(nomLinia);
         linia.setBackgroundColor(Color.parseColor(colors.get(position)));
+        String color = "";
+        switch (nomLinia) {
+            case "L1":
+                color = context.getResources().getString(R.string.L1);
+                break;
+            case "L2":
+                color = context.getResources().getString(R.string.L2);
+                break;
+            case "L3":
+                color = context.getResources().getString(R.string.L3);
+                break;
+            case "L4":
+                color = context.getResources().getString(R.string.L4);
+                break;
+            case "L5":
+                color = context.getResources().getString(R.string.L5);
+                break;
+            case "L9":
+                color = context.getResources().getString(R.string.L9);
+                break;
+            case "L10":
+                color = context.getResources().getString(R.string.L10);
+                break;
+            case "L11":
+                color = context.getResources().getString(R.string.L11);
+                break;
+        }
+        linia.setContentDescription(nomLinia+' '+color);
 
         return convertView;
     }

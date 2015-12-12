@@ -48,4 +48,14 @@
     <string name="config2">Rojo sobre verde</string>
     <string name="config3">Blanco sobre púrpura</string>
 
+    <!-- line colors -->
+    <string name="L1">roja</string>
+    <string name="L2">púrpura</string>
+    <string name="L3">verde</string>
+    <string name="L4">amarilla</string>
+    <string name="L5">azul</string>
+    <string name="L9">naranja</string>
+    <string name="L10">azul claro</string>
+    <string name="L11">verde claro</string>
+
 </resources>

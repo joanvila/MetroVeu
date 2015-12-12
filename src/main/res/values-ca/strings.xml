@@ -77,4 +77,14 @@
     <string name="config2">Vermell sobre verd</string>
     <string name="config3">Blanc sobre porpra</string>
 
+    <!-- line colors -->
+    <string name="L1">vermella</string>
+    <string name="L2">lila</string>
+    <string name="L3">verda</string>
+    <string name="L4">groga</string>
+    <string name="L5">blava</string>
+    <string name="L9">taronja</string>
+    <string name="L10">blau clar</string>
+    <string name="L11">verd clar</string>
+
 </resources>
