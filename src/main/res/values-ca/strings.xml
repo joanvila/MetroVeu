@@ -3,12 +3,41 @@
     <string name="action_settings">Configuració</string>
     <string name="accept">ACEPTAR</string>
     <string name="cancel">CANCEL·LAR</string>
+    <string name="ajuda">Ajuda</string>
+    <string name="info">Més informació</string>
+
 
     <!-- home fragment -->
     <string name="home">Metro Veu</string>
     <string name="show_lines_button">Línies</string>
     <string name="show_rate_button">Tarifes</string>
     <string name="configuration_button">Configuració</string>
+    <string name="ajuda_main">Benvolgut/da usuari/a,
+
+    MetroVeu és una aplicació dirigida a persones de totes les edats i accessible també, per a persones cegues o amb visibilitat reduïda.
+
+    En cada una de les pantalles de l’aplicació apareix el menú superior que consta d’un assistent d’ajuda i d’una opció de més informació.
+
+    L’assistent d’ajuda us proporcionarà la informació necessària en cada pantalla per treure el màxim de profit de l’eina MetroVeu.
+
+    L’opció de més informació us facilitarà les dades de creació i dels autors de l’aplicació.
+
+    Des de la pantalla principal, es pot accedir a linies, rutes, tarifes i a la configuració de l’aplicació.
+    A linies es poden veure totes les línies del metro de Barcelona i les seves parades.
+    A rutes es poden veure i esborrar totes les rutes que heu dissenyat per mitjà de l’aplicació.
+    A tarifes, es pot consultar informació sobre els diferents tipus de tarifes existents
+    A configuració, es pot editar la presentació de l’aplicació. Aquesta opció va dirigida a les persones amb visibilitat reduïda.
+    </string>
+
+    <string name="info_main">Benvolgut/da usuari/a,\n \n
+        MetroVeu és un projecte Android impartit en l\'assignatura de Projecte d\'Enginyeria del Software del Grau d\'Enginyeria Informàtica de la Universitat Politècnica de Catalunya (UPC). \n \n
+        <b>Els autors</b> \n
+        Els autors de l\'aplicació son els estudiants <b>Laura Carrio</b>, <b>Carla Diví</b>, <b>Flor Tarditti</b>,
+        <b>Esteve Torrents</b> i <b>Joan Vilà</b>. \n \n
+        <b>MetroVeu</b> \n
+        La finalitat del projecte és de tipus educatiu. El seu desenvolupament es va dur a terme el quadrimestre de primavera del curs 2015 - 2016.
+    </string>
+
 
     <!-- parada fragment -->
     <string name="parada">Parada</string>
