@@ -16,7 +16,9 @@ import android.view.View;
 
 import com.metroveu.metroveu.R;
 import com.metroveu.metroveu.data.MetroContract;
+import com.metroveu.metroveu.fragments.AboutFragment;
 import com.metroveu.metroveu.fragments.ConfigFragment;
+import com.metroveu.metroveu.fragments.HelpFragment;
 import com.metroveu.metroveu.fragments.HomeFragment;
 import com.metroveu.metroveu.fragments.LiniesFragment;
 import com.metroveu.metroveu.fragments.ParadaFragment;
@@ -76,42 +78,6 @@ public class MainActivity extends AppCompatActivity {
         paradesTask.execute();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        //getMenuInflater().inflate(R.menu.menu_dibuix2d, menu);
-        //return true;
-        MenuInflater mif = getMenuInflater();
-        mif.inflate(R.menu.menu_metroveu, menu);
-        return super.onCreateOptionsMenu(menu);
-
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id ==R.id.action_help) {
-            final Dialog helpDialog = new Dialog(this);
-            helpDialog.setTitle("Ajuda principal");
-            helpDialog.setContentView(R.layout.main_ajuda);
-            helpDialog.show();
-            return true;
-        }
-        else if (id == R.id.action_about){
-            final Dialog aboutDialog = new Dialog(this);
-            aboutDialog.setTitle("Orígens MetroVeu");
-            aboutDialog.setContentView(R.layout.main_info);
-            aboutDialog.show();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
     public void buttonClick(View v) {
         switch (v.getId()) {
             case R.id.show_lines_button:
@@ -142,6 +108,22 @@ public class MainActivity extends AppCompatActivity {
                 ConfigFragment configFragment = new ConfigFragment();
                 ft = getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.content_frame, configFragment);
+                ft.addToBackStack(null);
+                ft.commit();
+                break;
+
+            case R.id.help_button:
+                ConfigFragment helpFragment = new HelpFragment();
+                ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.content_frame, helpFragment);
+                ft.addToBackStack(null);
+                ft.commit();
+                break;
+
+            case R.id.about_button:
+                ConfigFragment aboutFragment = new AboutFragment();
+                ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.content_frame, aboutFragment);
                 ft.addToBackStack(null);
                 ft.commit();
                 break;
