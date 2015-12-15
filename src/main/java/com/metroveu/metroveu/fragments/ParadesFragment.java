@@ -66,6 +66,7 @@ public class ParadesFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
 
+                view.announceForAccessibility(paradesData.get(position));
                 ParadaFragment paradaFragment = new ParadaFragment();
                 Bundle paradaBundle = new Bundle();
                 paradaBundle.putStringArrayList("parades_data", paradesData);
