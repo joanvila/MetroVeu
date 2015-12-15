@@ -263,50 +263,24 @@ public class ParadaFragment extends Fragment implements View.OnClickListener {
         @Override
         public void onClick(View v) {
         if (!rutaStarted) {
-            final AlertDialog dialog = new AlertDialog.Builder(getActivity()).create();
-            dialog.show();
+            rutaStarted = true;
+            ruta.add(nomLinia + "-" + nomParada);
+            rutaText.setText(R.string.eliminar_ultima_parada_afegida);
 
-            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
-            dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-            dialog.setContentView(R.layout.pop_up_start_ruta);
-            dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-
-            TextView add = (TextView) dialog.findViewById(R.id.add);
-            TextView cancel = (TextView) dialog.findViewById(R.id.cancel);
-
-            add.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    rutaStarted = true;
-                    ruta.add(nomLinia + "-" + nomParada);
-                    rutaText.setText(R.string.eliminar_ultima_parada_afegida);
-
-                    CardView cardView = new CardView(getActivity().getApplicationContext());
-                    CardView.LayoutParams cardViewLayout = new CardView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                    cardView.setRadius(14);
-                    cardView.setLayoutParams(cardViewLayout);
-                    cardView.setCardBackgroundColor(getResources().getColor(R.color.colorBGray));
-                    cardView.setOnClickListener(acabarRutaOnClick);
-                    TextView finishRuta = new TextView(getActivity().getApplicationContext());
-                    finishRuta.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-                    finishRuta.setText(getResources().getString(R.string.final_ruta));
-                    finishRuta.setTextSize(20);
-                    finishRuta.setTextColor(getResources().getColor(R.color.colorWhite));
-                    finishRuta.setGravity(Gravity.CENTER);
-                    cardView.addView(finishRuta);
-                    finRutaLayout.addView(cardView);
-                    dialog.dismiss();
-                }
-
-            });
-
-            cancel.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    dialog.dismiss();
-                }
-
-            });
+            CardView cardView = new CardView(getActivity().getApplicationContext());
+            CardView.LayoutParams cardViewLayout = new CardView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            cardView.setRadius(14);
+            cardView.setLayoutParams(cardViewLayout);
+            cardView.setCardBackgroundColor(getResources().getColor(R.color.colorBGray));
+            cardView.setOnClickListener(acabarRutaOnClick);
+            TextView finishRuta = new TextView(getActivity().getApplicationContext());
+            finishRuta.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+            finishRuta.setText(getResources().getString(R.string.final_ruta));
+            finishRuta.setTextSize(20);
+            finishRuta.setTextColor(getResources().getColor(R.color.colorWhite));
+            finishRuta.setGravity(Gravity.CENTER);
+            cardView.addView(finishRuta);
+            finRutaLayout.addView(cardView);
 
         } else if (ruta != null && ruta.size() > 0) {
             final AlertDialog dialog = new AlertDialog.Builder(getActivity()).create();

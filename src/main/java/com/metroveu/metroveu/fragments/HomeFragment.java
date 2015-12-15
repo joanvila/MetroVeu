@@ -25,11 +25,15 @@ public class HomeFragment extends Fragment {
         Button showRoutes = (Button) rootView.findViewById(R.id.show_routes_button);
         Button showRates = (Button) rootView.findViewById(R.id.show_rate_button);
         Button showConfig = (Button) rootView.findViewById(R.id.configuration_button);
+        Button showHelp = (Button) rootView.findViewById(R.id.help_button);
+        Button showAbout = (Button) rootView.findViewById(R.id.about_button);
 
         showLines.setBackgroundColor(getResources().getColor(color));
         showRoutes.setBackgroundColor(getResources().getColor(color));
         showRates.setBackgroundColor(getResources().getColor(color));
         showConfig.setBackgroundColor(getResources().getColor(color));
+        showHelp.setBackgroundColor(getResources().getColor(color));
+        showAbout.setBackgroundColor(getResources().getColor(color));
 
         return rootView;
     }

@@ -18,7 +18,6 @@
             android:id="@+id/textAboutApp"
             android:layout_weight="0.85"
             android:textAlignment="gravity"
-            android:textColor="#3E87BB"
             android:gravity="left|center_vertical|right" />
 
     </ScrollView>

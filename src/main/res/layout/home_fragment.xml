@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingTop="150dp">
+    android:paddingTop="70dp">
 
     <TextView android:text="@string/home" android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -49,6 +49,22 @@
             android:layout_height="wrap_content"
             android:text="@string/configuration_button"
             android:id="@+id/configuration_button"
+            android:layout_marginTop="20dp"
+            android:onClick="buttonClick" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/help_button"
+            android:id="@+id/help_button"
+            android:layout_marginTop="20dp"
+            android:onClick="buttonClick" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/about_button"
+            android:id="@+id/about_button"
             android:layout_marginTop="20dp"
             android:onClick="buttonClick" />
     </LinearLayout>

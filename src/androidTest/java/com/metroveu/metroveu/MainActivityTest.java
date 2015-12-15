@@ -18,10 +18,13 @@ import static android.support.test.espresso.action.ViewActions.swipeLeft;
 import static android.support.test.espresso.action.ViewActions.swipeRight;
 import static android.support.test.espresso.action.ViewActions.swipeUp;
 import static android.support.test.espresso.assertion.PositionAssertions.isBelow;
+import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.anything;
+import static org.hamcrest.Matchers.hasToString;
+import static org.hamcrest.core.StringStartsWith.startsWith;
 
 /**
  * Created by joanvila on 13/10/15.
@@ -485,6 +488,22 @@ public class MainActivityTest {
                 .check(ViewAssertions.matches(isDisplayed()));
     }
 
+    /*@Test public void checkEliminarRuta() {
+        onView(withId(R.id.show_routes_button))
+                .perform(click());
+        onView(withText("De L5-Collblanc a L5-Entença"))
+                .check(ViewAssertions.matches(isDisplayed()));
+        onData(hasToString(startsWith("De L5-Collblanc a L5-Entença")))
+                .inAdapterView(withId(R.id.routesListView)).atPosition(0)
+                .perform(click());
+        onView(withId(R.id.deleteRouteClickable))
+                .perform(click());
+        onView(withText("ACCEPTAR"))
+                .perform(click());
+        onView(withText("De L5-Collblanc a L5-Entença"))
+                .check(doesNotExist());
+    }*/
+
     @Test public void checkCreateRouteDeletingLastStation() {
         onView(withId(R.id.show_lines_button))
                 .perform(click());
@@ -505,9 +524,11 @@ public class MainActivityTest {
         onView(withText("Eliminar última parada afegida"))
                 .check(ViewAssertions.matches(isDisplayed()))
                 .perform(click());
+        onView(withText("ACCEPTAR"))
+                .perform(click());
         onView(withText("Finalitzar ruta"))
                 .perform(click());
-        onView(withText("Plaça del Centre"))
+        onView(withText("Les Corts"))
                 .check(ViewAssertions.matches(isDisplayed()))
                 .perform(pressBack());
         onView(withText("L3"))
@@ -527,6 +548,47 @@ public class MainActivityTest {
                 .perform(pressBack());
         onView(withText("De L3-Palau Reial a L3-Les Corts"))
                 .check(ViewAssertions.matches(isDisplayed()));
+    }
+
+    @Test public void checkCreateRouteDeletingAllStations() {
+        onView(withId(R.id.show_lines_button))
+                .perform(click());
+        onView(withText("L3"))
+                .perform(click());
+        onView(withText("Palau Reial"))
+                .perform(click());
+        onView(withText("Començar ruta"))
+                .perform(click());
+        onView(withText("Palau Reial"))
+                .perform(swipeLeft());
+        onView(withText("Maria Cristina"))
+                .perform(swipeLeft());
+        onView(withText("Les Corts"))
+                .perform(swipeLeft());
+        onView(withText("Plaça del Centre"))
+                .check(ViewAssertions.matches(isDisplayed()));
+        onView(withText("Eliminar última parada afegida"))
+                .check(ViewAssertions.matches(isDisplayed()))
+                .perform(click());
+        onView(withText("ACCEPTAR"))
+                .perform(click());
+        onView(withText("Eliminar última parada afegida"))
+                .check(ViewAssertions.matches(isDisplayed()))
+                .perform(click());
+        onView(withText("ACCEPTAR"))
+                .perform(click());
+        onView(withText("Eliminar última parada afegida"))
+                .check(ViewAssertions.matches(isDisplayed()))
+                .perform(click());
+        onView(withText("ACCEPTAR"))
+                .perform(click());
+        onView(withText("Eliminar última parada afegida"))
+                .check(ViewAssertions.matches(isDisplayed()))
+                .perform(click());
+        onView(withText("ACCEPTAR"))
+                .perform(click());
+        onView(withText("Començar ruta"))
+                .check(ViewAssertions.matches((isDisplayed())));
     }
 
     @Test public void checkRatesBitlletSenzill() {
