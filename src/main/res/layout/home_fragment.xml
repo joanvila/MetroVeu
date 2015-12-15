@@ -14,58 +14,71 @@
         android:id="@+id/textView" />
 
     <LinearLayout
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_gravity="center_horizontal"
-        android:gravity="bottom" >
+        android:layout_marginTop="100dp">
 
         <Button
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:text="@string/show_lines_button"
             android:id="@+id/show_lines_button"
             android:layout_marginTop="20dp"
-            android:onClick="buttonClick" />
+            android:onClick="buttonClick"
+            android:layout_gravity="center"/>
 
         <Button
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:text="@string/show_routes_button"
             android:id="@+id/show_routes_button"
             android:layout_marginTop="20dp"
-            android:onClick="buttonClick" />
+            android:onClick="buttonClick"
+            android:layout_gravity="center"/>
 
         <Button
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:text="@string/show_rate_button"
             android:id="@+id/show_rate_button"
             android:layout_marginTop="20dp"
-            android:onClick="buttonClick" />
+            android:onClick="buttonClick"
+            android:layout_gravity="center"/>
 
-        <Button
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:text="@string/configuration_button"
-            android:id="@+id/configuration_button"
+            android:orientation="horizontal"
             android:layout_marginTop="20dp"
-            android:onClick="buttonClick" />
+            android:layout_gravity="center">
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/help_button"
-            android:id="@+id/help_button"
-            android:layout_marginTop="20dp"
-            android:onClick="buttonClick" />
+            <Button
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:text="@string/configuration_button"
+                android:id="@+id/configuration_button"
+                android:onClick="buttonClick"
+                android:layout_weight="2"
+                android:layout_marginEnd="5dp"/>
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/about_button"
-            android:id="@+id/about_button"
-            android:layout_marginTop="20dp"
-            android:onClick="buttonClick" />
+            <Button
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:text="@string/help_button"
+                android:id="@+id/help_button"
+                android:onClick="buttonClick"
+                android:layout_weight="1"/>
+
+            <Button
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:text="@string/about_button"
+                android:id="@+id/about_button"
+                android:onClick="buttonClick"
+                android:layout_weight="1"
+                android:layout_marginStart="5dp"/>
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>
