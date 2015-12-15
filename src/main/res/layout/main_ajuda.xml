@@ -20,8 +20,62 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:text="@string/ajuda_main"
+                android:text="@string/ajuda_main1"
                 android:id="@+id/ajuda"
+                android:layout_weight="0.85"
+                android:textAlignment="gravity"
+                android:gravity="left|center_vertical|right" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:text="@string/ajuda_main2"
+                android:id="@+id/ajuda2"
+                android:layout_weight="0.85"
+                android:textAlignment="gravity"
+                android:gravity="left|center_vertical|right" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:text="@string/ajuda_main3"
+                android:id="@+id/ajuda3"
+                android:layout_weight="0.85"
+                android:textAlignment="gravity"
+                android:gravity="left|center_vertical|right" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:text="@string/ajuda_main4"
+                android:id="@+id/ajuda4"
+                android:layout_weight="0.85"
+                android:textAlignment="gravity"
+                android:gravity="left|center_vertical|right" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:text="@string/ajuda_main5"
+                android:id="@+id/ajuda5"
+                android:layout_weight="0.85"
+                android:textAlignment="gravity"
+                android:gravity="left|center_vertical|right" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:text="@string/ajuda_main6"
+                android:id="@+id/ajuda6"
+                android:layout_weight="0.85"
+                android:textAlignment="gravity"
+                android:gravity="left|center_vertical|right" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:text="@string/ajuda_main7"
+                android:id="@+id/ajuda7"
                 android:layout_weight="0.85"
                 android:textAlignment="gravity"
                 android:gravity="left|center_vertical|right" />
