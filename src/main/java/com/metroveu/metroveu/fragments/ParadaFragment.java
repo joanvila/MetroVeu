@@ -126,7 +126,6 @@ public class ParadaFragment extends Fragment implements View.OnClickListener {
                                     if (rutaStarted && !ruta.contains(proxParada)) ruta.add(proxParada);
                                 }
                             }
-                            nomParadaView.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_CLICKED);
                             nomParadaView.sendAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED);
                         } catch (Exception e) {
                             // nothing
@@ -182,7 +181,6 @@ public class ParadaFragment extends Fragment implements View.OnClickListener {
     private void setParadaInfoInView(View rootView) {
         nomParadaView = (TextView) rootView.findViewById(R.id.nomParada);
         nomParadaView.setText(nomParada);
-        nomParadaView.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_CLICKED);
 
         finalLinia = (TextView) rootView.findViewById(R.id.finalLinia);
         if (paradesList.get(0).equals(nomParada)
