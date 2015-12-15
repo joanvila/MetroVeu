@@ -426,6 +426,6 @@ public class ParadaFragment extends Fragment implements View.OnClickListener {
         String proxParada = text + "-" + nomParada;
         if (rutaStarted && !ruta.contains(proxParada)) ruta.add(proxParada);
 
-        ((MainActivity)getActivity()).transbord(paradesData, nomParada, text, color, rutaStarted, ruta);
+        ((MainActivity)getActivity()).transbord(v, paradesData, nomParada, text, color, rutaStarted, ruta);
     }
 }

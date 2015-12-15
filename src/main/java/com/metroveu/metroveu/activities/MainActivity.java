@@ -178,12 +178,13 @@ public class MainActivity extends AppCompatActivity {
         startActivity(currentActivity);
     }
 
-    public void transbord(ArrayList<String> paradesData, String nomParada, String btnText, String colorLinia,
+    public void transbord(View v, ArrayList<String> paradesData, String nomParada, String btnText, String colorLinia,
         boolean rutaStarted, ArrayList<String> ruta) {
 
         FragmentManager manager = getSupportFragmentManager();
         manager.popBackStack();
 
+        v.announceForAccessibility(btnText);
         ParadaFragment paradaFragment = new ParadaFragment();
         Bundle paradaBundle = new Bundle();
         paradaBundle.putStringArrayList("parades_data", paradesData);
