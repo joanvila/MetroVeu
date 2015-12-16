@@ -230,6 +230,7 @@ public class ParadaFragment extends Fragment implements View.OnClickListener {
             connectionName.setId(getResources().getIdentifier(connexions.get(i).trim(), "values",
                     getActivity().getApplicationContext().getPackageName()));
             connectionName.setTextSize(20);
+            connectionName.setPadding(0, 10, 0, 10);
             connectionName.setTextColor(getResources().getColor(R.color.colorWhite));
             connectionName.setTypeface(null, Typeface.BOLD);
             connectionName.setGravity(Gravity.CENTER);
@@ -271,12 +272,14 @@ public class ParadaFragment extends Fragment implements View.OnClickListener {
             CardView.LayoutParams cardViewLayout = new CardView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             cardView.setRadius(14);
             cardView.setCardBackgroundColor(getResources().getColor(R.color.colorBlack));
+            cardView.setPadding(0, 7, 0, 7);
             cardView.setLayoutParams(cardViewLayout);
             cardView.setOnClickListener(acabarRutaOnClick);
             TextView finishRuta = new TextView(getActivity().getApplicationContext());
             finishRuta.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
             finishRuta.setText(getResources().getString(R.string.final_ruta));
             finishRuta.setTextSize(20);
+            finishRuta.setPadding(0, 7, 0, 7);
             finishRuta.setTextColor(getResources().getColor(R.color.colorWhite));
             finishRuta.setGravity(Gravity.CENTER);
             cardView.addView(finishRuta);

@@ -18,13 +18,10 @@ import static android.support.test.espresso.action.ViewActions.swipeLeft;
 import static android.support.test.espresso.action.ViewActions.swipeRight;
 import static android.support.test.espresso.action.ViewActions.swipeUp;
 import static android.support.test.espresso.assertion.PositionAssertions.isBelow;
-import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.anything;
-import static org.hamcrest.Matchers.hasToString;
-import static org.hamcrest.core.StringStartsWith.startsWith;
 
 /**
  * Created by joanvila on 13/10/15.
@@ -106,10 +103,7 @@ public class MainActivityTest {
 
         onData(anything()).inAdapterView(withId(R.id.paradesListView))
                 .atPosition(0)
-                //.perform(click());
                 .check(ViewAssertions.matches(isDisplayed()));
-
-        //TODO: Es pot ampliar el test
 
     }
 
