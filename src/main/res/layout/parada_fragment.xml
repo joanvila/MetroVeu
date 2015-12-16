@@ -69,6 +69,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="20sp"
                         android:text="@string/comencar_ruta"
+                        android:textColor="@color/colorWhite"
                         android:gravity="center"
                         android:layout_below="@+id/finalLinia"
                         android:layout_alignEnd="@+id/connexionsLayout"/>
