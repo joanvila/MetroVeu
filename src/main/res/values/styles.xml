@@ -1,10 +1,15 @@
 <resources>
 
+    <attr format="reference" name="cardStyle"/>
     <!-- Base application themes. -->
     <!-- Yellow over black -->
     <style name="AppTheme1" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:textColor">@color/colorYellow</item>
         <item name="android:listViewStyle">@style/YellowBlackListViewStyle</item>
+        <item name="cardStyle">@style/CardViewStyle1</item>
+    </style>
+    <style name="CardViewStyle1" parent="CardView">
+        <item name="cardBackgroundColor">@color/colorBlack</item>
     </style>
     <style name="YellowBlackListViewStyle">
         <item name="android:background">@color/colorBlack</item>
@@ -24,6 +29,10 @@
     <style name="AppTheme2" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:textColor">@color/colorRed</item>
         <item name="android:listViewStyle">@style/GreenRedListViewStyle</item>
+        <item name="cardStyle">@style/CardViewStyle2</item>
+    </style>
+    <style name="CardViewStyle2" parent="CardView">
+        <item name="cardBackgroundColor">@color/colorGreen</item>
     </style>
     <style name="GreenRedListViewStyle">
         <item name="android:background">@color/colorGreen</item>
@@ -43,6 +52,10 @@
     <style name="AppTheme3" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:textColor">@color/colorWhite</item>
         <item name="android:listViewStyle">@style/PurpleWhiteListViewStyle</item>
+        <item name="cardStyle">@style/CardViewStyle3</item>
+    </style>
+    <style name="CardViewStyle3" parent="CardView">
+        <item name="cardBackgroundColor">@color/colorPurple</item>
     </style>
     <style name="PurpleWhiteListViewStyle">
         <item name="android:background">@color/colorPurple</item>

@@ -270,14 +270,13 @@ public class ParadaFragment extends Fragment implements View.OnClickListener {
             CardView cardView = new CardView(getActivity().getApplicationContext());
             CardView.LayoutParams cardViewLayout = new CardView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             cardView.setRadius(14);
+            cardView.setBackgroundColor(getResources().getColor(R.color.colorBlack));
             cardView.setLayoutParams(cardViewLayout);
-            cardView.setCardBackgroundColor(getResources().getColor(R.color.colorBGray));
             cardView.setOnClickListener(acabarRutaOnClick);
             TextView finishRuta = new TextView(getActivity().getApplicationContext());
             finishRuta.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
             finishRuta.setText(getResources().getString(R.string.final_ruta));
             finishRuta.setTextSize(20);
-            finishRuta.setTextColor(getResources().getColor(R.color.colorWhite));
             finishRuta.setGravity(Gravity.CENTER);
             cardView.addView(finishRuta);
             finRutaLayout.addView(cardView);

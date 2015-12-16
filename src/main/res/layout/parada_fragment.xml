@@ -59,15 +59,14 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:id="@+id/rutaCard"
-                card_view:cardBackgroundColor="#bbb"
                 card_view:cardCornerRadius="8dp"
+                card_view:cardBackgroundColor="@color/colorBlack"
                 android:layout_marginLeft="6dp"
                 android:layout_marginRight="6dp">
 
                     <TextView android:id="@+id/rutaText"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/colorWhite"
                         android:textSize="20sp"
                         android:text="@string/comencar_ruta"
                         android:gravity="center"
