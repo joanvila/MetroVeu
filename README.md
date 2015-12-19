@@ -1,5 +1,5 @@
 # MetroVeu
-Android application for the FIB PES subject.
+Android application to help blind people move around Barcelona.
 
 Android Studio version: 1.4
 
@@ -32,6 +32,5 @@ testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
 Right click on a test class and select **Run 'AplicationTest'** or whatever the test is named.
 
-Enjoy TDD. Red green refactor.
 
 [Useful espresso cheat sheet to make tests](https://google.github.io/android-testing-support-library/docs/espresso/cheatsheet/)
