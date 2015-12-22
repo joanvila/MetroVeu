@@ -3,6 +3,8 @@
     <string name="action_settings">Configuration</string>
     <string name="accept">ACCEPT</string>
     <string name="cancel">CANCEL</string>
+    <string name="ajuda">Help</string>
+    <string name="info">More info</string>
 
     <!-- home fragment -->
     <string name="home">Metro Veu</string>
@@ -47,15 +49,16 @@
     <string name="ajuda_main7">A <b>autors</b> es pot veure les dades de creació i dels autors de l’aplicació.</string>
 
 
-
+    <!-- about fragment -->
     <string name="info_main">Benvolgut/da usuari/a,\n \n
-        MetroVeu és un projecte Android impartit en l\'assignatura de Projecte d\'Enginyeria del Software del Grau d\'Enginyeria Informàtica de la Universitat Politècnica de Catalunya (UPC). \n \n
-        <b>Els autors</b> \n
-        Els autors de l\'aplicació son els estudiants <b>Laura Carrio</b>, <b>Carla Diví</b>, <b>Flor Tarditti</b>,
-        <b>Esteve Torrents</b> i <b>Joan Vilà</b>. \n \n
-        <b>MetroVeu</b> \n
+        MetroVeu és un projecte Android impartit en l’assignatura de Projecte d’Enginyeria del Software del Grau d’Enginyeria Informàtica de la Universitat Politècnica de Catalunya (UPC). \n \n
+        Els autors \n
+        Els autors de l’aplicació son els estudiants Laura Carrio, Carla Diví, Flor Tarditti,
+        Esteve Torrents i Joan Vilà. \n \n
+        MetroVeu \n
         La finalitat del projecte és de tipus educatiu. El seu desenvolupament es va dur a terme el quadrimestre de primavera del curs 2015 - 2016.
     </string>
+
     <!-- lines fragment -->
     <string name="lines_title">Select one line</string>
     <string name="final_linia">Line end</string>

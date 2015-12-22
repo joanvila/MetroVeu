@@ -630,5 +630,21 @@ public class MainActivityTest {
                 .check(ViewAssertions.matches(isDisplayed()))
                 .perform(pressBack());
     }
+
+    @Test public void checkHelp() {
+        onView(withId(R.id.help_button))
+                .perform(click());
+        onView(withText("Des de la pantalla principal, es pot accedir a línies, rutes, tarifes, configuració de l’aplicació, ajuda i autors.\n \n"))
+                .check(ViewAssertions.matches(isDisplayed()))
+                .perform(pressBack());
+    }
+
+    @Test public void checkAbout() {
+        onView(withId(R.id.about_button))
+                .perform(click());
+        onView(withText("Benvolgut/da usuari/a,\n \n MetroVeu és un projecte Android impartit en l’assignatura de Projecte d’Enginyeria del Software del Grau d’Enginyeria Informàtica de la Universitat Politècnica de Catalunya (UPC). \n \n Els autors \n Els autors de l’aplicació son els estudiants Laura Carrio, Carla Diví, Flor Tarditti, Esteve Torrents i Joan Vilà. \n \n MetroVeu \n La finalitat del projecte és de tipus educatiu. El seu desenvolupament es va dur a terme el quadrimestre de primavera del curs 2015 - 2016."))
+                .check(ViewAssertions.matches(isDisplayed()))
+                .perform(pressBack());
+    }
 }
 

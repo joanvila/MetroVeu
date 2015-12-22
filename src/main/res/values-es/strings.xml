@@ -3,6 +3,8 @@
     <string name="action_settings">Configuración</string>
     <string name="accept">ACEPTAR</string>
     <string name="cancel">CANCELAR</string>
+    <string name="ajuda">Ayuda</string>
+    <string name="info">Más información</string>
 
     <!-- home fragment -->
     <string name="home">Metro Veu</string>
@@ -11,26 +13,6 @@
     <string name="configuration_button">Configuración</string>
     <string name="help_button">Ayuda</string>
     <string name="about_button">Autores</string>
-    <string name="ajuda_main">Apreciado/a usuario/a, \n \n
-
-MetroVeu es una aplicación dirigida a personas de todas las edades y accesible también, para personas ciegas o con visibilidad reducida. \n \n
-Desde la pantalla principal, se puede acceder a líneas, rutas, tarifas, configuración, ayuda y  autores de la aplicación. \n \n
-En <b>líneas</b> se pueden ver todas las líneas del metro de Barcelona y sus paradas. Además, se pueden consultar los detalles de cada una de las paradas y navegar pasando el dedo por la pantalla entre ellas. \n \n
-En <b>rutas</b> se pueden ver y borrar todas las rutas que se han diseñado por medio de la aplicación. \n \n
-En <b>tarifas</b> se puede ver la clasificación de las diferentes tarifas y la información sobre los diferentes tipos de billetes existentes. \n \n
-En <b>configuración</b> se puede editar la presentación de la aplicación por aquellas personas con visibilidad reducida. La aplicación da la posibilidad de escoger entre tres temas de presentación. \n \n
-En <b>autores</b> se pueden ver los datos de creación y de los autores de la aplicación.
-    </string>
-
-     <string name="info_main">Bienvenido/a usuario/a,\n \n
-        MetroVeu es un proyecto Android impartido en la asignatura de Proyecto de Ingenieria del Software del Grado de Ingenieria Informática de la Universitat Politècnica de Catalunya (UPC). \n \n
-        <b>Los autores</b> \n
-        Los autores de la aplicación son los estudiantes <b>Laura Carrio</b>, <b>Carla Diví</b>, <b>Flor Tarditti</b>,
-        <b>Esteve Torrents</b> y <b>Joan Vilà</b>. \n \n
-        <b>MetroVeu</b> \n
-        La finalidad del proyecto es de tipo educativo. Su desarrollo se llevo a cabo el cuatrimestre de otoño del curso 2015 - 2016.
-    </string>
-
 
     <!-- parada fragment -->
     <string name="parada">Parada</string>
@@ -47,6 +29,36 @@ En <b>autores</b> se pueden ver los datos de creación y de los autores de la ap
     <string name="delete_ruta">Botón para borrar la ruta</string>
     <string name="delete_ruta_desc">Está a punto de borrar una ruta.\nQuiere continuar?</string>
     <string name="delete_parada_ruta_desc">Está a punto de borrar la última parada añadida.\nQuiere continuar?</string>
+
+    <!-- help fragment -->
+    <string name="ajuda_main1">Apreciado/a usuario/a, \n \n
+          MetroVeu es una aplicación dirigida a personas de todas las edades y accesible también,
+          para personas ciegas o con visibilidad reducida. \n \n </string>
+    <string name="ajuda_main2">Desde la pantalla principal, se puede acceder a líneas, rutas,
+        tarifas, configuración, ayuda y  autores de la aplicación. \n \n </string>
+    <string name="ajuda_main3">En <b>líneas</b> se pueden ver todas las líneas del metro de
+        Barcelona y sus paradas. Además, se pueden consultar los detalles de cada una de las paradas
+        y navegar pasando el dedo por la pantalla entre ellas. \n \n </string>
+    <string name="ajuda_main4">En <b>rutas</b> se pueden ver y borrar todas las rutas que se han
+        diseñado por medio de la aplicación. \n \n </string>
+    <string name="ajuda_main5">En <b>tarifas</b> se puede ver la clasificación de las diferentes
+        tarifas y la información sobre los diferentes tipos de billetes existentes. \n \n </string>
+    <string name="ajuda_main6">En <b>configuración</b> se puede editar la presentación de la
+        aplicación por aquellas personas con visibilidad reducida. La aplicación da la posibilidad
+        de escoger entre tres temas de presentación. \n \n </string>
+    <string name="ajuda_main7">En <b>autores</b> se pueden ver los datos de creación y de los
+        autores de la aplicación.</string>
+
+
+    <!-- about fragment -->
+    <string name="info_main">Bienvenido/a usuario/a,\n \n
+        MetroVeu es un proyecto Android impartido en la asignatura de Proyecto de Ingenieria del Software del Grado de Ingenieria Informática de la Universitat Politècnica de Catalunya (UPC). \n \n
+        Los autores \n
+        Los autores de la aplicación son los estudiantes Laura Carrio, Carla Diví, Flor Tarditti,
+        Esteve Torrents y Joan Vilà. \n \n
+        MetroVeu \n
+        La finalidad del proyecto es de tipo educativo. Su desarrollo se llevo a cabo el cuatrimestre de otoño del curso 2015 - 2016. </string>
+
 
     <!-- lines fragment -->
     <string name="lines_title">Selecciona una línea</string>
